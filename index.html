@@ -76,20 +76,39 @@
 
 
 
-    <div class="container">
+    <section class="container" id="about">
         <div class="row">
-            <article class="col s12">
+            <div class="col s12 l4">
+                <h2>About</h2>
                 <p>Content of the page would go here. Maybe information on the company and such.</p>
-                <p class="flow-text">Flow Text Content</p>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe eligendi culpa ducimus quam voluptas.
-                    Officia, laboriosam consectetur? Earum praesentium atque voluptatibus quae tenetur doloribus nisi
-                    impedit, quod adipisci eligendi cupiditate.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi eaque tempora quod accusantium. Minima
-                    iusto tempore odit esse maxime. Id repellat facere corporis consequuntur iste voluptate veritatis
-                    consequatur saepe! Ex.</p>
-            </article>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe eligendi culpa ducimus quam voluptas. Officia, laboriosam consectetur? Earum praesentium atque voluptatibus quae tenetur doloribus nisi impedit, quod adipisci eligendi cupiditate.</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi eaque tempora quod accusantium. Minima iusto tempore odit esse maxime. Id repellat facere corporis consequuntur iste voluptate veritatis consequatur saepe! Ex.</p>
+
+            </div>
+
+            <!-- Beginning of Slider -->
+            <div class="slider col s12 l6 offset-l2">
+                <ul class="slides">
+                    <li>
+                       <div class="card">
+                           <div class="card-image">
+                               <img src="assets/images/luxury_home_4.png" alt="luxuryhome" class="reponsive-img">
+                           </div>
+                       </div> 
+                    </li>
+                    <li>
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="assets/images/luxury_home_5.jpg" alt="luxuryhome" class="reponsive-img">
+                            </div>
+                        </div> 
+                     </li>
+                </ul>
+            </div>
+            <!-- End of Slider -->
+
         </div>
-    </div>
+    </section>
 
     <div class="row">
         <form class="col l12">
@@ -115,8 +134,21 @@
     </div>
 
 
-    <div id="homeCards" class="row">
+    <div class="parallax-container">
+        <div class="parallax">
+            <img src="assets/images/luxury_home_6.jpg" alt="" class="responsive-img">
+        </div>
     </div>
+
+
+    <section class="container">
+        <div id="homeCards" class="row">
+
+
+        </div>
+    </section>
+    
+
 
     <div class="parallax-container">
         <div class="parallax">
@@ -149,6 +181,7 @@
                     <div class="input-field">
                         <i class="material-icons prefix">person</i>
                         <input type="text" id="lastName">
+
                         <label for="lastName">Last Name</label>
                     </div>
 
@@ -174,10 +207,76 @@
                     </div>
 
                 </form>
+                
             </div>
         </div>
+        <form >
+
+            <div class="input-field">
+                <i class="material-icons prefix">person</i>
+                <input type="text" id="firstName">
+                <label for="firstName">First Name</label>
+            </div>
+
+            <div class="input-field">
+                <i class="material-icons prefix">person</i>
+                <input type="text" id="lastName">
+                <label for="lastName">Last Name</label>
+            </div>
+
+            <div class="input-field">
+              <i class="material-icons prefix">email</i>
+              <input type="email" id="email">
+              <label for="email">Your Email</label>
+            </div>
+  
+            <div class="input-field">
+              <i class="material-icons prefix">message</i>
+              <textarea id="message" class="materialize-textarea"></textarea>
+              <label for="message">Your Message</label>
+            </div>
+
+            <div class="input-field">
+                <input type="text" id="date" class="datepicker">
+                <label for="date">Schedule Call</label>
+            </div>
+
+            <div id="send_message" class="input-field center">
+                <button class="btn">Submit</button>
+            </div>
+            
+
+        </form>
+        
+
     </section>
 
+
+    <footer class="page-footer grey darken-1">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 l6">
+                    <h5>Some Stuff</h5>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae, enim veritatis corporis architecto repellat velit sapiente sequi voluptates harum, distinctio nesciunt atque quae exercitationem inventore quam eum maiores voluptatem. Ullam.</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Harum quisquam fugit perspiciatis veritatis, cum recusandae, aspernatur ipsum similique blanditiis sit voluptatem. Accusantium, molestias? Atque, sequi. Sit blanditiis molestias dolorum asperiores.</p>
+                </div>
+
+                <div class="col s12 l4 offset-l2">
+                    <h5>Connect</h5>
+                    <ul>
+                        <li><a href="#" class="grey-text text-lighten-3">Facebook</a></li>
+                        <li><a href="#" class="grey-text text-lighten-3">Instragram</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer-copyright grey darken-4">
+            <div class="container center-align">&copy; <script>document.write(new Date().getFullYear())</script> Home Finder </div>
+        </div>
+    </footer>
+
+    
 
     <!-- JQuery -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -204,6 +303,7 @@
             $(".datepicker").datepicker({
                 disableWeekends: true
             });
+            $(".slides").slider();
 
 
             // Added Scroll event listener for the Nav bar
