@@ -36,9 +36,9 @@ $(document).ready(function () {
         
         
         function createCard() {
-            var row = $(".row");
+            var searchResults = $("#homeCards");
             var column = $("<div class='col l4'>");
-            var card = $("<div class='card medium'>");
+            var card = $("<div class='card large'>");
             var cardImgDiv = $("<div class='card-image'>");
             var cardBackground = $("<img class='responsive-img'>");
             var spanCard = $("<span class='card-title'>");
@@ -47,7 +47,8 @@ $(document).ready(function () {
             var lotSize = $("<p>");
             var bedBaths = $("<p>");
             var buildingSize = $("<p>");
-            var house = results[i]
+            var location = $("<p>");
+            var house = results[i];
 
             spanCard.html(house.address.line);
 
@@ -63,6 +64,8 @@ $(document).ready(function () {
 
             bedBaths.html("Beds: " + house.beds + " Baths: " + house.baths);
 
+            location.html("City: " + house.address.city + " State: " + house.address.state)
+
             cardAction.html("<a href='" + house.rdc_web_url + "'>" + "check out the property" + "</a>")
 
             // cardBackground.addClass("responsive-img");
@@ -75,6 +78,7 @@ $(document).ready(function () {
             cardContent.append(bedBaths);
             cardContent.append(buildingSize);
             cardContent.append(lotSize);
+            cardContent.append(location)
         
             cardImgDiv.append(cardBackground);
             cardImgDiv.append(spanCard);
@@ -84,9 +88,9 @@ $(document).ready(function () {
 
             column.append(card);
 
-            row.append(column);
+            searchResults.append(column);
 
-            $("#loading").hide()
+            $(".preloader-wrapper").hide()
         };
     });
 });
