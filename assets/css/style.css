@@ -1,0 +1,35 @@
+
+
+header{
+    background-image: url("../images/luxury_home_2.jpg");
+    background-size: cover;
+    background-position: center;
+    min-height: 50vw;
+}
+
+nav {
+    position: fixed;
+    padding:0px 20px;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 5;
+}
+
+
+.tabs .indicator {
+    background-color: #1a237e;
+}
+
+
+.tabs .tab a:focus, .tabs .tab a:focus.active{
+    background: transparent;
+}
+
+
+@media screen and (max-width: 670px){
+    header{
+        min-height: 500px;
+    }
+}
+
+
+
