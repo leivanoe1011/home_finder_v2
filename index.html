@@ -70,8 +70,6 @@
                     <li><a href="#search">Search Homes</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
-  
-
             </div>
         </nav>
     </header>
@@ -130,6 +128,29 @@
         </div>
     </section>
 
+    <div class="row">
+        <form class="col l12">
+            <div class="input-field col m4" id="">
+                <i class="material-icons prefix">mode_edit</i>
+                <textarea id="icon_prefix2" class="materialize-textarea" id="userCity"></textarea>
+                <label for="icon_prefix2">City</label>
+            </div>
+            <div class="input-field col m4">
+                <select id="selector">
+                    <option value="" disabled selected>State</option>
+                </select>
+                <label>Choose:</label>
+            </div>
+            <div class="input-field col m4">
+                <textarea id="icon_prefix2" class="materialize-textarea"  id="userZip"></textarea>
+                <label for="icon_prefix2">Zip code</label>
+            </div>
+        </form>
+    </div>
+    <div class="row center" id="submitButton">
+        <a class="waves-effect waves-light btn-large">Button</a>
+    </div>
+
 
     <div class="parallax-container">
         <div class="parallax">
@@ -147,7 +168,6 @@
     
 
 
-
     <div class="parallax-container">
         <div class="parallax">
             <img src="assets/images/luxury_home_3.jpeg" alt="" class="responsive-img">
@@ -159,12 +179,16 @@
         <div class="row">
             <div class="col s12 l4">
                 <h2>Contact Me</h2>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa quas porro non ab officiis magni consequatur veniam nostrum. Quos, voluptatem eaque. Esse provident ipsam sed vel nihil laborum accusamus hic.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore porro debitis, tempore cumque laudantium aliquam illum illo distinctio eligendi possimus aperiam, natus, beatae necessitatibus doloremque repellat quidem totam labore! Laudantium.</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa quas porro non ab officiis magni
+                    consequatur veniam nostrum. Quos, voluptatem eaque. Esse provident ipsam sed vel nihil laborum
+                    accusamus hic.</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore porro debitis, tempore cumque
+                    laudantium aliquam illum illo distinctio eligendi possimus aperiam, natus, beatae necessitatibus
+                    doloremque repellat quidem totam labore! Laudantium.</p>
             </div>
 
             <div id="contact_form" class="col s12 l4 offset-l2">
-                <form >
+                <form>
 
                     <div class="input-field">
                         <i class="material-icons prefix">person</i>
@@ -175,19 +199,20 @@
                     <div class="input-field">
                         <i class="material-icons prefix">person</i>
                         <input type="text" id="lastName">
+
                         <label for="lastName">Last Name</label>
                     </div>
 
                     <div class="input-field">
-                      <i class="material-icons prefix">email</i>
-                      <input type="email" id="email">
-                      <label for="email">Your Email</label>
+                        <i class="material-icons prefix">email</i>
+                        <input type="email" id="email">
+                        <label for="email">Your Email</label>
                     </div>
-          
+
                     <div class="input-field">
-                      <i class="material-icons prefix">message</i>
-                      <textarea id="message" class="materialize-textarea"></textarea>
-                      <label for="message">Your Message</label>
+                        <i class="material-icons prefix">message</i>
+                        <textarea id="message" class="materialize-textarea"></textarea>
+                        <label for="message">Your Message</label>
                     </div>
 
                     <div class="input-field">
@@ -200,8 +225,48 @@
                     </div>
 
                 </form>
+                
             </div>
         </div>
+        <form >
+
+            <div class="input-field">
+                <i class="material-icons prefix">person</i>
+                <input type="text" id="firstName">
+                <label for="firstName">First Name</label>
+            </div>
+
+            <div class="input-field">
+                <i class="material-icons prefix">person</i>
+                <input type="text" id="lastName">
+                <label for="lastName">Last Name</label>
+            </div>
+
+            <div class="input-field">
+              <i class="material-icons prefix">email</i>
+              <input type="email" id="email">
+              <label for="email">Your Email</label>
+            </div>
+  
+            <div class="input-field">
+              <i class="material-icons prefix">message</i>
+              <textarea id="message" class="materialize-textarea"></textarea>
+              <label for="message">Your Message</label>
+            </div>
+
+            <div class="input-field">
+                <input type="text" id="date" class="datepicker">
+                <label for="date">Schedule Call</label>
+            </div>
+
+            <div id="send_message" class="input-field center">
+                <button class="btn">Submit</button>
+            </div>
+            
+
+        </form>
+        
+
     </section>
 
 
