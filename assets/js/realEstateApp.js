@@ -13,7 +13,7 @@ var listingsObj = $("#listings");
 
 
 
-function displayResults(data){
+function displayResults(data) {
 
     // console.log("In Display Results");
 
@@ -25,9 +25,9 @@ function displayResults(data){
 
     console.log(properties);
 
-    for(var i = 0; i < properties.length; i++){
+    for (var i = 0; i < properties.length; i++) {
         // console.log(properties[i]);
-        
+
         var propertyLink = $("<a>");
 
         // $(propertyLink).addClass("col-lg-4 col-xl-4");
@@ -36,7 +36,7 @@ function displayResults(data){
 
         var listingLink = properties[i].rdc_web_url;
 
-        $(propertyLink).attr("href",listingLink);
+        $(propertyLink).attr("href", listingLink);
 
         var propertyImage = $("<img>");
 
@@ -63,17 +63,17 @@ function displayResults(data){
 
         var propertySizeUnits = "NA";
 
-        if(properties[i].hasOwnProperty("building_size")){
-            
+        if (properties[i].hasOwnProperty("building_size")) {
+
             propertySize = (typeof properties[i].building_size.size !== "undefined" ? properties[i].building_size.size : "NA");
 
             propertySizeUnits = (typeof properties[i].building_size.units !== "undefined" ? properties[i].building_size.units : "NA");
         }
-        
 
-        var homeDetails = '<span class="card-text"><strong>' + propertyBed + "</strong> Bed(s) " + 
-            "<strong>" + propertyBath + "</strong> bath(s) "  
-            +  "<strong>" + propertySize + "</strong> " +  propertySizeUnits+ "</span>";
+
+        var homeDetails = '<span class="card-text"><strong>' + propertyBed + "</strong> Bed(s) " +
+            "<strong>" + propertyBath + "</strong> bath(s) "
+            + "<strong>" + propertySize + "</strong> " + propertySizeUnits + "</span>";
 
 
 
@@ -83,20 +83,20 @@ function displayResults(data){
 
 
 
-        var homeAddress = '<span class="card-text col-lg-8 col-xl-8 home_address">' + properties[i].address.line + 
-            "<br>" + properties[i].address.city + ", " + properties[i].address.state_code + 
+        var homeAddress = '<span class="card-text col-lg-8 col-xl-8 home_address">' + properties[i].address.line +
+            "<br>" + properties[i].address.city + ", " + properties[i].address.state_code +
             " " + properties[i].address.postal_code + '</span>'
 
-            
+
         var emailButton = $("<a>");
 
         $(emailButton).addClass("btn btn-primary col-lg-4 col-xl-4");
 
-        $(emailButton).attr("href","#");
+        $(emailButton).attr("href", "#");
 
         $(emailButton).text("Email Agent");
 
-        
+
         $(otherDetails).append(homeAddress);
 
         $(otherDetails).append(emailButton);
@@ -106,7 +106,7 @@ function displayResults(data){
         $(aboutHome).append(homeDetails);
 
         $(propertyLink).append(propertyImage);
-        
+
 
         $(propertyLink).append(homeDetails);
 
@@ -119,19 +119,19 @@ function displayResults(data){
 
 }
 
-function realtorCall(city, state, zip, limit){
-    
+function realtorCall(city, state, zip, limit) {
+
 
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "https://realtor.p.rapidapi.com/properties/v2/list-for-sale?sort=relevance" 
-            + "&postal_code=" + listing_Zip_Code 
-            + "&city=" + listing_city 
-            + "&limit=" + listing_Limit 
+        "url": "https://realtor.p.rapidapi.com/properties/v2/list-for-sale?sort=relevance"
+            + "&postal_code=" + listing_Zip_Code
+            + "&city=" + listing_city
+            + "&limit=" + listing_Limit
             + "&offset=0"
-            +"&state_code=" + listing_state_code + "",
-            
+            + "&state_code=" + listing_state_code + "",
+
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "realtor.p.rapidapi.com",
@@ -142,18 +142,18 @@ function realtorCall(city, state, zip, limit){
 
     $.ajax(settings).on(function (response) {
         console.log(response);
-        
+
         displayResults(response);
     });
-    
+
 }
 
 
-$("#getDemographics").on("click",function(event){
-    
+$("#getDemographics").on("click", function (event) {
+
     event.preventDefault();
 
-    var city = $("#cityEntry").val() ;
+    var city = $("#cityEntry").val();
 
     city = (city !== null ? city : "NA");
 
@@ -174,7 +174,7 @@ $("#getDemographics").on("click",function(event){
 });
 
 
-$(document).ready(function(){
+$(document).ready(function () {
     realtorCall();
 });
 
