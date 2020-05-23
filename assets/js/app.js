@@ -117,7 +117,6 @@ function stateApi (){
     }
     
     $.ajax(settings).done(function (response) {
-        console.log(response);
         loadStates(response);
     });
 }
