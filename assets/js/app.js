@@ -10,7 +10,7 @@ $(document).ready(function () {
     var zipCode = 37664;//$("#userZip").val().trim();
     var city = "kingsport";//$("#userCity").val().trim();
     var listCount = 9;//$("#listCount").val();
-    var stateCode = 47;//$("#stateCode").val().trim();
+    var stateCode = "tennessee";//$("#stateCode").val().trim();
     var apiKey = "0c292c0993mshd75f0effe5adad9p120e45jsn157b0022e4d8";
 
     var apiSettings = {
@@ -33,8 +33,8 @@ $(document).ready(function () {
         for (i = 0; i < results.length; i++) {
             createCard();
         };
-        
-        
+
+
         function createCard() {
             var searchResults = $("#homeCards");
             var column = $("<div class='col l4'>");
@@ -48,8 +48,10 @@ $(document).ready(function () {
             var bedBaths = $("<p>");
             var buildingSize = $("<p>");
             var location = $("<p>");
+            var price = $("<p>");
             var house = results[i];
-
+            var link = $("<a href='" + house.rdc_web_url + "' target='_blank'>")
+            
             spanCard.html(house.address.line);
 
             // card.addClass("card medium");
@@ -64,23 +66,30 @@ $(document).ready(function () {
 
             bedBaths.html("Beds: " + house.beds + " Baths: " + house.baths);
 
-            location.html("City: " + house.address.city + " State: " + house.address.state)
+            location.html("City: " + house.address.city + " State: " + house.address.state);
 
-            cardAction.html("<a href='" + house.rdc_web_url + "'>" + "check out the property" + "</a>")
+            price.html("Listing price: $" + house.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ");
+
+            cardAction.html("<a href='" + house.rdc_web_url + "' target='_blank'>" + "check out the property" + "</a>")
+
+
 
             // cardBackground.addClass("responsive-img");
 
             // spanCard.addClass("card-title");
 
             // imgDiv.addClass("col l4");
- 
-            cardContent.append(cardAction); 
+
+            cardContent.append(cardAction);
             cardContent.append(bedBaths);
             cardContent.append(buildingSize);
             cardContent.append(lotSize);
             cardContent.append(location)
-        
-            cardImgDiv.append(cardBackground);
+            cardContent.append(price)
+
+            link.append(cardBackground);
+
+            cardImgDiv.append(link)
             cardImgDiv.append(spanCard);
 
             card.append(cardImgDiv);
@@ -90,24 +99,24 @@ $(document).ready(function () {
 
             searchResults.append(column);
 
-            $(".preloader-wrapper").hide()
+            $(".preloader-wrapper").hide();
         };
     });
 });
 
-function loadStates(data){
-    
+function loadStates(data) {
+
     var response = data;
 
-    for(var prop in response){
+    for (var prop in response) {
         states.push(prop);
     }
-    
-}   
+
+}
 
 
-function stateApi (){
-    
+function stateApi() {
+
     var settings = {
         "async": true,
         "crossDomain": true,
@@ -119,7 +128,7 @@ function stateApi (){
             "country": "USA"
         }
     }
-    
+
     $.ajax(settings).done(function (response) {
         console.log(response);
         loadStates(response);
