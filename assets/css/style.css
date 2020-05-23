@@ -28,6 +28,16 @@ nav {
     background: transparent;
 }
 
+#parallax-container {
+    margin-bottom: 100px !important;
+}
+
+#contact_form{
+    margin-top: 50px !important;
+    border: 2px solid #ececec;
+    /* margin: 10px; */
+}
+
 @media screen and (max-width: 670px){
     header{
         min-height: 500px;
