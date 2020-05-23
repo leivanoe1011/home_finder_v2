@@ -7,12 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- font awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+        integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    
+
     <!-- Materialize css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
@@ -30,7 +31,7 @@
     <header>
         <nav class="nav-wrapper transparent white-text">
             <div class="container">
-                
+
                 <a href="#" class="brand-logo">Home Finder</a>
 
                 <!-- Mobile Device Menu -->
@@ -46,7 +47,7 @@
                     <!-- Fab Icons -->
                     <li>
                         <a href="#" class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="Facebook">
-                        <i class="fab fa-facebook"></i>
+                            <i class="fab fa-facebook"></i>
                         </a>
                     </li>
 
@@ -55,7 +56,7 @@
                             <i class="fab fa-instagram"></i>
                         </a>
                     </li>
-            
+
                     <li>
                         <a href="#" class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="LinkedIn">
                             <i class="fab fa-linkedin"></i>
@@ -87,41 +88,13 @@
             </article>
        
         </div>
-
-        <h1 id="loading" style="text-align: center;">Loading...</h1>
-      
     </div>
 
 
+    <div id="homeCards" class="row">
 
 
-    <!-- Begin Parallax -->
-    <section class="parallax-container">
-        <div class="parallax">
-
-        </div>
-    </section>
-    <!-- End Parallax -->
-
-
-    <!-- Begin Contact -->
-    <section class="container" id="contact">
-        <div class="row">
-            <div class="col s12 l4">
-                <h1>Contact</h1>                
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus dignissimos reprehenderit dolorem esse. Possimus aspernatur voluptatum a! Sed quis eligendi iusto autem quam facere eum fuga id doloremque. Doloribus, quo!</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, suscipit necessitatibus quasi vitae tempore veniam nobis nisi! Alias, commodi? A tempore suscipit eveniet, non architecto nesciunt vero sunt accusamus eos.</p>
-            </div>
-
-            <div class="col s12 l6 offset-l2">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur perferendis consectetur quo adipisci vel eveniet suscipit atque voluptatibus facere aliquid, inventore quis incidunt architecto recusandae unde laborum vero maiores minus?</p>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet, error atque repellat necessitatibus eos id expedita dolores quos adipisci sed, fuga eligendi. Voluptate sapiente quaerat distinctio, placeat laboriosam optio deleniti?</p>
-            </div>
-        </div>
-
-    </section>
-
-    <!-- End Contact -->
+    </div>
 
 
     <!-- JQuery -->
@@ -129,21 +102,21 @@
 
     <!-- Materialize JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    
+
     <!-- Custom JS -->
     <script type="text/javascript" src="assets/js/app.js"></script>
 
     <script>
-         $(document).ready(function(){
+        $(document).ready(function () {
 
             // Initialize the Side Nav
             $(".sidenav").sidenav();
 
 
             // Added Scroll event listener for the Nav bar
-            $(window).scroll(function(){
+            $(window).scroll(function () {
 
-                if ($(window).scrollTop() > 20){
+                if ($(window).scrollTop() > 20) {
                     $("nav").addClass("white");
                     $(".brand-logo").addClass("black-text");
                     $(".nav_button").addClass("black-text");
@@ -154,8 +127,8 @@
                     $(".brand-logo").removeClass("black-text");
                     $(".nav_button").removeClass("black-text");
                 }
-            })
-         })
+            });
+        })
     </script>
 
 </body>
