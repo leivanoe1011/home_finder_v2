@@ -78,23 +78,54 @@
 
 
 
-    <div class="container">
+    <section class="container" id="about">
         <div class="row">
-            <article class="col s12">
+            <div class="col s12 l4">
+                <h2>About</h2>
                 <p>Content of the page would go here. Maybe information on the company and such.</p>
-                <p class="flow-text">Flow Text Content</p>
                 <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe eligendi culpa ducimus quam voluptas. Officia, laboriosam consectetur? Earum praesentium atque voluptatibus quae tenetur doloribus nisi impedit, quod adipisci eligendi cupiditate.</p>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi eaque tempora quod accusantium. Minima iusto tempore odit esse maxime. Id repellat facere corporis consequuntur iste voluptate veritatis consequatur saepe! Ex.</p>
-            </article>
-       
+            </div>
+
+            <!-- Beginning of Slider -->
+            <div class="slider col s12 l6 offset-l2">
+                <ul class="slides">
+                    <li>
+                       <div class="card">
+                           <div class="card-image">
+                               <img src="assets/images/luxury_home_4.png" alt="luxuryhome" class="reponsive-img">
+                           </div>
+                       </div> 
+                    </li>
+                    <li>
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="assets/images/luxury_home_5.jpg" alt="luxuryhome" class="reponsive-img">
+                            </div>
+                        </div> 
+                     </li>
+                </ul>
+            </div>
+            <!-- End of Slider -->
+
+        </div>
+    </section>
+
+
+    <div class="parallax-container">
+        <div class="parallax">
+            <img src="assets/images/luxury_home_6.jpg" alt="" class="responsive-img">
         </div>
     </div>
 
 
-    <div id="homeCards" class="row">
+    <section class="container">
+        <div id="homeCards" class="row">
 
 
-    </div>
+        </div>
+    </section>
+    
 
 
     <div class="parallax-container">
@@ -205,6 +236,7 @@
             $(".datepicker").datepicker({
                 disableWeekends: true
             });
+            $(".slides").slider();
 
 
             // Added Scroll event listener for the Nav bar
