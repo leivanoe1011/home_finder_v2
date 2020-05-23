@@ -1,6 +1,13 @@
 
 var states = [];
 
+
+$("#submitButton").on("click", function(event){
+    event.preventDefault();
+
+});
+
+
 $(document).ready(function () {
 
     stateApi();
