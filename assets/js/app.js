@@ -138,16 +138,15 @@ function stateApi() {
     $.ajax(settings).done(function (response) {
         loadStates(response);
         console.log(response)
-        for(var i = 0; i < states.length; i++){
-            var select = $("#selector");
-            var option = $("<option>");
+        // for(var i = 0; i < states.length; i++){
+        //     var select = $("#selector");
+        //     var option = $("<option>");
         
-            option.html(states[i]);
+        //     option.html(states[i]);
 
-            select.append(option);
-        }
+        //     select.append(option);
+        // }
     });
 }
-
 stateApi();
 
