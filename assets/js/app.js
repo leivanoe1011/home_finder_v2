@@ -4,7 +4,7 @@ var states = [];
 $(document).ready(function () {
 
     stateApi();
-    
+
     $('.sidenav').sidenav();
 
     var zipCode = 37664;//$("#userZip").val().trim();
@@ -97,8 +97,12 @@ $(document).ready(function () {
 
 function loadStates(data){
     
-    console.log(data);
-    // states.push()
+    var response = data;
+
+    for(var prop in response){
+        states.push(prop);
+    }
+    
 }   
 
 
@@ -118,6 +122,7 @@ function stateApi (){
     
     $.ajax(settings).done(function (response) {
         console.log(response);
+        loadStates(response);
     });
 }
 
