@@ -24,6 +24,9 @@ nav {
     background: transparent;
 }
 
+.sidenav-overlay{
+    background: transparent;
+}
 
 @media screen and (max-width: 670px){
     header{
