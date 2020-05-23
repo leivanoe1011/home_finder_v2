@@ -7,12 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- font awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+        integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    
+
     <!-- Materialize css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
@@ -30,7 +31,7 @@
     <header>
         <nav class="nav-wrapper transparent white-text">
             <div class="container">
-                
+
                 <a href="#" class="brand-logo">Home Finder</a>
 
                 <!-- Mobile Device Menu -->
@@ -46,7 +47,7 @@
                     <!-- Fab Icons -->
                     <li>
                         <a href="#" class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="Facebook">
-                        <i class="fab fa-facebook"></i>
+                            <i class="fab fa-facebook"></i>
                         </a>
                     </li>
 
@@ -55,7 +56,7 @@
                             <i class="fab fa-instagram"></i>
                         </a>
                     </li>
-            
+
                     <li>
                         <a href="#" class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="LinkedIn">
                             <i class="fab fa-linkedin"></i>
@@ -70,7 +71,7 @@
                     <li><a href="#contact">Contact</a></li>
                 </ul>
 
-                 
+
 
             </div>
         </nav>
@@ -82,35 +83,54 @@
         <article class="col s12">
             <p>Content of the page would go here. Maybe information on the company and such.</p>
             <p class="flow-text">Flow Text Content</p>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe eligendi culpa ducimus quam voluptas. Officia, laboriosam consectetur? Earum praesentium atque voluptatibus quae tenetur doloribus nisi impedit, quod adipisci eligendi cupiditate.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi eaque tempora quod accusantium. Minima iusto tempore odit esse maxime. Id repellat facere corporis consequuntur iste voluptate veritatis consequatur saepe! Ex.</p>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe eligendi culpa ducimus quam voluptas.
+                Officia, laboriosam consectetur? Earum praesentium atque voluptatibus quae tenetur doloribus nisi
+                impedit, quod adipisci eligendi cupiditate.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi eaque tempora quod accusantium. Minima
+                iusto tempore odit esse maxime. Id repellat facere corporis consequuntur iste voluptate veritatis
+                consequatur saepe! Ex.</p>
         </article>
-
-        <h1 id="loading" style="text-align: center;">Loading...</h1>
+    </div>
+    <div class="row center">
+        <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue-only">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <div id="homeCards" class="row">
 
+    </div>
 
     <!-- JQuery -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- Materialize JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    
+
     <!-- Custom JS -->
     <script type="text/javascript" src="assets/js/app.js"></script>
 
     <script>
-         $(document).ready(function(){
+        $(document).ready(function () {
 
             // Initialize the Side Nav
             $(".sidenav").sidenav();
 
 
             // Added Scroll event listener for the Nav bar
-            $(window).scroll(function(){
+            $(window).scroll(function () {
 
-                if ($(window).scrollTop() > 20){
+                if ($(window).scrollTop() > 20) {
                     $("nav").addClass("white");
                     $(".brand-logo").addClass("black-text");
                     $(".nav_button").addClass("black-text");
@@ -121,8 +141,8 @@
                     $(".brand-logo").removeClass("black-text");
                     $(".nav_button").removeClass("black-text");
                 }
-            })
-         })
+            });
+        })
     </script>
 
 </body>
