@@ -36,7 +36,7 @@ $(document).ready(function () {
         
         
         function createCard() {
-            var row = $("#homeCards");
+            var searchResults = $("#homeCards");
             var column = $("<div class='col l4'>");
             var card = $("<div class='card large'>");
             var cardImgDiv = $("<div class='card-image'>");
@@ -88,7 +88,7 @@ $(document).ready(function () {
 
             column.append(card);
 
-            row.append(column);
+            searchResults.append(column);
 
             $(".preloader-wrapper").hide()
         };
