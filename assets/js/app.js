@@ -6,6 +6,25 @@ var states = [];
 var searchList = [];
 
 
+// Your web app's Firebase configuration
+var firebaseConfig = {
+    apiKey: "AIzaSyAATbtZxRXHkvnP7CMemxc_8ibgyQLpWN4",
+    authDomain: "grpprj1-home-finder.firebaseapp.com",
+    databaseURL: "https://grpprj1-home-finder.firebaseio.com",
+    projectId: "grpprj1-home-finder",
+    storageBucket: "grpprj1-home-finder.appspot.com",
+    messagingSenderId: "1063890729907",
+    appId: "1:1063890729907:web:78a3392d4da6bb9acb69c6",
+    measurementId: "G-LNPJ4N4NXZ"
+  };
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+// Get a reference to the database service
+var database = firebase.database();
+
+
 function saveSearch(city, zip){
 
     var searchObj = {
