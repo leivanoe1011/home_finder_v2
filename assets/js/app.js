@@ -1,5 +1,20 @@
 
+// Holds all the states from the State API
 var states = [];
+
+// Used to load all our search entries
+var searchList = [];
+
+
+function saveSearch(city, zip){
+
+    var searchObj = {
+        city: city,
+        zipCode: zip
+    }
+
+    searchList.push(searchObj);
+}
 
 
 $("#submitButton").on("click", function(event){
@@ -10,6 +25,8 @@ $("#submitButton").on("click", function(event){
 
 $(document).ready(function () {
 
+    stateApi();
+
     $('select').formSelect();
 
     $('.sidenav').sidenav();
@@ -18,6 +35,9 @@ $(document).ready(function () {
     $("#submitButton").on("click", function () {
         var zipCode = $("#userZip").val();
         var city = $("#userCity").val();
+
+        saveSearch(city, zipCode);
+
         var listCount = 9;//$("#listCount").val();
         var stateCode = "tennessee";//$("#stateCode").val().trim();
         var apiKey = "6348c7c3damsh9f06f3bf656de25p1004dajsn161cb5ca1bac";
