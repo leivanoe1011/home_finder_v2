@@ -81,68 +81,86 @@
             <div class="col s12 l4">
                 <h2>About</h2>
                 <p>Content of the page would go here. Maybe information on the company and such.</p>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe eligendi culpa ducimus quam voluptas. Officia, laboriosam consectetur? Earum praesentium atque voluptatibus quae tenetur doloribus nisi impedit, quod adipisci eligendi cupiditate.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi eaque tempora quod accusantium. Minima iusto tempore odit esse maxime. Id repellat facere corporis consequuntur iste voluptate veritatis consequatur saepe! Ex.</p>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe eligendi culpa ducimus quam voluptas.
+                    Officia, laboriosam consectetur? Earum praesentium atque voluptatibus quae tenetur doloribus nisi
+                    impedit, quod adipisci eligendi cupiditate.</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi eaque tempora quod accusantium. Minima
+                    iusto tempore odit esse maxime. Id repellat facere corporis consequuntur iste voluptate veritatis
+                    consequatur saepe! Ex.</p>
 
             </div>
 
             <!-- Beginning of Slider -->
-             <!-- Slider Reviews -->
-          <div class="slider col s12 l5 offset-l2">
-            <ul class="slides">
-              <li>
-                <div class="card">
-                  <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="assets/images/luxury_home_5.jpg">
-                  </div>
-                  <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">Luxury Home<i class="material-icons right">more_vert</i></span>
-                    <!-- <p><a href="#">This is a link</a></p> -->
-                  </div>
-                  <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                  </div>
-                </div>   
-              </li>
-              <li>
-                <div class="card ">
-                  <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="assets/images/luxury_home_6.jpg">
-                  </div>
-                  <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">Luxury Home<i class="material-icons right">more_vert</i></span>
-                    <!-- <p><a href="#">This is a link</a></p> -->
-                  </div>
-                  <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                  </div>
-                </div>
-               
-              </li>
-            </ul>
-          </div>
+            <!-- Slider Reviews -->
+            <div class="slider col s12 l5 offset-l2">
+                <ul class="slides">
+                    <li>
+                        <div class="card">
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <img class="activator" src="assets/images/luxury_home_5.jpg">
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4">Luxury Home<i
+                                        class="material-icons right">more_vert</i></span>
+                                <!-- <p><a href="#">This is a link</a></p> -->
+                            </div>
+                            <div class="card-reveal">
+                                <span class="card-title grey-text text-darken-4">Card Title<i
+                                        class="material-icons right">close</i></span>
+                                <p>Here is some more information about this product that is only revealed once clicked
+                                    on.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="card ">
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <img class="activator" src="assets/images/luxury_home_6.jpg">
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4">Luxury Home<i
+                                        class="material-icons right">more_vert</i></span>
+                                <!-- <p><a href="#">This is a link</a></p> -->
+                            </div>
+                            <div class="card-reveal">
+                                <span class="card-title grey-text text-darken-4">Card Title<i
+                                        class="material-icons right">close</i></span>
+                                <p>Here is some more information about this product that is only revealed once clicked
+                                    on.</p>
+                            </div>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
             <!-- End of Slider -->
 
         </div>
     </section>
 
+
+    <div class="parallax-container">
+        <div class="parallax">
+            <img src="assets/images/luxury_home_6.jpg" alt="" class="responsive-img">
+        </div>
+    </div>
+
     <div class="row">
         <form class="col l12">
-            <div class="input-field col m4" id="">
+            <div class="input-field col m6" id="">
                 <i class="material-icons prefix">mode_edit</i>
-                <textarea id="icon_prefix2" class="materialize-textarea" id="userCity"></textarea>
+                <textarea id="icon_prefix2" class="materialize-textarea userCity"></textarea>
                 <label for="icon_prefix2">City</label>
             </div>
-            <div class="input-field col m4">
-                <select id="selector">
-                    <option value="" disabled selected>State</option>
-                </select>
+            <div class="col m3">
                 <label>Choose:</label>
+                <select class="options browser-default">
+                    <option value="" disabled selected></option>
+                </select>
+
             </div>
-            <div class="input-field col m4">
-                <textarea id="icon_prefix2" class="materialize-textarea"  id="userZip"></textarea>
+            <div class="input-field col m3">
+                <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
                 <label for="icon_prefix2">Zip code</label>
             </div>
         </form>
@@ -152,20 +170,13 @@
     </div>
 
 
-    <div class="parallax-container">
-        <div class="parallax">
-            <img src="assets/images/luxury_home_6.jpg" alt="" class="responsive-img">
-        </div>
-    </div>
-
-
     <section class="container">
         <div id="homeCards" style="min-height:1000px" class="row">
 
 
         </div>
     </section>
-    
+
 
 
     <div class="parallax-container">
@@ -225,48 +236,9 @@
                     </div>
 
                 </form>
-                
+
             </div>
         </div>
-        <form >
-
-            <div class="input-field">
-                <i class="material-icons prefix">person</i>
-                <input type="text" id="firstName">
-                <label for="firstName">First Name</label>
-            </div>
-
-            <div class="input-field">
-                <i class="material-icons prefix">person</i>
-                <input type="text" id="lastName">
-                <label for="lastName">Last Name</label>
-            </div>
-
-            <div class="input-field">
-              <i class="material-icons prefix">email</i>
-              <input type="email" id="email">
-              <label for="email">Your Email</label>
-            </div>
-  
-            <div class="input-field">
-              <i class="material-icons prefix">message</i>
-              <textarea id="message" class="materialize-textarea"></textarea>
-              <label for="message">Your Message</label>
-            </div>
-
-            <div class="input-field">
-                <input type="text" id="date" class="datepicker">
-                <label for="date">Schedule Call</label>
-            </div>
-
-            <div id="send_message" class="input-field center">
-                <button class="btn">Submit</button>
-            </div>
-            
-
-        </form>
-        
-
     </section>
 
 
@@ -275,8 +247,12 @@
             <div class="row">
                 <div class="col s12 l6">
                     <h5>Some Stuff</h5>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae, enim veritatis corporis architecto repellat velit sapiente sequi voluptates harum, distinctio nesciunt atque quae exercitationem inventore quam eum maiores voluptatem. Ullam.</p>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Harum quisquam fugit perspiciatis veritatis, cum recusandae, aspernatur ipsum similique blanditiis sit voluptatem. Accusantium, molestias? Atque, sequi. Sit blanditiis molestias dolorum asperiores.</p>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae, enim veritatis corporis
+                        architecto repellat velit sapiente sequi voluptates harum, distinctio nesciunt atque quae
+                        exercitationem inventore quam eum maiores voluptatem. Ullam.</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Harum quisquam fugit perspiciatis
+                        veritatis, cum recusandae, aspernatur ipsum similique blanditiis sit voluptatem. Accusantium,
+                        molestias? Atque, sequi. Sit blanditiis molestias dolorum asperiores.</p>
                 </div>
 
                 <div class="col s12 l4 offset-l2">
@@ -290,11 +266,12 @@
 
         </div>
         <div class="footer-copyright grey darken-4">
-            <div class="container center-align">&copy; <script>document.write(new Date().getFullYear())</script> Home Finder </div>
+            <div class="container center-align">&copy;
+                <script>document.write(new Date().getFullYear())</script> Home Finder </div>
         </div>
     </footer>
 
-    
+
 
     <!-- JQuery -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -322,7 +299,7 @@
             $(".datepicker").datepicker({
                 disableWeekends: true
             });
-           
+
 
 
             // Added Scroll event listener for the Nav bar
