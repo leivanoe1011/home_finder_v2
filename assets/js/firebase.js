@@ -37,6 +37,4 @@ $("#send_message").on("click", function submitForm() {
         message: message,
         date: date
     });
-
-
 });
