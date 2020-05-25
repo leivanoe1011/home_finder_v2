@@ -9,10 +9,15 @@ $("#submitButton").on("click", function (event) {
 $(document).ready(function () {
     $('.sidenav').sidenav();
 
+    $(".preloader-wrapper").hide();
+
     $("#submitButton").on("click", function () {
         var city = $(".userCity").val().toString()
         var listCount = 9;//$("#listCount").val();
         var stateCode = $(".options").val().toString();
+
+        $(".preloader-wrapper").show()
+        $("#submitButton").hide()
 
         $("#homeCards").empty()
 
@@ -33,7 +38,6 @@ $(document).ready(function () {
 
         $.ajax(apiSettings).then(function (response) {
             console.log(response);
-
 
             var results = response.properties
 
@@ -58,6 +62,8 @@ $(document).ready(function () {
                 var price = $("<p>");
                 var house = results[i];
                 var link = $("<a href='" + house.rdc_web_url + "' target='_blank'>")
+                
+                
 
                 spanCard.html(house.address.line);
 
@@ -107,8 +113,11 @@ $(document).ready(function () {
                 searchResults.append(column);
 
                 $(".preloader-wrapper").hide();
+                $("#submitButton").show();
             };
+            
         });
+      
     })
 
 

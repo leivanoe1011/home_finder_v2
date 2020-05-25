@@ -134,39 +134,52 @@
 
     <div class="parallax-container">
         <div class="parallax">
-            <img src="assets/images/luxury_home_6.jpg" alt="" class="responsive-img" id="search">
+            <img src="assets/images/luxury_home_6.jpg" class="responsive-img scrollspy" id="search">
         </div>
     </div>
 
-    <div class="row">
-        <form class="col l12">
-            <div class="input-field col m6" id="">
+    <div class="container">
+        <form class="row center">
+            <div class="input-field col m8">
                 <i class="material-icons prefix">mode_edit</i>
                 <textarea id="icon_prefix2" class="materialize-textarea userCity"></textarea>
                 <label for="icon_prefix2">City</label>
             </div>
-            <div class="col m3">
+            <div class="col m2">
                 <label>Choose:</label>
                 <select class="options browser-default">
                     <option value="" disabled selected></option>
                 </select>
 
             </div>
-            <div class="input-field col m3">
+            <div class="input-field col m2">
                 <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
                 <label for="icon_prefix2">Zip code</label>
             </div>
         </form>
     </div>
     <div class="row center" id="submitButton">
-        <a class="waves-effect waves-light btn-large">Button</a>
+        <a class="waves-effect waves-light btn-large">Search</a>
     </div>
-
+    
+    <div class="row center">
+        <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue-only">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <section class="container">
         <div id="homeCards" style="min-height:1000px" class="row">
-
-
         </div>
     </section>
 
@@ -225,7 +238,7 @@
                     </div>
 
                     <div id="send_message" class="input-field center">
-                        <button class="btn">Submit</button>
+                        <button onclick="M.toast({html: 'Form submitted successfully!'})" class="btn">Submit</button>
                     </div>
 
                 </form>
