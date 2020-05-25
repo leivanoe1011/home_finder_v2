@@ -15,18 +15,14 @@ $("#send_message").on("click", function (event) {
     event.preventDefault();
 });
 
-var firstName = ""
-var lastName = ""
-var email = ""
-var message = ""
-var date = ""
+
 
 $("#send_message").on("click", function submitForm() {
-    firstName = $("#firstName").val();
-    lastName = $("#lastName").val();
-    email = $("#email").val();
-    message = $("#message").val();
-    date = $("#date").val();
+    var firstName = $("#firstName").val();
+    var lastName = $("#lastName").val();
+    var email = $("#email").val();
+    var message = $("#message").val();
+    var date = $("#date").val();
 
 
 
