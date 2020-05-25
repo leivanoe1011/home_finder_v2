@@ -33,7 +33,50 @@ function saveSearch(city, zip){
     }
 
     searchList.push(searchObj);
+
+    localStorage.setItem("searchResults", JSON.stringify(searchList));
 }
+
+
+function loadStates(data) {
+
+    var response = data;
+
+    for (var prop in response) {
+        states.push(prop);
+    }
+
+}
+
+
+function stateApi() {
+
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://states2.p.rapidapi.com/query?country=USA%3Fcountry%3DUSA",
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "states2.p.rapidapi.com",
+            "x-rapidapi-key": "0c292c0993mshd75f0effe5adad9p120e45jsn157b0022e4d8",
+            "country": "USA"
+        }
+    }
+
+    $.ajax(settings).done(function (response) {
+        loadStates(response);
+        console.log(response)
+        for(var i = 0; i < states.length; i++){
+            var select = $("#selector");
+            var option = $("<option>");
+        
+            option.html(states[i]);
+
+            select.append(option);
+        }
+    });
+}
+
 
 
 $("#submitButton").on("click", function(event){
@@ -154,46 +197,4 @@ $(document).ready(function () {
         });
     })
 });
-
-
-function loadStates(data) {
-
-    var response = data;
-
-    for (var prop in response) {
-        states.push(prop);
-    }
-
-}
-
-
-function stateApi() {
-
-    var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "https://states2.p.rapidapi.com/query?country=USA%3Fcountry%3DUSA",
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-host": "states2.p.rapidapi.com",
-            "x-rapidapi-key": "0c292c0993mshd75f0effe5adad9p120e45jsn157b0022e4d8",
-            "country": "USA"
-        }
-    }
-
-    $.ajax(settings).done(function (response) {
-        loadStates(response);
-        console.log(response)
-        for(var i = 0; i < states.length; i++){
-            var select = $("#selector");
-            var option = $("<option>");
-        
-            option.html(states[i]);
-
-            select.append(option);
-        }
-    });
-}
-
-stateApi();
 
