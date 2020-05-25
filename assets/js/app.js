@@ -1,10 +1,8 @@
-
 var states = [];
 
 
 $("#submitButton").on("click", function (event) {
     event.preventDefault();
-
 });
 
 
@@ -15,6 +13,8 @@ $(document).ready(function () {
         var city = $(".userCity").val().toString()
         var listCount = 9;//$("#listCount").val();
         var stateCode = $(".options").val().toString();
+
+        $("#homeCards").empty()
 
         console.log(stateCode)
 
