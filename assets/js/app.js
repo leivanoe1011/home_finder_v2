@@ -1,40 +1,5 @@
 var states = [];
 
-// Used to load all our search entries
-var searchList = [];
-
-
-// Your web app's Firebase configuration
-var firebaseConfig = {
-    apiKey: "AIzaSyAATbtZxRXHkvnP7CMemxc_8ibgyQLpWN4",
-    authDomain: "grpprj1-home-finder.firebaseapp.com",
-    databaseURL: "https://grpprj1-home-finder.firebaseio.com",
-    projectId: "grpprj1-home-finder",
-    storageBucket: "grpprj1-home-finder.appspot.com",
-    messagingSenderId: "1063890729907",
-    appId: "1:1063890729907:web:78a3392d4da6bb9acb69c6",
-    measurementId: "G-LNPJ4N4NXZ"
-  };
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-
-// Get a reference to the database service
-var database = firebase.database();
-
-
-function saveSearch(city, zip){
-
-    var searchObj = {
-        city: city,
-        zipCode: zip
-    }
-
-    searchList.push(searchObj);
-
-    localStorage.setItem("searchResults", JSON.stringify(searchList));
-}
-
 
 function loadStates(data) {
 
@@ -79,10 +44,18 @@ function stateApi() {
 
 $("#submitButton").on("click", function (event) {
     event.preventDefault();
+    var city = $(".userCity").val().toString()
+    var stateCode = $(".options").val().toString();
+
+    saveSearch(city, stateCode);
 });
 
 
 $(document).ready(function () {
+
+    // Create State Array
+    stateApi();
+
     $('.sidenav').sidenav();
 
     $(".preloader-wrapper").hide();
@@ -91,6 +64,9 @@ $(document).ready(function () {
         var city = $(".userCity").val().toString()
         var listCount = 9;//$("#listCount").val();
         var stateCode = $(".options").val().toString();
+
+        // Save search Results
+        saveSearch(city, stateCode);
 
         $(".preloader-wrapper").show()
         $("#submitButton").hide()
