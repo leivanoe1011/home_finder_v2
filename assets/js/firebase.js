@@ -42,10 +42,11 @@ var searchList = [];
 
 function createButtons (saveSearch){
     var newResult = $("<button>");
+    newResult.addClass("waves-effect waves-light btn-small");
     var city = saveSearch.city;
     var state = saveSearch.stateCode;
 
-    newResult.text(city + ", " + state);
+    newResult.html('<i class="material-icons left">cloud</i>' + city + ", " + state);
 
     $("#previous_search").append(newResult);
 }
