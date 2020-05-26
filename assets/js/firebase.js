@@ -42,11 +42,11 @@ var searchList = [];
 
 function createButtons (saveSearch){
     var newResult = $("<button>");
-    newResult.addClass("waves-effect waves-light btn-small");
+    newResult.addClass("waves-effect waves-light btn-small search_button");
     var city = saveSearch.city;
     var state = saveSearch.stateCode;
 
-    newResult.html('<i class="material-icons left">cloud</i>' + city + ", " + state);
+    newResult.html('<i class="material-icons left">home</i>' + city + ", " + state);
 
     $("#previous_search").append(newResult);
 }
@@ -70,13 +70,13 @@ function saveSearch(city, state){
 
 
 // Search Form Event Handler
-$("#submitButton").on("click", function (event) {
-    event.preventDefault();
-    var city = $(".userCity").val().toString()
-    var stateCode = $(".options").val().toString();
+// $("#submitButton").on("click", function (event) {
+//     event.preventDefault();
+//     var city = $(".userCity").val().toString()
+//     var stateCode = $(".options").val().toString();
 
-    saveSearch(city, stateCode);
-});
+//     saveSearch(city, stateCode);
+// });
 
 
 

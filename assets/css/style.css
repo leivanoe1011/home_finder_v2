@@ -43,6 +43,15 @@ nav {
 }
 
 
+#previous_search {
+    margin: 20px !important;
+    padding: 10px !important;
+    border: 2px solid #ececec;
+}
+
+.search_button{
+    margin: 5px !important;
+}
 
 @media screen and (max-width: 670px){
     header{
