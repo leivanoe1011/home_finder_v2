@@ -1,5 +1,3 @@
-
-// Holds all the states from the State API
 var states = [];
 
 // Used to load all our search entries
@@ -79,30 +77,27 @@ function stateApi() {
 
 
 
-$("#submitButton").on("click", function(event){
+$("#submitButton").on("click", function (event) {
     event.preventDefault();
-
 });
 
 
 $(document).ready(function () {
-
-    stateApi();
-
-    $('select').formSelect();
-
     $('.sidenav').sidenav();
 
+    $(".preloader-wrapper").hide();
 
     $("#submitButton").on("click", function () {
-        var zipCode = $("#userZip").val();
-        var city = $("#userCity").val();
-
-        saveSearch(city, zipCode);
-
+        var city = $(".userCity").val().toString()
         var listCount = 9;//$("#listCount").val();
-        var stateCode = "tennessee";//$("#stateCode").val().trim();
-        var apiKey = "6348c7c3damsh9f06f3bf656de25p1004dajsn161cb5ca1bac";
+        var stateCode = $(".options").val().toString();
+
+        $(".preloader-wrapper").show()
+        $("#submitButton").hide()
+
+        $("#homeCards").empty()
+
+        console.log(stateCode)
 
         var apiSettings = {
             "url": "https://realtor.p.rapidapi.com/properties/v2/list-for-sale?sort=relevance"
@@ -113,16 +108,15 @@ $(document).ready(function () {
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "realtor.p.rapidapi.com",
-                "x-rapidapi-key": apiKey
+                "x-rapidapi-key": "6348c7c3damsh9f06f3bf656de25p1004dajsn161cb5ca1bac"
             }
         };
-        console.log(apiSettings)
+
         $.ajax(apiSettings).then(function (response) {
             console.log(response);
-            
 
             var results = response.properties
-            
+
             for (i = 0; i < results.length; i++) {
                 createCard();
             };
@@ -144,6 +138,8 @@ $(document).ready(function () {
                 var price = $("<p>");
                 var house = results[i];
                 var link = $("<a href='" + house.rdc_web_url + "' target='_blank'>")
+                
+                
 
                 spanCard.html(house.address.line);
 
@@ -193,8 +189,58 @@ $(document).ready(function () {
                 searchResults.append(column);
 
                 $(".preloader-wrapper").hide();
+                $("#submitButton").show();
             };
+            
         });
+      
     })
-});
+
+
+
+    function loadStates(data) {
+
+        var response = data;
+
+        for (var prop in response) {
+            states.push(prop);
+        }
+
+    };
+
+
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://states2.p.rapidapi.com/query?country=USA%3Fcountry%3DUSA",
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "states2.p.rapidapi.com",
+            "x-rapidapi-key": "0c292c0993mshd75f0effe5adad9p120e45jsn157b0022e4d8",
+            "country": "USA"
+        }
+    }
+
+
+
+    $.ajax(settings).then(function (response) {
+
+        loadStates(response);
+        for (var i = 0; i < states.length; i++) {
+            var select = $(".options");
+            var option = $("<option>");
+
+
+            option.html(states[i]);
+
+            option.attr("value", states[i])
+
+            select.append(option);
+        }
+    });
+
+    $('select').formSelect();
+})
+
+
 
