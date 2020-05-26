@@ -41,16 +41,6 @@ function stateApi() {
 }
 
 
-
-$("#submitButton").on("click", function (event) {
-    event.preventDefault();
-    var city = $(".userCity").val().toString()
-    var stateCode = $(".options").val().toString();
-
-    saveSearch(city, stateCode);
-});
-
-
 $(document).ready(function () {
 
     // Create State Array

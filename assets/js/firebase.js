@@ -28,8 +28,8 @@ var firebaseConfig = {
 
 
 // Initialize Firebase
-var app1 = firebase.initializeApp(firebaseConfig);
-var app2 = firebase.initializeApp(firebaseConfig_SaveSearchResults);
+var app1 = firebase.initializeApp(firebaseConfig, 'app1');
+var app2 = firebase.initializeApp(firebaseConfig_SaveSearchResults,'app2');
 
 // initialize databases
 var db1 = firebase.database(app1);
@@ -40,14 +40,12 @@ var db2 = firebase.database(app2);
 var searchList = [];
 
 
-
-
 function createButtons (saveSearch){
     var newResult = $("<button>");
     var city = saveSearch.city;
     var state = saveSearch.stateCode;
 
-    newResult.text(city + ", " + stateCode);
+    newResult.text(city + ", " + state);
 
     $("#previous_search").append(newResult);
 }
@@ -62,12 +60,22 @@ function saveSearch(city, state){
 
     searchList.push(searchObj);
 
-    database.ref().set({
+    db2.ref().set({
         searchResults: JSON.stringify(searchList)
     });
 
     createButtons(searchObj);
 }
+
+
+// Search Form Event Handler
+$("#submitButton").on("click", function (event) {
+    event.preventDefault();
+    var city = $(".userCity").val().toString()
+    var stateCode = $(".options").val().toString();
+
+    saveSearch(city, stateCode);
+});
 
 
 
