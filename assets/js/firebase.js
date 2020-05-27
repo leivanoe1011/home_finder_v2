@@ -1,4 +1,4 @@
-
+$("#previous_search").hide()
 
 // Configuration file to the Save Search Results
 var firebaseConfig_SaveSearchResults = {
@@ -10,10 +10,7 @@ var firebaseConfig_SaveSearchResults = {
     messagingSenderId: "1063890729907",
     appId: "1:1063890729907:web:78a3392d4da6bb9acb69c6",
     measurementId: "G-LNPJ4N4NXZ"
-  };
-
-
-
+};
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -26,7 +23,6 @@ var firebaseConfig = {
     appId: "1:966136180453:web:d996bfcf09907e4907ae0c"
 };
 
-
 // Initialize Firebase
 var app1 = firebase.initializeApp(firebaseConfig, 'app1');
 var app2 = firebase.initializeApp(firebaseConfig_SaveSearchResults,'app2');
@@ -35,10 +31,8 @@ var app2 = firebase.initializeApp(firebaseConfig_SaveSearchResults,'app2');
 var db1 = firebase.database(app1);
 var db2 = firebase.database(app2);
 
-
 // Used to load all our search entries
 var searchList = [];
-
 
 function createButtons (saveSearch){
     var newResult = $("<button>");
@@ -49,8 +43,8 @@ function createButtons (saveSearch){
     newResult.html('<i class="material-icons left">home</i>' + city + ", " + state);
 
     $("#previous_search").append(newResult);
+    $("#previous_search").show()
 }
-
 
 function saveSearch(city, state){
 
@@ -68,7 +62,6 @@ function saveSearch(city, state){
     createButtons(searchObj);
 }
 
-
 // Search Form Event Handler
 // $("#submitButton").on("click", function (event) {
 //     event.preventDefault();
@@ -78,13 +71,9 @@ function saveSearch(city, state){
 //     saveSearch(city, stateCode);
 // });
 
-
-
 $("#send_message").on("click", function (event) {
     event.preventDefault();
 });
-
-
 
 $("#send_message").on("click", function submitForm() {
     var firstName = $("#firstName").val();
@@ -92,8 +81,6 @@ $("#send_message").on("click", function submitForm() {
     var email = $("#email").val();
     var message = $("#message").val();
     var date = $("#date").val();
-
-
 
     db1.ref('messages').push().set({
         firstName: firstName,
