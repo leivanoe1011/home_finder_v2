@@ -1,4 +1,4 @@
-
+$("#previous_search").hide()
 
 // Configuration file to the Save Search Results
 var firebaseConfig_SaveSearchResults = {
@@ -11,7 +11,6 @@ var firebaseConfig_SaveSearchResults = {
     appId: "1:1063890729907:web:78a3392d4da6bb9acb69c6",
     measurementId: "G-LNPJ4N4NXZ"
 };
-
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -44,6 +43,7 @@ function createButtons (saveSearch){
     newResult.html('<i class="material-icons left">home</i>' + city + ", " + state);
 
     $("#previous_search").append(newResult);
+    $("#previous_search").show()
 }
 
 function saveSearch(city, state){
