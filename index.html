@@ -8,9 +8,7 @@
 
     <!-- firebase -->
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script>
-
-  
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script> 
     <!-- font awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
         integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
@@ -25,45 +23,36 @@
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <title>Home Finder</title>
 </head>
-
 <body>
     <header>
         <nav class="nav-wrapper transparent white-text">
             <div class="container">
-
                 <a href="#" class="brand-logo">Home Finder</a>
-
                 <!-- Mobile Device Menu -->
                 <a href="#" class="sidenav-trigger" data-target="mobile-menu">
                     <i class="material-icons">menu</i>
                 </a>
-
                 <!-- Navigation Bar -->
                 <ul class="right hide-on-med-and-down" id="#nav_menu">
                     <li><a class="nav_button" href="#search">Search Homes</a></li>
                     <li><a class="nav_button" href="#contact">Contact</a></li>
-
                     <!-- Fab Icons -->
                     <li>
                         <a href="#" class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="Facebook">
                             <i class="fab fa-facebook"></i>
                         </a>
                     </li>
-
                     <li>
                         <a href="#" class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
                     </li>
-
                     <li>
                         <a href="#" class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="LinkedIn">
                             <i class="fab fa-linkedin"></i>
                         </a>
                     </li>
-
                 </ul>
-
                 <!-- The menu that will appear when the page is viewed in mobile device -->
                 <ul class="sidenav grey lighten-4" id="mobile-menu">
                     <li><a href="#search">Search Homes</a></li>
@@ -72,8 +61,6 @@
             </div>
         </nav>
     </header>
-
-
 
     <section class="container" id="about">
         <div class="row wow animate__animated animate__slideInUp animate__slower">
@@ -86,9 +73,7 @@
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi eaque tempora quod accusantium. Minima
                     iusto tempore odit esse maxime. Id repellat facere corporis consequuntur iste voluptate veritatis
                     consequatur saepe! Ex.</p>
-
             </div>
-
             <!-- Beginning of Slider -->
             <!-- Slider Reviews -->
             <div class="slider col s12 l5 offset-l2">
@@ -137,7 +122,6 @@
         </div>
     </section>
 
-
     <div class="parallax-container">
         <div class="parallax">
             <img src="assets/images/luxury_home_6.jpg" class="responsive-img">
@@ -148,33 +132,28 @@
     <!-- Load the Search Results -->
     <div class="container">
         <div class="row" id="previous_search">
-
         </div>
     </div>
 
 
     <div class="container">
         <form class="row center scrollspy" id="search">
-            <div class="input-field col m8">
+            <div class="input-field col m6 s12">
                 <i class="material-icons prefix">mode_edit</i>
                 <textarea id="icon_prefix2" class="materialize-textarea userCity"></textarea>
                 <label for="icon_prefix2">City</label>
             </div>
-            <div class="col m2">
+            <div class="col m6 s12">
                 <label>Choose:</label>
-                <select class="options browser-default">
+                <select class="browser-default" id="stateCode">
                     <option value="" disabled selected></option>
                 </select>
 
             </div>
-            <div class="input-field col m2">
-                <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
-                <label for="icon_prefix2">Zip code</label>
-            </div>
         </form>
     </div>
-    <div class="row center" id="submitButton">
-        <a class="waves-effect waves-light btn-large">Search</a>
+    <div class="row center">
+        <a class="waves-effect waves-light btn-large" id="submitButton">Search</a>
     </div>
     
     <div class="row center">
@@ -198,14 +177,11 @@
         </div>
     </section>
 
-
-
     <div class="parallax-container">
         <div class="parallax">
             <img src="assets/images/luxury_home_3.jpeg" alt="" class="responsive-img">
         </div>
     </div>
-
 
     <section class="container scrollspy" id="contact">
         <div class="row">
@@ -255,13 +231,10 @@
                     <div id="send_message" class="input-field center">
                         <button onclick="M.toast({html: 'Form submitted successfully!'})" class="btn">Submit</button>
                     </div>
-
                 </form>
-
             </div>
         </div>
     </section>
-
 
     <footer class="page-footer grey darken-1">
         <div class="container">
@@ -275,7 +248,6 @@
                         veritatis, cum recusandae, aspernatur ipsum similique blanditiis sit voluptatem. Accusantium,
                         molestias? Atque, sequi. Sit blanditiis molestias dolorum asperiores.</p>
                 </div>
-
                 <div class="col s12 l4 offset-l2">
                     <h5>Connect</h5>
                     <ul>
@@ -284,7 +256,6 @@
                     </ul>
                 </div>
             </div>
-
         </div>
         <div class="footer-copyright grey darken-4">
             <div class="container center-align">&copy;
@@ -297,6 +268,8 @@
      <!-- JQuery -->
      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- Materialize JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -307,11 +280,9 @@
     <script type="text/javascript" src="assets/js/app.js"></script>
     <script type="text/javascript" src="assets/js/firebase.js"></script>
 
-
     <!-- WOW JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
     <script> new WOW().init(); </script>
-
 
     <script>
         $(document).ready(function () {
@@ -324,8 +295,6 @@
             $(".datepicker").datepicker({
                 disableWeekends: true
             });
-
-
 
             // Added Scroll event listener for the Nav bar
             $(window).scroll(function () {
@@ -344,8 +313,5 @@
             });
         })
     </script>
-
-
 </body>
-
 </html>

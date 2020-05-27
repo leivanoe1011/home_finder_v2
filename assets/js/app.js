@@ -1,18 +1,17 @@
-var states = [];
 
 
-function loadStates(data) {
+$(document).ready(function () {
+    var states = [];
 
-    var response = data;
+    function loadStates(data) {
 
-    for (var prop in response) {
-        states.push(prop);
-    }
+        var response = data;
 
-}
+        for (var prop in response) {
+            states.push(prop);
+        }
 
-
-function stateApi() {
+    };
 
     var settings = {
         "async": true,
@@ -24,36 +23,33 @@ function stateApi() {
             "x-rapidapi-key": "0c292c0993mshd75f0effe5adad9p120e45jsn157b0022e4d8",
             "country": "USA"
         }
-    }
+    };
 
-    $.ajax(settings).done(function (response) {
+    $.ajax(settings).then(function (response) {
+
         loadStates(response);
-        console.log(response)
-        for(var i = 0; i < states.length; i++){
-            var select = $("#selector");
+        for (var i = 0; i < states.length; i++) {
+            var select = $("#stateCode");
             var option = $("<option>");
-        
+
             option.html(states[i]);
 
+            option.attr("value", states[i])
+
             select.append(option);
-        }
+        };
     });
-}
 
-
-$(document).ready(function () {
-
-    // Create State Array
-    stateApi();
+    $('select').formSelect();
 
     $('.sidenav').sidenav();
 
     $(".preloader-wrapper").hide();
 
     $("#submitButton").on("click", function () {
-        var city = $(".userCity").val().toString()
-        var listCount = 9;//$("#listCount").val();
-        var stateCode = $(".options").val().toString();
+        var city = $(".userCity").val();
+        var listCount = 24;
+        var stateCode = $("#stateCode").val().toString();
 
         // Save search Results
         saveSearch(city, stateCode);
@@ -61,9 +57,9 @@ $(document).ready(function () {
         $(".preloader-wrapper").show()
         $("#submitButton").hide()
 
-        $("#homeCards").empty()
+        $("#homeCards").empty();
 
-        console.log(stateCode)
+        console.log(stateCode);
 
         var apiSettings = {
             "url": "https://realtor.p.rapidapi.com/properties/v2/list-for-sale?sort=relevance"
@@ -90,61 +86,85 @@ $(document).ready(function () {
 
             function createCard() {
                 var searchResults = $("#homeCards");
-                var column = $("<div class='col l4'>");
+                var column = $("<div class='col s12 m6 l4'>");
                 var card = $("<div class='card large'>");
                 var cardImgDiv = $("<div class='card-image'>");
-                var cardBackground = $("<img class='responsive-img'>");
+                var cardBackground = $("<img height='300px'>");
                 var spanCard = $("<span class='card-title'>");
                 var cardContent = $("<div class='card-content'>");
                 var cardAction = $("<div class='card-action'>");
+                var house = results[i];
+                var link = $("<a href='" + house.rdc_web_url + "' target='_blank'>");
                 var lotSize = $("<p>");
                 var bedBaths = $("<p>");
                 var buildingSize = $("<p>");
                 var location = $("<p>");
                 var price = $("<p>");
-                var house = results[i];
-                var link = $("<a href='" + house.rdc_web_url + "' target='_blank'>")
-                
-                
 
                 spanCard.html(house.address.line);
 
-                // card.addClass("card medium");
+                
 
-                // innerCard.addClass("card-image");
+                bedBaths.html("Beds: " 
+                + house.beds 
+                + " Baths: " 
+                + house.baths);
 
-                cardBackground.attr("src", house.thumbnail);
+                location.html("City: " 
+                + house.address.city 
+                + " State: " 
+                + house.address.state);
 
-                lotSize.html("Lot size: " + house.lot_size.size.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " " + house.lot_size.units);
+                price.html("Listing price: $" 
+                + house.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
+                + " ");
 
-                buildingSize.html("Building size: " + house.building_size.size.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " " + house.building_size.units);
+                cardAction.html("<a href='" 
+                + house.rdc_web_url 
+                + "' target='_blank'>" 
+                + "check out the property" 
+                + "</a>");
 
-                bedBaths.html("Beds: " + house.beds + " Baths: " + house.baths);
+                var sizeLot = "NA";
 
-                location.html("City: " + house.address.city + " State: " + house.address.state);
+                var unitLot = "";
 
-                price.html("Listing price: $" + house.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ");
+                if (house.hasOwnProperty("lot_size")) {
+                    sizeLot = (typeof house.lot_size.size !== "undefined" ? house.lot_size.size.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "NA")
+                    unitLot = (typeof house.lot_size.units !== "undefined" ? house.lot_size.units : "NA")
+                }
 
-                cardAction.html("<a href='" + house.rdc_web_url + "' target='_blank'>" + "check out the property" + "</a>")
+                lotSize.html("Lot size: " + sizeLot + " " + unitLot);
 
+                var sizeHouse = "NA";
 
+                var unitHouse = "";
 
-                // cardBackground.addClass("responsive-img");
+                if (house.hasOwnProperty("building_size")) {
+                    sizeHouse = (typeof house.building_size.size !== "undefined" ? house.building_size.size.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "NA")
+                    unitHouse = (typeof house.building_size.units !== "undefined" ? house.building_size.units : "NA")
+                }
+                
+                var imageUnavailable = cardBackground.attr("src", '\assets/images/unavailable-image.jpg');
 
-                // spanCard.addClass("card-title");
+                var houseThumbnail = cardBackground.attr("src", house.thumbnail);
 
-                // imgDiv.addClass("col l4");
+                
+                imageUnavailable = (typeof house.thumbnail !== "undefined" ? houseThumbnail : imageUnavailable)
+               
+
+                buildingSize.html("Building size: " + sizeHouse + " " + unitHouse);
 
                 cardContent.append(cardAction);
                 cardContent.append(bedBaths);
                 cardContent.append(buildingSize);
                 cardContent.append(lotSize);
-                cardContent.append(location)
-                cardContent.append(price)
+                cardContent.append(location);
+                cardContent.append(price);
 
                 link.append(cardBackground);
 
-                cardImgDiv.append(link)
+                cardImgDiv.append(link);
                 cardImgDiv.append(spanCard);
 
                 card.append(cardImgDiv);
@@ -157,56 +177,10 @@ $(document).ready(function () {
                 $(".preloader-wrapper").hide();
                 $("#submitButton").show();
             };
-            
+
         });
-      
+
     })
 
 
-
-    function loadStates(data) {
-
-        var response = data;
-
-        for (var prop in response) {
-            states.push(prop);
-        }
-
-    };
-
-
-    var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "https://states2.p.rapidapi.com/query?country=USA%3Fcountry%3DUSA",
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-host": "states2.p.rapidapi.com",
-            "x-rapidapi-key": "0c292c0993mshd75f0effe5adad9p120e45jsn157b0022e4d8",
-            "country": "USA"
-        }
-    }
-
-
-
-    $.ajax(settings).then(function (response) {
-
-        loadStates(response);
-        for (var i = 0; i < states.length; i++) {
-            var select = $(".options");
-            var option = $("<option>");
-
-
-            option.html(states[i]);
-
-            option.attr("value", states[i])
-
-            select.append(option);
-        }
-    });
-
-    $('select').formSelect();
-})
-
-
-
+});
