@@ -10,7 +10,7 @@ $(document).ready(function () {
     $(".preloader-wrapper").hide();
 
     $("#submitButton").on("click", function () {
-        var city = $(".userCity").val().toString();
+        var city = $(".userCity").val();
         var listCount = 20;
         var stateCode = $("#stateCode").val().toString();
 
@@ -40,9 +40,7 @@ $(document).ready(function () {
             var results = response.properties
 
             for (i = 0; i < results.length; i++) {  
-                if(results[i].lot_size.size === undefined || results[i].lot_size.units === undefined || results[i].building_size.size === undefined || results[i].building_size.units === undefined){
-                   
-                }
+                
 
                 createCard();
               
@@ -163,6 +161,3 @@ $(document).ready(function () {
     $('select').formSelect();
     
 });
-
-
-
