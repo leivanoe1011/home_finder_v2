@@ -9,7 +9,7 @@ $(document).ready(function () {
 
         for (var prop in response) {
             states.push(prop);
-        }
+        };
 
     };
 
@@ -28,13 +28,14 @@ $(document).ready(function () {
     $.ajax(settings).then(function (response) {
 
         loadStates(response);
+        
         for (var i = 0; i < states.length; i++) {
             var select = $("#stateCode");
             var option = $("<option>");
 
             option.html(states[i]);
 
-            option.attr("value", states[i])
+            option.attr("value", states[i]);
 
             select.append(option);
         };
@@ -50,12 +51,12 @@ $(document).ready(function () {
         var city = $(".userCity").val();
         var listCount = 24;
         var stateCode = $("#stateCode").val().toString();
-
+        
         // Save search Results
         saveSearch(city, stateCode);
 
-        $(".preloader-wrapper").show()
-        $("#submitButton").hide()
+        $(".preloader-wrapper").show();
+        $("#submitButton").hide();
 
         $("#homeCards").empty();
 
@@ -83,7 +84,6 @@ $(document).ready(function () {
                 createCard();
             };
 
-
             function createCard() {
                 var searchResults = $("#homeCards");
                 var column = $("<div class='col s12 m6 l4'>");
@@ -103,8 +103,6 @@ $(document).ready(function () {
 
                 spanCard.html(house.address.line);
 
-                
-
                 bedBaths.html("Beds: " 
                 + house.beds 
                 + " Baths: " 
@@ -116,12 +114,12 @@ $(document).ready(function () {
                 + house.address.state);
 
                 price.html("Listing price: $" 
-                + house.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
+                + house.price.toLocaleString()
                 + " ");
 
                 cardAction.html("<a href='" 
                 + house.rdc_web_url 
-                + "' target='_blank'>" 
+                + "' target='_blank' style='color: #26a69a;'>" 
                 + "check out the property" 
                 + "</a>");
 
@@ -130,45 +128,44 @@ $(document).ready(function () {
                 var unitLot = "";
 
                 if (house.hasOwnProperty("lot_size")) {
-                    sizeLot = (typeof house.lot_size.size !== "undefined" ? house.lot_size.size.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "NA")
+                    sizeLot = (typeof house.lot_size.size !== "undefined" ? house.lot_size.size.toLocaleString() : "NA")
                     unitLot = (typeof house.lot_size.units !== "undefined" ? house.lot_size.units : "NA")
                 }
 
-                lotSize.html("Lot size: " + sizeLot + " " + unitLot);
+                lotSize.html("Lot size: " 
+                + sizeLot 
+                + " " 
+                + unitLot);
 
                 var sizeHouse = "NA";
 
                 var unitHouse = "";
 
                 if (house.hasOwnProperty("building_size")) {
-                    sizeHouse = (typeof house.building_size.size !== "undefined" ? house.building_size.size.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "NA")
+                    sizeHouse = (typeof house.building_size.size !== "undefined" ? house.building_size.size.toLocaleString() : "NA")
                     unitHouse = (typeof house.building_size.units !== "undefined" ? house.building_size.units : "NA")
-                }
+                };
                 
                 var imageUnavailable = cardBackground.attr("src", '\assets/images/unavailable-image.jpg');
 
                 var houseThumbnail = cardBackground.attr("src", house.thumbnail);
 
                 
-                imageUnavailable = (typeof house.thumbnail !== "undefined" ? houseThumbnail : imageUnavailable)
+                imageUnavailable = (typeof house.thumbnail !== "undefined" ? houseThumbnail : imageUnavailable);
                
 
-                buildingSize.html("Building size: " + sizeHouse + " " + unitHouse);
+                buildingSize.html("Building size: " 
+                + sizeHouse 
+                + " " 
+                + unitHouse);
 
-                cardContent.append(cardAction);
-                cardContent.append(bedBaths);
-                cardContent.append(buildingSize);
-                cardContent.append(lotSize);
-                cardContent.append(location);
-                cardContent.append(price);
-
+                cardContent.append(cardAction, bedBaths, buildingSize, lotSize, location, price);
+                
                 link.append(cardBackground);
 
-                cardImgDiv.append(link);
-                cardImgDiv.append(spanCard);
+                cardImgDiv.append(link, spanCard);
 
-                card.append(cardImgDiv);
-                card.append(cardContent);
+                card.append(cardImgDiv, cardContent);
 
                 column.append(card);
 
@@ -177,10 +174,6 @@ $(document).ready(function () {
                 $(".preloader-wrapper").hide();
                 $("#submitButton").show();
             };
-
         });
-
     })
-
-
 });
