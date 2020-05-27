@@ -28,3 +28,4 @@ Functionality and layout (Suggestion from Noe)
 - At the same time, a button will be generated that will save all the data from that search.  
 	-- This functionality will give the user to go back to previous search criteria.
 
+@ Noe: Have you already scoped out an Animated Search Form? This could be really simple or miserably difficult. Guess I'll see what I can find also.
