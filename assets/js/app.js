@@ -1,10 +1,8 @@
 var states = [];
 
-
 $("#submitButton").on("click", function (event) {
     event.preventDefault();
 });
-
 
 $(document).ready(function () {
     $('.sidenav').sidenav();
@@ -12,16 +10,16 @@ $(document).ready(function () {
     $(".preloader-wrapper").hide();
 
     $("#submitButton").on("click", function () {
-        var city = $(".userCity").val().toString()
-        var listCount = 9;//$("#listCount").val();
-        var stateCode = $(".options").val().toString();
+        var city = $(".userCity").val().toString();
+        var listCount = 20;
+        var stateCode = $("#stateCode").val().toString();
 
-        $(".preloader-wrapper").show()
-        $("#submitButton").hide()
+        $(".preloader-wrapper").show();
+        $("#submitButton").hide();
 
-        $("#homeCards").empty()
+        $("#homeCards").empty();
 
-        console.log(stateCode)
+        console.log(stateCode);
 
         var apiSettings = {
             "url": "https://realtor.p.rapidapi.com/properties/v2/list-for-sale?sort=relevance"
@@ -41,8 +39,13 @@ $(document).ready(function () {
 
             var results = response.properties
 
-            for (i = 0; i < results.length; i++) {
+            for (i = 0; i < results.length; i++) {  
+                if(results[i].lot_size.size === undefined || results[i].lot_size.units === undefined || results[i].building_size.size === undefined || results[i].building_size.units === undefined){
+                   
+                }
+
                 createCard();
+              
             };
 
 
@@ -55,16 +58,15 @@ $(document).ready(function () {
                 var spanCard = $("<span class='card-title'>");
                 var cardContent = $("<div class='card-content'>");
                 var cardAction = $("<div class='card-action'>");
-                var lotSize = $("<p>");
-                var bedBaths = $("<p>");
-                var buildingSize = $("<p>");
-                var location = $("<p>");
-                var price = $("<p>");
                 var house = results[i];
-                var link = $("<a href='" + house.rdc_web_url + "' target='_blank'>")
+                var link = $("<a href='" + house.rdc_web_url + "' target='_blank'>");
+                var p = $("<p>");
+                var lotSize = p;
+                var bedBaths = p;
+                var buildingSize = p;
+                var location = p;
+                var price = p;
                 
-                
-
                 spanCard.html(house.address.line);
 
                 // card.addClass("card medium");
@@ -85,8 +87,6 @@ $(document).ready(function () {
 
                 cardAction.html("<a href='" + house.rdc_web_url + "' target='_blank'>" + "check out the property" + "</a>")
 
-
-
                 // cardBackground.addClass("responsive-img");
 
                 // spanCard.addClass("card-title");
@@ -97,12 +97,12 @@ $(document).ready(function () {
                 cardContent.append(bedBaths);
                 cardContent.append(buildingSize);
                 cardContent.append(lotSize);
-                cardContent.append(location)
-                cardContent.append(price)
+                cardContent.append(location);
+                cardContent.append(price);
 
                 link.append(cardBackground);
 
-                cardImgDiv.append(link)
+                cardImgDiv.append(link);
                 cardImgDiv.append(spanCard);
 
                 card.append(cardImgDiv);
@@ -143,28 +143,26 @@ $(document).ready(function () {
             "x-rapidapi-key": "0c292c0993mshd75f0effe5adad9p120e45jsn157b0022e4d8",
             "country": "USA"
         }
-    }
-
-
+    };
 
     $.ajax(settings).then(function (response) {
 
         loadStates(response);
         for (var i = 0; i < states.length; i++) {
-            var select = $(".options");
+            var select = $("#stateCode");
             var option = $("<option>");
-
 
             option.html(states[i]);
 
             option.attr("value", states[i])
 
             select.append(option);
-        }
+        };
     });
 
     $('select').formSelect();
-})
+    
+});
 
 
 
