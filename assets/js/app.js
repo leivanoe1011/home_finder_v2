@@ -9,7 +9,7 @@ $(document).ready(function () {
 
         for (var prop in response) {
             states.push(prop);
-        }
+        };
 
     };
 
@@ -28,13 +28,14 @@ $(document).ready(function () {
     $.ajax(settings).then(function (response) {
 
         loadStates(response);
+
         for (var i = 0; i < states.length; i++) {
-            var select = $("#stateCode");
+            var select = $(".stateCode");
             var option = $("<option>");
 
             option.html(states[i]);
 
-            option.attr("value", states[i])
+            option.attr("value", states[i]);
 
             select.append(option);
         };
@@ -46,16 +47,22 @@ $(document).ready(function () {
 
     $(".preloader-wrapper").hide();
 
-    $("#submitButton").on("click", function () {
+    $("#submitButton").on("click", function (event) {
+        event.preventDefault();
+
         var city = $(".userCity").val();
         var listCount = 24;
-        var stateCode = $("#stateCode").val().toString();
-
+        var stateCode = $(".stateCode").val().toString();
+        var minPrice = $(".minPrice").val();
+        var maxPrice = $(".maxPrice").val();
+        
         // Save search Results
         saveSearch(city, stateCode);
 
-        $(".preloader-wrapper").show()
-        $("#submitButton").hide()
+        console.log(city)
+
+        $(".preloader-wrapper").show();
+        $("#submitButton").hide();
 
         $("#homeCards").empty();
 
@@ -66,7 +73,9 @@ $(document).ready(function () {
                 + "&city=" + city
                 + "&limit=" + listCount
                 + "&offset=0"
-                + "&state_code=" + stateCode + "",
+                + "&state_code=" + stateCode + ""
+                + "&price_min=" + minPrice
+                + "&price_max=" + maxPrice,
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "realtor.p.rapidapi.com",
@@ -76,17 +85,22 @@ $(document).ready(function () {
 
         $.ajax(apiSettings).then(function (response) {
             console.log(response);
-
+            console.log(apiSettings);
             var results = response.properties
 
-            for (i = 0; i < results.length; i++) {
-                createCard();
+            for (var i = 0; i < results.length; i++) {
+                createCard(i);
             };
 
 
-            function createCard() {
+            function createCard(index) {
+
                 var searchResults = $("#homeCards");
-                var column = $("<div class='col s12 m6 l4'>");
+                var column = $("<div class='col s12 l4'>");
+                
+                // adding data target for favorite button functionality
+                $(column).attr("data-target", index);
+
                 var card = $("<div class='card large'>");
                 var cardImgDiv = $("<div class='card-image'>");
                 var cardBackground = $("<img height='300px'>");
@@ -103,8 +117,6 @@ $(document).ready(function () {
 
                 spanCard.html(house.address.line);
 
-                
-
                 bedBaths.html("Beds: " 
                 + house.beds 
                 + " Baths: " 
@@ -116,12 +128,34 @@ $(document).ready(function () {
                 + house.address.state);
 
                 price.html("Listing price: $" 
-                + house.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
+                + house.price.toLocaleString()
                 + " ");
+
+
+                // Favorite Icon
+                var favoriteButton = $("<a>");
+                $(favoriteButton).addClass("btn-floating waves-effect waves-light red right");
+
+                var favIcon = $("<i>");
+                $(favIcon).addClass("material-icons favorite_button");
+                $(favIcon).attr("data-value",index);
+                $(favIcon).text("favorite_border");
+
+                $(favoriteButton).append(favIcon);
+
+                // Check out Property Link
+                var propertyLink = $("<a href='" 
+                    + house.rdc_web_url 
+                    + "' target='_blank'>" 
+                    + "check out the property" 
+                    + "</a>");
+
+                $(cardAction).append(propertyLink);
+                $(cardAction).append(favoriteButton);
 
                 cardAction.html("<a href='" 
                 + house.rdc_web_url 
-                + "' target='_blank'>" 
+                + "' target='_blank' style='color: #26a69a;'>" 
                 + "check out the property" 
                 + "</a>");
 
@@ -130,45 +164,44 @@ $(document).ready(function () {
                 var unitLot = "";
 
                 if (house.hasOwnProperty("lot_size")) {
-                    sizeLot = (typeof house.lot_size.size !== "undefined" ? house.lot_size.size.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "NA")
+                    sizeLot = (typeof house.lot_size.size !== "undefined" ? house.lot_size.size.toLocaleString() : "NA")
                     unitLot = (typeof house.lot_size.units !== "undefined" ? house.lot_size.units : "NA")
                 }
 
-                lotSize.html("Lot size: " + sizeLot + " " + unitLot);
+                lotSize.html("Lot size: " 
+                + sizeLot 
+                + " " 
+                + unitLot);
 
                 var sizeHouse = "NA";
 
                 var unitHouse = "";
 
                 if (house.hasOwnProperty("building_size")) {
-                    sizeHouse = (typeof house.building_size.size !== "undefined" ? house.building_size.size.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "NA")
+                    sizeHouse = (typeof house.building_size.size !== "undefined" ? house.building_size.size.toLocaleString() : "NA")
                     unitHouse = (typeof house.building_size.units !== "undefined" ? house.building_size.units : "NA")
-                }
+                };
                 
                 var imageUnavailable = cardBackground.attr("src", '\assets/images/unavailable-image.jpg');
 
                 var houseThumbnail = cardBackground.attr("src", house.thumbnail);
 
                 
-                imageUnavailable = (typeof house.thumbnail !== "undefined" ? houseThumbnail : imageUnavailable)
+                imageUnavailable = (typeof house.thumbnail !== "undefined" ? houseThumbnail : imageUnavailable);
                
 
-                buildingSize.html("Building size: " + sizeHouse + " " + unitHouse);
+                buildingSize.html("Building size: " 
+                + sizeHouse 
+                + " " 
+                + unitHouse);
 
-                cardContent.append(cardAction);
-                cardContent.append(bedBaths);
-                cardContent.append(buildingSize);
-                cardContent.append(lotSize);
-                cardContent.append(location);
-                cardContent.append(price);
-
+                cardContent.append(cardAction, bedBaths, buildingSize, lotSize, location, price);
+                
                 link.append(cardBackground);
 
-                cardImgDiv.append(link);
-                cardImgDiv.append(spanCard);
+                cardImgDiv.append(link, spanCard);
 
-                card.append(cardImgDiv);
-                card.append(cardContent);
+                card.append(cardImgDiv, cardContent);
 
                 column.append(card);
 
@@ -177,10 +210,6 @@ $(document).ready(function () {
                 $(".preloader-wrapper").hide();
                 $("#submitButton").show();
             };
-
         });
-
     })
-
-
 });
