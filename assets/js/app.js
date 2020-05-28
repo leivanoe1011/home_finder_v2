@@ -28,7 +28,7 @@ $(document).ready(function () {
     $.ajax(settings).then(function (response) {
 
         loadStates(response);
-        
+
         for (var i = 0; i < states.length; i++) {
             var select = $("#stateCode");
             var option = $("<option>");
@@ -51,6 +51,7 @@ $(document).ready(function () {
         var city = $(".userCity").val();
         var listCount = 24;
         var stateCode = $("#stateCode").val().toString();
+        var minPrice = $("#minPrice").val();
         
         // Save search Results
         saveSearch(city, stateCode);
@@ -67,7 +68,8 @@ $(document).ready(function () {
                 + "&city=" + city
                 + "&limit=" + listCount
                 + "&offset=0"
-                + "&state_code=" + stateCode + "",
+                + "&state_code=" + stateCode + ""
+                + "&price_min=" + minPrice,
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "realtor.p.rapidapi.com",
