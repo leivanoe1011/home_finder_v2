@@ -55,6 +55,8 @@ $(document).ready(function () {
         var stateCode = $(".stateCode").val().toString();
         var minPrice = $(".minPrice").val();
         var maxPrice = $(".maxPrice").val();
+        var minBaths = $(".minBaths").val();
+        var maxBaths = $(".maxBaths").val();
         
         // Save search Results
         saveSearch(city, stateCode);
@@ -75,7 +77,9 @@ $(document).ready(function () {
                 + "&offset=0"
                 + "&state_code=" + stateCode + ""
                 + "&price_min=" + minPrice
-                + "&price_max=" + maxPrice,
+                + "&price_max=" + maxPrice
+                + "&baths_min=" + minBaths
+                + "&baths_max=" + maxBaths,
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "realtor.p.rapidapi.com",
