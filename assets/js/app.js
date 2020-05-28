@@ -79,14 +79,18 @@ $(document).ready(function () {
 
             var results = response.properties
 
-            for (i = 0; i < results.length; i++) {
-                createCard();
+            for (var i = 0; i < results.length; i++) {
+                createCard(i);
             };
 
 
-            function createCard() {
+            function createCard(index) {
                 var searchResults = $("#homeCards");
-                var column = $("<div class='col s12 m6 l4'>");
+                var column = $("<div class='col s12 l4'>");
+                
+                // adding data target for favorite button functionality
+                $(column).attr("data-target", index);
+
                 var card = $("<div class='card large'>");
                 var cardImgDiv = $("<div class='card-image'>");
                 var cardBackground = $("<img height='300px'>");
@@ -119,11 +123,26 @@ $(document).ready(function () {
                 + house.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
                 + " ");
 
-                cardAction.html("<a href='" 
-                + house.rdc_web_url 
-                + "' target='_blank'>" 
-                + "check out the property" 
-                + "</a>");
+                // Favorite Icon
+                var favoriteButton = $("<a>");
+                $(favoriteButton).addClass("btn-floating waves-effect waves-light red right");
+
+                var favIcon = $("<i>");
+                $(favIcon).addClass("material-icons favorite_button");
+                $(favIcon).attr("data-value",index);
+                $(favIcon).text("favorite_border");
+
+                $(favoriteButton).append(favIcon);
+
+                // Check out Property Link
+                var propertyLink = $("<a href='" 
+                    + house.rdc_web_url 
+                    + "' target='_blank'>" 
+                    + "check out the property" 
+                    + "</a>");
+
+                $(cardAction).append(propertyLink);
+                $(cardAction).append(favoriteButton);
 
                 var sizeLot = "NA";
 
