@@ -144,17 +144,26 @@
 
     <div class="container">
         <form class="row center scrollspy" id="search">
-            <div class="input-field col m6 s12">
+            <div class="input-field col m4 s12 l4">
                 <i class="material-icons prefix">mode_edit</i>
-                <textarea id="icon_prefix2" class="materialize-textarea userCity"></textarea>
+                <input id="icon_prefix2" type="text" class="materialize-textarea userCity">
                 <label for="icon_prefix2">City</label>
             </div>
-            <div class="col m6 s12">
+            <div class="col m4 s12 l4">
                 <label>Choose:</label>
-                <select class="browser-default" id="stateCode">
+                <select class="browser-default stateCode">
                     <option value="" disabled selected></option>
                 </select>
-
+            </div>
+            <div class="input-field col m4 s12 l4">
+                <i class="material-icons prefix">mode_edit</i>
+                <textarea id="icon_prefix2" class="materialize-textarea minPrice"></textarea>
+                <label for="icon_prefix2">Min. Price:</label>
+            </div>
+            <div class="input-field col m4 s12 l4">
+                <i class="material-icons prefix">mode_edit</i>
+                <textarea id="icon_prefix2" class="materialize-textarea maxPrice"></textarea>
+                <label for="icon_prefix2">Max Price:</label>
             </div>
         </form>
     </div>
@@ -179,7 +188,7 @@
     </div>
 
     <section class="container">
-        <div id="homeCards" style="min-height:1000px" class="row">
+        <div id="homeCards" class="row">
         </div>
     </section>
 
@@ -203,7 +212,6 @@
 
             <div id="contact_form" class="col s12 l4 offset-l2">
                 <form>
-
                     <div class="input-field">
                         <i class="material-icons prefix">person</i>
                         <input type="text" id="firstName">
