@@ -1,5 +1,8 @@
 
 
+
+
+
 $(document).ready(function () {
     var states = [];
 
@@ -153,11 +156,6 @@ $(document).ready(function () {
                 $(cardAction).append(propertyLink);
                 $(cardAction).append(favoriteButton);
 
-                cardAction.html("<a href='" 
-                + house.rdc_web_url 
-                + "' target='_blank' style='color: #26a69a;'>" 
-                + "check out the property" 
-                + "</a>");
 
                 var sizeLot = "NA";
 

@@ -62,6 +62,46 @@ function saveSearch(city, state){
     createButtons(searchObj);
 }
 
+
+function storeFavoriteCards(card){
+
+}
+
+
+function getFavoriteCard(object, cardIndex){
+    var currentCardContainer = object;
+    var currentCard; 
+    var valueId = cardIndex;
+
+    $(currentCardContainer).children("div").each(function(){
+    
+        var targetId = $(this).data("target");
+                
+        if(valueId === targetId){
+            currentCard = $(this);
+            return false;
+        }
+    });
+
+    return currentCard;
+
+}
+
+$(document).on("click",".favorite_button", function(){
+
+    var cardTargetId = $(this).data("value");
+
+    var cardContainer = $("#homeCards");
+
+    var favoriteCard = getFavoriteCard(cardContainer,cardTargetId);
+
+    console.log(favoriteCard);
+
+    storeFavoriteCards(favoriteCard);
+});
+
+
+
 // Search Form Event Handler
 // $("#submitButton").on("click", function (event) {
 //     event.preventDefault();
