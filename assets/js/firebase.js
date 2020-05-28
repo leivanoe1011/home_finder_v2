@@ -75,6 +75,7 @@ $("#send_message").on("click", function (event) {
     event.preventDefault();
 });
 
+
 $("#send_message").on("click", function submitForm() {
     var firstName = $("#firstName").val();
     var lastName = $("#lastName").val();
@@ -90,3 +91,7 @@ $("#send_message").on("click", function submitForm() {
         date: date
     });
 });
+
+
+
+
