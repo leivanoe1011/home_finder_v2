@@ -144,17 +144,26 @@
 
     <div class="container">
         <form class="row center scrollspy" id="search">
-            <div class="input-field col m6 s12">
+            <div class="input-field col m4 s12 l4">
                 <i class="material-icons prefix">mode_edit</i>
-                <textarea id="icon_prefix2" class="materialize-textarea userCity"></textarea>
+                <input id="icon_prefix2" type="text" class="materialize-textarea userCity">
                 <label for="icon_prefix2">City</label>
             </div>
-            <div class="col m6 s12">
+            <div class="col m4 s12 l4">
                 <label>Choose:</label>
-                <select class="browser-default" id="stateCode">
+                <select class="browser-default stateCode">
                     <option value="" disabled selected></option>
                 </select>
-
+            </div>
+            <div class="input-field col m4 s12 l4">
+                <i class="material-icons prefix">mode_edit</i>
+                <textarea id="icon_prefix2" class="materialize-textarea minPrice"></textarea>
+                <label for="icon_prefix2">Min. Price:</label>
+            </div>
+            <div class="input-field col m4 s12 l4">
+                <i class="material-icons prefix">mode_edit</i>
+                <textarea id="icon_prefix2" class="materialize-textarea maxPrice"></textarea>
+                <label for="icon_prefix2">Max Price:</label>
             </div>
         </form>
     </div>
@@ -180,6 +189,7 @@
 
     <section class="container">
         <div id="homeCards" style="min-height:200px" class="row">
+
         </div>
     </section>
 
@@ -203,7 +213,6 @@
 
             <div id="contact_form" class="col s12 l4 offset-l2">
                 <form>
-
                     <div class="input-field">
                         <i class="material-icons prefix">person</i>
                         <input type="text" id="firstName">
@@ -276,16 +285,11 @@
 
     <!-- JQuery -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
     <!-- Materialize JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-
-
     <!-- Custom JS -->
     <script type="text/javascript" src="assets/js/app.js"></script>
     <script type="text/javascript" src="assets/js/firebase.js"></script>
-
     <!-- WOW JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
     <script> new WOW().init(); </script>
