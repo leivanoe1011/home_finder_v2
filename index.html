@@ -5,26 +5,20 @@
     <meta charset="UTF-8">
     <meta lang="en-US">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <!-- Animate -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.0/animate.min.css">
-
-
     <!-- firebase -->
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script> 
-   
-
     <!-- font awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
         integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
     <!-- Materialize css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
+    <!--nouislider-->
+    <link rel="stylesheet" href="assets/css/nouislider.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <title>Home Finder</title>
@@ -124,7 +118,6 @@
                 </ul>
             </div>
             <!-- End of Slider -->
-
         </div>
     </section>
 
@@ -145,26 +138,86 @@
     <div class="container">
         <form class="row center scrollspy" id="search">
             <div class="input-field col m4 s12 l4">
-                <i class="material-icons prefix">mode_edit</i>
+                <i class="material-icons prefix">location_city</i>
                 <input id="icon_prefix2" type="text" class="materialize-textarea userCity">
                 <label for="icon_prefix2">City</label>
             </div>
             <div class="col m4 s12 l4">
-                <label>Choose:</label>
+                <label>State:</label>
                 <select class="browser-default stateCode">
                     <option value="" disabled selected></option>
                 </select>
             </div>
-            <div class="input-field col m4 s12 l4">
-                <i class="material-icons prefix">mode_edit</i>
-                <textarea id="icon_prefix2" class="materialize-textarea minPrice"></textarea>
-                <label for="icon_prefix2">Min. Price:</label>
+            <div class="col m4 s12 l4">
+                <label>Min. Price:</label>
+                <select class="browser-default minPrice">
+                    <option value="" disabled selected></option>
+                    <option value="50000">50,000</option>
+                    <option value="100000">100,000</option>
+                    <option value="150000">150,000</option>
+                    <option value="200000">200,000</option>
+                    <option value="250000">250,000</option>
+                    <option value="300000">300,000</option>
+                </select>
             </div>
-            <div class="input-field col m4 s12 l4">
-                <i class="material-icons prefix">mode_edit</i>
-                <textarea id="icon_prefix2" class="materialize-textarea maxPrice"></textarea>
-                <label for="icon_prefix2">Max Price:</label>
+            <div class="col m4 s12 l4">
+                <label>Max. Price:</label>
+                <select class="browser-default maxPrice">
+                    <option value="" disabled selected></option>
+                    <option value="50000">50,000</option>
+                    <option value="100000">100,000</option>
+                    <option value="150000">150,000</option>
+                    <option value="200000">200,000</option>
+                    <option value="250000">250,000</option>
+                    <option value="300000">300,000</option>
+                </select>
             </div>
+            <div class="col m4 s12 l4">
+                <label>Min. Baths:</label>
+                <select class="browser-default minBaths">
+                    <option value="" disabled selected></option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class=" col m4 s12 l4">
+                <label>Max. Baths:</label>
+                <select class="browser-default maxBaths">
+                    <option value="" disabled selected></option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="col m4 s12 l4">
+                <label>Min. Bedrooms:</label>
+                <select class="browser-default minBedrooms">
+                    <option value="" disabled selected></option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="col m4 s12 l4">
+                <label>Max Bedrooms:</label>
+                <select class="browser-default maxBedrooms">
+                    <option value="" disabled selected></option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+
+            
         </form>
     </div>
     <div class="row center">
@@ -277,16 +330,14 @@
                 <script>document.write(new Date().getFullYear())</script> Home Finder </div>
         </div>
     </footer>
-
- 
-
-     <!-- JQuery -->
-     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
     <!-- JQuery -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Materialize JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!--wnumb-->
+    <script type="text/javascript" src="assets/js/wNumb.js"></script>
+    <!--nouislider-->
+    <script type="text/javascript" src="assets/js/nouislider.js"></script>
     <!-- Custom JS -->
     <script type="text/javascript" src="assets/js/app.js"></script>
     <script type="text/javascript" src="assets/js/firebase.js"></script>
