@@ -34,7 +34,7 @@ function displayCard(index, homeWebSite, addressLine, beds, baths, city, state, 
 
     var card = $("<div class='card large'>");
     var cardImgDiv = $("<div class='card-image'>");
-    var cardBackground = $("<img height='300px'>");
+    var cardBackground = $("<img height='300px' class='responsive-image'>");
     var spanCard = $("<span class='card-title'>");
     var cardContent = $("<div class='card-content' style='margin-top: -10px;'>");
     var cardAction = $("<div class='card-action'>");
@@ -91,8 +91,8 @@ function displayCard(index, homeWebSite, addressLine, beds, baths, city, state, 
         + " "
         + lotUnit);
 
-    houseSize = (typeof houseSize !== "undefined" ? houseSize : "NA")
-    houseUnit = (typeof houseUnit !== "undefined" ? houseUnit : "NA")
+    houseSize = (typeof houseSize !== "undefined" ? houseSize : "NA");
+    houseUnit = (typeof houseUnit !== "undefined" ? houseUnit : "NA");
 
     var imageUnavailable = cardBackground.attr("src", '\assets/images/unavailable-image.jpg');
 
