@@ -42,6 +42,9 @@ function displayCard(index, propertyObj) {
     var googleDirections = propertyObj.googleDirections;
 
 
+    // console.log("Google URL: " + googleDirections);
+    // console.log("Home website URL: "+ homeWebSite);
+
     var searchResults = $("#homeCards");
     var column = $("<div class='col s12 m6 l6 wow animate__animated animate__fadeInUp'>");
 
@@ -177,6 +180,7 @@ function createCard(index, house) {
         houseImage: house.thumbnail,
         googleDirections: `http://maps.google.com/maps?q=${house.address.city}+${house.address.state}+${house.address.line}`
     }
+    // console.log (propertyObj);
 
 
     realtorResults.push(propertyObj);
