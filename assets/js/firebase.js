@@ -1,16 +1,6 @@
 $("#previous_search").hide()
 
-// Configuration file to the Save Search Results
-var firebaseConfig_SaveSearchResults = {
-    apiKey: "AIzaSyAATbtZxRXHkvnP7CMemxc_8ibgyQLpWN4",
-    authDomain: "grpprj1-home-finder.firebaseapp.com",
-    databaseURL: "https://grpprj1-home-finder.firebaseio.com",
-    projectId: "grpprj1-home-finder",
-    storageBucket: "grpprj1-home-finder.appspot.com",
-    messagingSenderId: "1063890729907",
-    appId: "1:1063890729907:web:78a3392d4da6bb9acb69c6",
-    measurementId: "G-LNPJ4N4NXZ"
-};
+
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -25,81 +15,9 @@ var firebaseConfig = {
 
 // Initialize Firebase
 var app1 = firebase.initializeApp(firebaseConfig, 'app1');
-var app2 = firebase.initializeApp(firebaseConfig_SaveSearchResults,'app2');
 
 // initialize databases
 var db1 = firebase.database(app1);
-var db2 = firebase.database(app2);
-
-// Used to load all our search entries
-var searchList = [];
-
-function createButtons (saveSearch){
-    var newResult = $("<button>");
-    newResult.addClass("waves-effect waves-light btn-small search_button");
-    var city = saveSearch.city;
-    var state = saveSearch.stateCode;
-
-    newResult.html('<i class="material-icons left">home</i>' + city + ", " + state);
-
-    $("#previous_search").append(newResult);
-    $("#previous_search").show()
-}
-
-function saveSearch(city, state){
-
-    var searchObj = {
-        city: city,
-        stateCode: state
-    }
-
-    searchList.push(searchObj);
-
-    db2.ref().set({
-        searchResults: JSON.stringify(searchList)
-    });
-
-    createButtons(searchObj);
-}
-
-
-function storeFavoriteCards(card){
-
-}
-
-
-function getFavoriteCard(object, cardIndex){
-    var currentCardContainer = object;
-    var currentCard; 
-    var valueId = cardIndex;
-
-    $(currentCardContainer).children("div").each(function(){
-    
-        var targetId = $(this).data("target");
-                
-        if(valueId === targetId){
-            currentCard = $(this);
-            return false;
-        }
-    });
-
-    return currentCard;
-
-}
-
-$(document).on("click",".favorite_button", function(){
-
-    var cardTargetId = $(this).data("value");
-
-    var cardContainer = $("#homeCards");
-
-    var favoriteCard = getFavoriteCard(cardContainer,cardTargetId);
-
-    console.log(favoriteCard);
-
-    storeFavoriteCards(favoriteCard);
-});
-
 
 
 // Search Form Event Handler
