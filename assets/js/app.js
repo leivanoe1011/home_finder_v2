@@ -129,22 +129,14 @@ function createCard(index, property) {
 
     var house = property;
 
-    var sizeLot = "NA";
-
-    var unitLot = "";
-
     if (house.hasOwnProperty("lot_size")) {
-        sizeLot = (typeof house.lot_size.size !== "undefined" ? house.lot_size.size.toLocaleString() : "NA")
-        unitLot = (typeof house.lot_size.units !== "undefined" ? house.lot_size.units : "NA")
+        lotSize = (typeof house.lot_size.size !== "undefined" ? house.lot_size.size.toLocaleString() : "NA")
+        lotUnit = (typeof house.lot_size.units !== "undefined" ? house.lot_size.units : "NA")
     }
 
-    var sizeHouse = "NA";
-
-    var unitHouse = "";
-
     if (house.hasOwnProperty("building_size")) {
-        sizeHouse = (typeof house.building_size.size !== "undefined" ? house.building_size.size.toLocaleString() : "NA")
-        unitHouse = (typeof house.building_size.units !== "undefined" ? house.building_size.units : "NA")
+        houseSize = (typeof house.building_size.size !== "undefined" ? house.building_size.size.toLocaleString() : "NA")
+        houseUnit = (typeof house.building_size.units !== "undefined" ? house.building_size.units : "NA")
     };
 
     // This will be used to create the Favorite Cards
@@ -156,10 +148,10 @@ function createCard(index, property) {
         city: house.address.city,
         state: house.address.state,
         price: house.price.toLocaleString(),
-        lotSize: sizeLot,
-        lotUnit: unitLot,
-        houseSize: sizeHouse,
-        houseUnit: unitHouse,
+        lotSize: lotSize,
+        lotUnit: lotUnit,
+        houseSize: houseSize,
+        houseUnit: houseUnit,
         houseImage: house.thumbnail
     }
 
