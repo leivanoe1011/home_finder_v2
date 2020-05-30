@@ -26,14 +26,55 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
 
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
 
     <title>Favorite</title>
 </head>
 <body>
 
-    <div>
-        <select name="" id=""></select>
-    </div>
+    <header>
+        <nav class="nav-wrapper transparent white-text">
+            <div class="container">
+                <a href="#" class="brand-logo">Home Finder</a>
+                <!-- Mobile Device Menu -->
+                <a href="#" class="sidenav-trigger" data-target="mobile-menu">
+                    <i class="material-icons menu_icon">menu</i>
+                </a>
+                <!-- Navigation Bar -->
+                <ul class="right hide-on-med-and-down" id="#nav_menu">
+                    <li><a class="nav_button" href="index.html">Search Homes</a></li>
+                    <li><a class="nav_button" href="favorite.html">Favorites</a></li>
+                    <li><a class="nav_button" href="#contact">Contact</a></li>
+                    <!-- Fab Icons -->
+                    <li>
+                        <a href="#" class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- The menu that will appear when the page is viewed in mobile device -->
+                <ul class="sidenav grey lighten-4" id="mobile-menu">
+                    <li><a href="index.html">Search Homes</a></li>
+                    <li><a href="favorite.html">Favorites</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+
     
     <section class="container">
         <div id="homeCards" style="min-height:200px" class="row">
@@ -46,6 +87,9 @@
 
     <!-- JQuery -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <!-- Custom JS -->
     <script type="text/javascript" src="assets/js/app.js"></script>
@@ -75,6 +119,34 @@
   
         $(document).ready(function(){
 
+
+            // Initialize the Side Nav
+            $(".sidenav").sidenav();
+            $(".parallax").parallax();
+            $('.slider').slider();
+            $(".scrollspy").scrollSpy();
+            $(".datepicker").datepicker({
+                disableWeekends: true
+            });
+
+            // Added Scroll event listener for the Nav bar
+            $(window).scroll(function () {
+
+                if ($(window).scrollTop() > 20) {
+                    $("nav").addClass("white");
+                    $(".brand-logo").addClass("black-text");
+                    $(".nav_button").addClass("black-text");
+                    $("nav").removeClass("transparent white-text");
+                    $(".menu_icon").addClass("black-text");
+                }
+                else {
+                    $("nav").addClass("transparent white-text");
+                    $(".brand-logo").removeClass("black-text");
+                    $(".nav_button").removeClass("black-text");
+                    $(".menu_icon").removeClass("black-text");
+                }
+            });
+
             var index = 1;
 
             var query = db2.ref().orderByKey();
@@ -90,8 +162,9 @@
 
                         index++;
                     })
-                })
-        })
+                });
+                
+        });
     
     
     </script>
