@@ -24,8 +24,25 @@ var app2 = firebase.initializeApp(firebaseConfig_SaveSearchResults, 'app2');
 var db2 = firebase.database(app2);
 
 
-function displayCard(index, homeWebSite, addressLine, beds, baths, city, state, price, lotSize, lotUnit, houseSize, houseUnit, houseImage, googleDirections) {
+function displayCard(index, propertyObj) {
 
+ 
+    var homeWebSite = propertyObj.homeWebSite;
+    var addressLine = propertyObj.addressLine;
+    var beds = propertyObj.beds;
+    var baths = propertyObj.baths;
+    var city = propertyObj.city;
+    var state = propertyObj.state;
+    var price = propertyObj.price;
+    var lotSize = propertyObj.lotSize;
+    var lotUnit = propertyObj.lotUnit;
+    var houseSize = propertyObj.houseSize;
+    var houseUnit = propertyObj.houseUnit;
+    var houseImage = propertyObj.houseImage;
+    var googleDirections = propertyObj.googleDirections;
+
+    console.log("Google URL: " + googleDirections);
+    console.log("Home website URL: "+ homeWebSite);
     var searchResults = $("#homeCards");
     var column = $("<div class='col s12 l4 wow animate__animated animate__fadeInUp'>");
 
@@ -170,14 +187,13 @@ function createCard(index, property) {
         houseUnit: unitHouse,
         houseImage: house.thumbnail,
         googleDirections: `http://maps.google.com/maps?q=${house.address.city}+${house.address.state}+${house.address.line}`
-    }
 
+    }
+    console.log (propertyObj);
     realtorResults.push(propertyObj);
 
-    displayCard(index, propertyObj.homeWebSite, propertyObj.addressLine, propertyObj.beds
-        , propertyObj.baths, propertyObj.city, propertyObj.state, propertyObj.price
-        , propertyObj.lotSize, propertyObj.lotUnit, propertyObj.houseSize, propertyObj.houseUnit, propertyObj.houseImage);
-};
+    displayCard(index, propertyObj);
+}
 
 
 // Used to load all our search entries
