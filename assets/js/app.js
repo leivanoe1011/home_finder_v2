@@ -57,7 +57,7 @@ function displayCard(index, propertyObj) {
     var spanCard = $("<span class='card-title'>");
     var cardContent = $("<div class='card-content' style='margin-top: -25px;'>");
     var cardActionRow = $("<div class='row'>")
-    var cardAction = $("<div class='card-action' style='padding-top: 0px'>");
+    var cardAction = $("<div class='card-action' style='padding-top: g0px'>");
 
     var link = $("<a href='" + homeWebSite + "' target='_blank'>");
     var homeLotSize = $("<p>");
