@@ -26,7 +26,7 @@ var db2 = firebase.database(app2);
 
 function displayCard(index, propertyObj) {
 
- 
+
     var homeWebSite = propertyObj.homeWebSite;
     var addressLine = propertyObj.addressLine;
     var beds = propertyObj.beds;
@@ -42,7 +42,7 @@ function displayCard(index, propertyObj) {
     var googleDirections = propertyObj.googleDirections;
 
     console.log("Google URL: " + googleDirections);
-    console.log("Home website URL: "+ homeWebSite);
+    console.log("Home website URL: " + homeWebSite);
     var searchResults = $("#homeCards");
     var column = $("<div class='col s12 m6 l6 wow animate__animated animate__fadeInUp'>");
 
@@ -62,7 +62,7 @@ function displayCard(index, propertyObj) {
     var buildingSize = $("<p>");
     var location = $("<p>");
     var homePrice = $("<p>");
-    
+
     spanCard.html(addressLine);
 
     bedBaths.html("Beds: "
@@ -98,10 +98,10 @@ function displayCard(index, propertyObj) {
         + "</a>");
     
     // Google Maps Directions Link
-    var directionLink =$("<a href='" 
+    var directionLink = $("<a href='"
         + googleDirections
         + "' target='_blank' style='color: #26a69a;'>"
-        + "Get Directions" 
+        + "Get Directions"
         + "</a>");
 
     $(cardAction).append(propertyLink);
@@ -179,8 +179,8 @@ function createCard(index, house) {
         googleDirections: `http://maps.google.com/maps?q=${house.address.city}+${house.address.state}+${house.address.line}`
     }
 
-    
-    console.log (propertyObj);
+
+    console.log(propertyObj);
     realtorResults.push(propertyObj);
 
     displayCard(index, propertyObj);
@@ -289,10 +289,16 @@ $(document).on("click", ".favorite_button", function () {
     storeFavoriteCards(favoriteCard);
 });
 
+$("#advancedFilter").on("click", function(){
+    $(".filter").toggle()
+});
+
 
 
 $(document).ready(function () {
     $('select').formSelect();
+
+    $(".filter").hide();
 
     var states = [];
 

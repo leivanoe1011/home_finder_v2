@@ -135,20 +135,22 @@
     </div>
 
 
-    <div class="container">
+    <div class="container blue-grey lighten-5 z-depth-4" id="searchContainer" style="margin-top: 10px;">
         <form class="row center scrollspy" id="search">
-            <div class="input-field col m4 s12 l4">
+            <div class="input-field col m4 s12 l6">
                 <i class="material-icons prefix">location_city</i>
                 <input id="icon_prefix2" type="text" class="materialize-textarea userCity">
                 <label for="icon_prefix2">City</label>
             </div>
-            <div class="col m4 s12 l4">
+            <div class="col m4 s12 l6">
                 <label>State:</label>
                 <select class="browser-default stateCode">
                     <option value="" disabled selected></option>
                 </select>
             </div>
-            <div class="col m4 s12 l4">
+        </form>
+        <form class="row center">
+            <div class="col m4 s12 l6">
                 <label>Min. Price:</label>
                 <select class="browser-default minPrice">
                     <option value="" disabled selected></option>
@@ -160,7 +162,7 @@
                     <option value="300000">300,000</option>
                 </select>
             </div>
-            <div class="col m4 s12 l4">
+            <div class="col m4 s12 l6">
                 <label>Max. Price:</label>
                 <select class="browser-default maxPrice">
                     <option value="" disabled selected></option>
@@ -172,7 +174,9 @@
                     <option value="300000">300,000</option>
                 </select>
             </div>
-            <div class="col m4 s12 l4">
+        </form>
+        <form class="row center">
+            <div class="col m4 s12 l3 filter">
                 <label>Min. Baths:</label>
                 <select class="browser-default minBaths">
                     <option value="" disabled selected></option>
@@ -183,7 +187,7 @@
                     <option value="5">5</option>
                 </select>
             </div>
-            <div class=" col m4 s12 l4">
+            <div class=" col m4 s12 l3 filter">
                 <label>Max. Baths:</label>
                 <select class="browser-default maxBaths">
                     <option value="" disabled selected></option>
@@ -194,7 +198,7 @@
                     <option value="5">5</option>
                 </select>
             </div>
-            <div class="col m4 s12 l4">
+            <div class="col m4 s12 l3 filter">
                 <label>Min. Bedrooms:</label>
                 <select class="browser-default minBedrooms">
                     <option value="" disabled selected></option>
@@ -205,7 +209,7 @@
                     <option value="5">5</option>
                 </select>
             </div>
-            <div class="col m4 s12 l4">
+            <div class="col m12 s12 l3 filter">
                 <label>Max Bedrooms:</label>
                 <select class="browser-default maxBedrooms">
                     <option value="" disabled selected></option>
@@ -216,9 +220,10 @@
                     <option value="5">5</option>
                 </select>
             </div>
-
-            
         </form>
+    </div>
+    <div class="row center">
+        <a class="waves-effect waves-light btn-small" id="advancedFilter">Advanced Filter</a>
     </div>
     <div class="row center">
         <a class="waves-effect waves-light btn-large" id="submitButton">Search</a>
