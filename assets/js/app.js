@@ -26,7 +26,7 @@ var db2 = firebase.database(app2);
 
 function displayCard(index, propertyObj) {
 
- 
+
     var homeWebSite = propertyObj.homeWebSite;
     var addressLine = propertyObj.addressLine;
     var beds = propertyObj.beds;
@@ -42,17 +42,15 @@ function displayCard(index, propertyObj) {
     var googleDirections = propertyObj.googleDirections;
 
 
-    // console.log("Google URL: " + googleDirections);
-    // console.log("Home website URL: "+ homeWebSite);
     var searchResults = $("#homeCards");
-    var column = $("<div class='col s12 l4 wow animate__animated animate__fadeInUp'>");
+    var column = $("<div class='col s12 m6 l6 wow animate__animated animate__fadeInUp'>");
 
     // adding data target for favorite button functionality
     $(column).attr("data-target", index);
 
     var card = $("<div class='card large'>");
     var cardImgDiv = $("<div class='card-image'>");
-    var cardBackground = $("<img height='300px'>");
+    var cardBackground = $("<img height='300px' class='responsive-image'>");
     var spanCard = $("<span class='card-title'>");
     var cardContent = $("<div class='card-content' style='margin-top: -10px;'>");
     var cardAction = $("<div class='card-action'>");
@@ -63,7 +61,7 @@ function displayCard(index, propertyObj) {
     var buildingSize = $("<p>");
     var location = $("<p>");
     var homePrice = $("<p>");
-    
+
     spanCard.html(addressLine);
 
     bedBaths.html("Beds: "
@@ -94,15 +92,15 @@ function displayCard(index, propertyObj) {
     // Check out Property Link
     var propertyLink = $("<a href='"
         + homeWebSite
-        + "' target='_blank'>"
+        + "' target='_blank' style='color: #26a69a;'>"
         + "check out the property"
         + "</a>");
-
+    
     // Google Maps Directions Link
-    var directionLink =$("<a href='" 
+    var directionLink = $("<a href='"
         + googleDirections
-        + "' target='_blank'>"
-        + "Get Directions" 
+        + "' target='_blank' style='color: #26a69a;'>"
+        + "Get Directions"
         + "</a>");
 
     $(cardAction).append(propertyLink);
@@ -117,8 +115,8 @@ function displayCard(index, propertyObj) {
         + " "
         + lotUnit);
 
-    houseSize = (typeof houseSize !== "undefined" ? houseSize : "NA")
-    houseUnit = (typeof houseUnit !== "undefined" ? houseUnit : "NA")
+    houseSize = (typeof houseSize !== "undefined" ? houseSize : "NA");
+    houseUnit = (typeof houseUnit !== "undefined" ? houseUnit : "NA");
 
     var imageUnavailable = cardBackground.attr("src", '\assets/images/unavailable-image.jpg');
 
@@ -151,26 +149,16 @@ function displayCard(index, propertyObj) {
 
 
 // Function will be used to parse the Realtor API results and Favorite functionality
-function createCard(index, property) {
-
-    var house = property;
-
-    var sizeLot = "NA";
-
-    var unitLot = "";
+function createCard(index, house) {
 
     if (house.hasOwnProperty("lot_size")) {
-        sizeLot = (typeof house.lot_size.size !== "undefined" ? house.lot_size.size.toLocaleString() : "NA")
-        unitLot = (typeof house.lot_size.units !== "undefined" ? house.lot_size.units : "NA")
+        lotSize = (typeof house.lot_size.size !== "undefined" ? house.lot_size.size.toLocaleString() : "NA")
+        lotUnit = (typeof house.lot_size.units !== "undefined" ? house.lot_size.units : "NA")
     }
 
-    var sizeHouse = "NA";
-
-    var unitHouse = "";
-
     if (house.hasOwnProperty("building_size")) {
-        sizeHouse = (typeof house.building_size.size !== "undefined" ? house.building_size.size.toLocaleString() : "NA")
-        unitHouse = (typeof house.building_size.units !== "undefined" ? house.building_size.units : "NA")
+        houseSize = (typeof house.building_size.size !== "undefined" ? house.building_size.size.toLocaleString() : "NA")
+        houseUnit = (typeof house.building_size.units !== "undefined" ? house.building_size.units : "NA")
     };
 
     // This will be used to create the Favorite Cards
@@ -182,15 +170,16 @@ function createCard(index, property) {
         city: house.address.city,
         state: house.address.state,
         price: house.price.toLocaleString(),
-        lotSize: sizeLot,
-        lotUnit: unitLot,
-        houseSize: sizeHouse,
-        houseUnit: unitHouse,
+        lotSize: lotSize,
+        lotUnit: lotUnit,
+        houseSize: houseSize,
+        houseUnit: houseUnit,
         houseImage: house.thumbnail,
         googleDirections: `http://maps.google.com/maps?q=${house.address.city}+${house.address.state}+${house.address.line}`
-
     }
-    // console.log (propertyObj);
+
+
+    console.log(propertyObj);
     realtorResults.push(propertyObj);
 
     displayCard(index, propertyObj);
@@ -347,10 +336,16 @@ $(document).on("click", ".favorite_button", function () {
     
 });
 
+$("#advancedFilter").on("click", function(){
+    $(".filter").toggle()
+});
+
 
 
 $(document).ready(function () {
     $('select').formSelect();
+
+    $(".filter").hide();
 
     var states = [];
 
