@@ -46,7 +46,7 @@ function displayCard(index, propertyObj) {
     // console.log("Home website URL: "+ homeWebSite);
 
     var searchResults = $("#homeCards");
-    var column = $("<div class='col s12 m6 l6 wow animate__animated animate__fadeInUp'>");
+    var column = $("<div class='col s12 m6 l4 wow animate__animated animate__fadeInUp'>");
 
     // adding data target for favorite button functionality
     $(column).attr("data-target", index);
@@ -57,7 +57,7 @@ function displayCard(index, propertyObj) {
     var spanCard = $("<span class='card-title'>");
     var cardContent = $("<div class='card-content' style='margin-top: -25px;'>");
     var cardActionRow = $("<div class='row'>")
-    var cardAction = $("<div class='card-action' style='display: block;'>");
+    var cardAction = $("<div class='card-action' style='padding-top: 0px'>");
 
     var link = $("<a href='" + homeWebSite + "' target='_blank'>");
     var homeLotSize = $("<p>");
