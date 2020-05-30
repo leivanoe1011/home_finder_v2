@@ -41,8 +41,9 @@ function displayCard(index, propertyObj) {
     var houseImage = propertyObj.houseImage;
     var googleDirections = propertyObj.googleDirections;
 
-    console.log("Google URL: " + googleDirections);
-    console.log("Home website URL: "+ homeWebSite);
+
+    // console.log("Google URL: " + googleDirections);
+    // console.log("Home website URL: "+ homeWebSite);
     var searchResults = $("#homeCards");
     var column = $("<div class='col s12 l4 wow animate__animated animate__fadeInUp'>");
 
@@ -189,7 +190,7 @@ function createCard(index, property) {
         googleDirections: `http://maps.google.com/maps?q=${house.address.city}+${house.address.state}+${house.address.line}`
 
     }
-    console.log (propertyObj);
+    // console.log (propertyObj);
     realtorResults.push(propertyObj);
 
     displayCard(index, propertyObj);
@@ -283,19 +284,40 @@ db2.ref().on("value", function (snapshot) {
     // console.log(parsedData);
 })
 
+function removeStoredFavoriteCard(card){
 
+}
+
+
+// Save House when selected to Favorite the home
 $(document).on("click", ".favorite_button", function () {
+
+    var currentFavoriteIcon = $(this).text();
 
     var cardTargetId = $(this).data("value");
 
     var favoriteCard = realtorResults[cardTargetId];
 
-    // var favoriteCard = getFavoriteCard(cardContainer,cardTargetId);
+    if(currentFavoriteIcon === "favorite_border"){
+
+        $(this).text("favorite");
+
+        // Adds new card to firebase database
+        storeFavoriteCards(favoriteCard);
+    }
+    else {
+
+        $(this).text("favorite_border");
+
+        // Removes favorite card from firebase database
+        removeStoredFavoriteCard(favoriteCard);
+    }
+
 
     console.log("Displaying Card");
     console.log(favoriteCard);
 
-    storeFavoriteCards(favoriteCard);
+    
 });
 
 
