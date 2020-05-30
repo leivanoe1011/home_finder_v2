@@ -97,7 +97,7 @@ function displayCard(index, propertyObj) {
     var propertyLink = $("<a href='"
         + homeWebSite
         + "' target='_blank' style='color: #26a69a;'>"
-        + "check out the property"
+        + "Check out the property"
         + "</a>");
     
     // Google Maps Directions Link
@@ -106,6 +106,7 @@ function displayCard(index, propertyObj) {
         + "' target='_blank' style='color: #26a69a;'>"
         + "Get Directions" 
         + "</a>");
+        
 
     $(cardAction).append(propertyLink);
     $(cardAction).append(directionLink);
