@@ -84,18 +84,13 @@ function displayCard(index, homeWebSite, addressLine, beds, baths, city, state, 
     $(cardAction).append(propertyLink);
     $(cardAction).append(favoriteButton);
 
-
-    var undefinedLotSize = "NA";
-
-    var undefinedLotUnit = "";
-
-    undefinedLotSize = (typeof lotSize !== "undefined" ? lotSize : "NA");
-    undefinedLotUnit = (typeof lotUnit !== "undefined" ? lotUnit : "NA");
+    lotSize = (typeof lotSize !== "undefined" ? lotSize : "NA");
+    lotUnit = (typeof lotUnit !== "undefined" ? lotUnit : "NA");
 
     homeLotSize.html("Lot size: "
-        + undefinedLotSize
+        + lotSize
         + " "
-        + undefinedLotUnit);
+        + lotUnit);
 
     var undefinedHouseSize = "";
 
