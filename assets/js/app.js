@@ -27,7 +27,7 @@ var db2 = firebase.database(app2);
 function displayCard(index, homeWebSite, addressLine, beds, baths, city, state, price, lotSize, lotUnit, houseSize, houseUnit, houseImage) {
 
     var searchResults = $("#homeCards");
-    var column = $("<div class='col s12 l4 wow animate__animated animate__fadeInUp'>");
+    var column = $("<div class='col s12 m6 l6 wow animate__animated animate__fadeInUp'>");
 
     // adding data target for favorite button functionality
     $(column).attr("data-target", index);
@@ -76,7 +76,7 @@ function displayCard(index, homeWebSite, addressLine, beds, baths, city, state, 
     // Check out Property Link
     var propertyLink = $("<a href='"
         + homeWebSite
-        + "' target='_blank'>"
+        + "' target='_blank' style='color: #26a69a;'>"
         + "check out the property"
         + "</a>");
 
@@ -126,7 +126,7 @@ function displayCard(index, homeWebSite, addressLine, beds, baths, city, state, 
 
 // Function will be used to parse the Realtor API results and Favorite functionality
 function createCard(index, house) {
-    
+
     if (house.hasOwnProperty("lot_size")) {
         lotSize = (typeof house.lot_size.size !== "undefined" ? house.lot_size.size.toLocaleString() : "NA")
         lotUnit = (typeof house.lot_size.units !== "undefined" ? house.lot_size.units : "NA")
