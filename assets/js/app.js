@@ -179,7 +179,6 @@ function createCard(index, house) {
     }
 
 
-    console.log(propertyObj);
     realtorResults.push(propertyObj);
 
     displayCard(index, propertyObj);
