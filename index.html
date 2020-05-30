@@ -297,7 +297,11 @@
 
                     <div class="input-field">
                         <input type="text" id="date" class="datepicker">
-                        <label for="date">Schedule Call</label>
+                        <label for="date">Schedule Date</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="text" id="time" class="timepicker">
+                        <label for="time">Schedule Time</label>
                     </div>
 
                     <div id="send_message" class="input-field center">
@@ -355,6 +359,11 @@
             $(".parallax").parallax();
             $('.slider').slider();
             $(".scrollspy").scrollSpy();
+            $('.timepicker').timepicker({
+                twelveHour: true,
+                vibrate: true,
+                autoClose: true,
+            });
             $(".datepicker").datepicker({
                 disableWeekends: true
             });
