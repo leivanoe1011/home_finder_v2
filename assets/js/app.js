@@ -89,15 +89,15 @@ function displayCard(index, homeWebSite, addressLine, beds, baths, city, state, 
 
     var undefinedLotUnit = "";
 
-    undefinedLotSize = (typeof lotSize !== "undefined" ? lotSize : "NA")
-    undefinedLotUnit = (typeof lotUnit !== "undefined" ? lotUnit : "NA")
+    undefinedLotSize = (typeof lotSize !== "undefined" ? lotSize : "NA");
+    undefinedLotUnit = (typeof lotUnit !== "undefined" ? lotUnit : "NA");
 
     homeLotSize.html("Lot size: "
         + undefinedLotSize
         + " "
         + undefinedLotUnit);
 
-    var undefinedHouseSize = "NA";
+    var undefinedHouseSize = "";
 
     var undefinedHouseUnit = "";
 
@@ -166,7 +166,7 @@ function createCard(index, property) {
         city: house.address.city,
         state: house.address.state,
         price: house.price.toLocaleString(),
-        homeLotSize: sizeLot,
+        lotSize: sizeLot,
         lotUnit: unitLot,
         houseSize: sizeHouse,
         houseUnit: unitHouse,
