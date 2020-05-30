@@ -96,7 +96,7 @@ function displayCard(index, propertyObj) {
         + "' target='_blank' style='color: #26a69a;'>"
         + "check out the property"
         + "</a>");
-
+    
     // Google Maps Directions Link
     var directionLink =$("<a href='" 
         + googleDirections
