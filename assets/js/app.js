@@ -19,16 +19,16 @@ var firebaseConfig_SaveSearchResults = {
     measurementId: "G-LNPJ4N4NXZ"
 };
 
-var app2 = firebase.initializeApp(firebaseConfig_SaveSearchResults,'app2');
+var app2 = firebase.initializeApp(firebaseConfig_SaveSearchResults, 'app2');
 
 var db2 = firebase.database(app2);
 
 
-function displayCard(index, homeWebSite, addressLine, beds, baths, city, state, price, lotSize, lotUnit, houseSize, houseUnit, houseImage){
+function displayCard(index, homeWebSite, addressLine, beds, baths, city, state, price, lotSize, lotUnit, houseSize, houseUnit, houseImage) {
 
     var searchResults = $("#homeCards");
     var column = $("<div class='col s12 l4'>");
-    
+
     // adding data target for favorite button functionality
     $(column).attr("data-target", index);
 
@@ -36,31 +36,31 @@ function displayCard(index, homeWebSite, addressLine, beds, baths, city, state, 
     var cardImgDiv = $("<div class='card-image'>");
     var cardBackground = $("<img height='300px'>");
     var spanCard = $("<span class='card-title'>");
-    var cardContent = $("<div class='card-content'>");
+    var cardContent = $("<div class='card-content' style='margin-top: -10px;'>");
     var cardAction = $("<div class='card-action'>");
-    
-    var link = $("<a href='" + homeWebSite+ "' target='_blank'>");
-    var lotSize = $("<p>");
+
+    var link = $("<a href='" + homeWebSite + "' target='_blank'>");
+    var homeLotSize = $("<p>");
     var bedBaths = $("<p>");
     var buildingSize = $("<p>");
     var location = $("<p>");
-    var price = $("<p>");
+    var homePrice = $("<p>");
 
     spanCard.html(addressLine);
 
-    bedBaths.html("Beds: " 
-    + beds
-    + " Baths: " 
-    + baths);
+    bedBaths.html("Beds: "
+        + beds
+        + " Baths: "
+        + baths);
 
-    location.html("City: " 
-    + city
-    + " State: " 
-    + state);
+    location.html("City: "
+        + city
+        + " State: "
+        + state);
 
-    price.html("Listing price: $" 
-    + price
-    + " ");
+    homePrice.html("Listing price: $"
+        + price
+        + " ");
 
 
     // Favorite Icon
@@ -69,56 +69,56 @@ function displayCard(index, homeWebSite, addressLine, beds, baths, city, state, 
 
     var favIcon = $("<i>");
     $(favIcon).addClass("material-icons favorite_button");
-    $(favIcon).attr("data-value",index);
+    $(favIcon).attr("data-value", index);
     $(favIcon).text("favorite_border");
 
     $(favoriteButton).append(favIcon);
 
     // Check out Property Link
-    var propertyLink = $("<a href='" 
+    var propertyLink = $("<a href='"
         + homeWebSite
-        + "' target='_blank'>" 
-        + "check out the property" 
+        + "' target='_blank'>"
+        + "check out the property"
         + "</a>");
 
     $(cardAction).append(propertyLink);
     $(cardAction).append(favoriteButton);
 
 
-    var sizeLot = "NA";
+    var undefinedLotSize = "NA";
 
-    var unitLot = "";
+    var undefinedLotUnit = "";
 
-    sizeLot = (typeof lotSize!== "undefined" ? lotSize : "NA")
-    unitLot = (typeof lotUnit !== "undefined" ? lotUnit : "NA")
+    undefinedLotSize = (typeof lotSize !== "undefined" ? lotSize : "NA")
+    undefinedLotUnit = (typeof lotUnit !== "undefined" ? lotUnit : "NA")
 
-    lotSize.html("Lot size: " 
-    + sizeLot 
-    + " " 
-    + unitLot);
+    homeLotSize.html("Lot size: "
+        + undefinedLotSize
+        + " "
+        + undefinedLotUnit);
 
-    var sizeHouse = "NA";
+    var undefinedHouseSize = "NA";
 
-    var unitHouse = "";
+    var undefinedHouseUnit = "";
 
-    sizeHouse = (typeof houseSize !== "undefined" ? houseSize : "NA")
-    unitHouse = (typeof houseUnit !== "undefined" ? houseUnit : "NA")
+    undefinedHouseSize = (typeof houseSize !== "undefined" ? houseSize : "NA")
+    undefinedHouseUnit = (typeof houseUnit !== "undefined" ? houseUnit : "NA")
 
     var imageUnavailable = cardBackground.attr("src", '\assets/images/unavailable-image.jpg');
 
     var houseThumbnail = cardBackground.attr("src", houseImage);
 
-    
+
     imageUnavailable = (typeof houseImage !== "undefined" ? houseThumbnail : imageUnavailable);
-   
 
-    buildingSize.html("Building size: " 
-    + sizeHouse 
-    + " " 
-    + unitHouse);
 
-    cardContent.append(cardAction, bedBaths, buildingSize, lotSize, location, price);
-    
+    buildingSize.html("Building size: "
+        + undefinedHouseSize
+        + " "
+        + undefinedHouseUnit);
+
+    cardContent.append(cardAction, bedBaths, buildingSize, homeLotSize, location, homePrice);
+
     link.append(cardBackground);
 
     cardImgDiv.append(link, spanCard);
@@ -159,14 +159,14 @@ function createCard(index, property) {
 
     // This will be used to create the Favorite Cards
     var propertyObj = {
-        homeWebSite: house.rdc_web_url ,
+        homeWebSite: house.rdc_web_url,
         addressLine: house.address.line,
         beds: house.beds,
         baths: house.baths,
         city: house.address.city,
         state: house.address.state,
         price: house.price.toLocaleString(),
-        lotSize: sizeLot,
+        homeLotSize: sizeLot,
         lotUnit: unitLot,
         houseSize: sizeHouse,
         houseUnit: unitHouse,
@@ -176,8 +176,8 @@ function createCard(index, property) {
     realtorResults.push(propertyObj);
 
     displayCard(index, propertyObj.homeWebSite, propertyObj.addressLine, propertyObj.beds
-        ,propertyObj.baths, propertyObj.city, propertyObj.state, propertyObj.price
-        ,propertyObj.lotSize, propertyObj.lotUnit, propertyObj.houseSize, propertyObj.houseUnit, propertyObj.houseImage);
+        , propertyObj.baths, propertyObj.city, propertyObj.state, propertyObj.price
+        , propertyObj.lotSize, propertyObj.lotUnit, propertyObj.houseSize, propertyObj.houseUnit, propertyObj.houseImage);
 };
 
 
@@ -185,7 +185,7 @@ function createCard(index, property) {
 var searchList = [];
 
 
-function createButtons (saveSearch){
+function createButtons(saveSearch) {
     var newResult = $("<button>");
     newResult.addClass("waves-effect waves-light btn-small search_button");
     var city = saveSearch.city;
@@ -197,7 +197,7 @@ function createButtons (saveSearch){
     $("#previous_search").show()
 }
 
-function saveSearch(city, state){
+function saveSearch(city, state) {
 
     var searchObj = {
         city: city,
@@ -215,16 +215,16 @@ function saveSearch(city, state){
 
 
 
-function getFavoriteCard(object, cardIndex){
+function getFavoriteCard(object, cardIndex) {
     var currentCardContainer = object;
-    let currentCard; 
+    let currentCard;
     var valueId = cardIndex;
 
-    $(currentCardContainer).children("div").each(function(){
-    
+    $(currentCardContainer).children("div").each(function () {
+
         var targetId = $(this).data("target");
-                
-        if(valueId === targetId){
+
+        if (valueId === targetId) {
             currentCard = $(this);
             return false;
         }
@@ -235,10 +235,10 @@ function getFavoriteCard(object, cardIndex){
 }
 
 
-function storeFavoriteCards(card){
-    
+function storeFavoriteCards(card) {
+
     var house = card;
-    
+
     db2.ref().push({
         // searchResults: JSON.stringify(htmlObject)
         homeWebSite: house.homeWebSite,
@@ -256,7 +256,7 @@ function storeFavoriteCards(card){
     });
 }
 
-db2.ref().on("value", function(snapshot){
+db2.ref().on("value", function (snapshot) {
 
     var data = snapshot.val();
 
@@ -269,7 +269,7 @@ db2.ref().on("value", function(snapshot){
 })
 
 
-$(document).on("click",".favorite_button", function(){
+$(document).on("click", ".favorite_button", function () {
 
     var cardTargetId = $(this).data("value");
 
@@ -287,7 +287,7 @@ $(document).on("click",".favorite_button", function(){
 
 $(document).ready(function () {
     $('select').formSelect();
-    
+
     var states = [];
 
     function loadStates(data) {
@@ -377,7 +377,7 @@ $(document).ready(function () {
         $.ajax(apiSettings).then(function (response) {
             console.log(response);
             console.log(apiSettings);
-            
+
             // Used to extract the Favorites
             var results = response.properties
 
@@ -385,7 +385,7 @@ $(document).ready(function () {
 
                 createCard(i, results[i]);
             };
-            
+
         });
     })
 });
