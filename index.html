@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.0/animate.min.css">
     <!-- firebase -->
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script> 
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script>
     <!-- font awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
         integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
@@ -21,6 +21,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <title>Home Finder</title>
 </head>
+
 <body>
     <header>
         <nav class="nav-wrapper transparent white-text">
@@ -37,17 +38,20 @@
                     <li><a class="nav_button" href="#contact">Contact</a></li>
                     <!-- Fab Icons -->
                     <li>
-                        <a target="_blank" href="https://www.facebook.com/WhiteheadProperties" class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="Facebook">
+                        <a target="_blank" href="https://www.facebook.com/WhiteheadProperties"
+                            class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="Facebook">
                             <i class="fab fa-facebook"></i>
                         </a>
                     </li>
                     <li>
-                        <a target="_blank" href="https://www.instagram.com/wsjrealestate/" class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="Instagram">
+                        <a target="_blank" href="https://www.instagram.com/wsjrealestate/"
+                            class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
                     </li>
                     <li>
-                        <a target="_blank" href="https://www.linkedin.com/in/noeleivadeveloper/" class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="LinkedIn">
+                        <a target="_blank" href="https://www.linkedin.com/in/noeleivadeveloper/"
+                            class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="LinkedIn">
                             <i class="fab fa-linkedin"></i>
                         </a>
                     </li>
@@ -134,101 +138,101 @@
         </div>
     </div>
 
-
-    <div class="container blue-grey lighten-5 z-depth-4" id="searchContainer" style="margin-top: 10px;">
-        <form class="row center scrollspy" id="search">
-            <div class="input-field col m4 s12 l6">
-                <i class="material-icons prefix">location_city</i>
-                <input id="icon_prefix2" type="text" class="materialize-textarea userCity">
-                <label for="icon_prefix2">City</label>
-            </div>
-            <div class="col m4 s12 l6">
-                <label>State:</label>
-                <select class="browser-default stateCode">
-                    <option value="" disabled selected></option>
-                </select>
-            </div>
-        </form>
-        <form class="row center">
-            <div class="col m4 s12 l6">
-                <label>Min. Price:</label>
-                <select class="browser-default minPrice">
-                    <option value="" disabled selected></option>
-                    <option value="50000">50,000</option>
-                    <option value="100000">100,000</option>
-                    <option value="150000">150,000</option>
-                    <option value="200000">200,000</option>
-                    <option value="250000">250,000</option>
-                    <option value="300000">300,000</option>
-                </select>
-            </div>
-            <div class="col m4 s12 l6">
-                <label>Max. Price:</label>
-                <select class="browser-default maxPrice">
-                    <option value="" disabled selected></option>
-                    <option value="50000">50,000</option>
-                    <option value="100000">100,000</option>
-                    <option value="150000">150,000</option>
-                    <option value="200000">200,000</option>
-                    <option value="250000">250,000</option>
-                    <option value="300000">300,000</option>
-                </select>
-            </div>
-        </form>
-        <form class="row center">
-            <div class="col m4 s12 l3 filter">
-                <label>Min. Baths:</label>
-                <select class="browser-default minBaths">
-                    <option value="" disabled selected></option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-            </div>
-            <div class=" col m4 s12 l3 filter">
-                <label>Max. Baths:</label>
-                <select class="browser-default maxBaths">
-                    <option value="" disabled selected></option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-            </div>
-            <div class="col m4 s12 l3 filter">
-                <label>Min. Bedrooms:</label>
-                <select class="browser-default minBedrooms">
-                    <option value="" disabled selected></option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-            </div>
-            <div class="col m12 s12 l3 filter">
-                <label>Max Bedrooms:</label>
-                <select class="browser-default maxBedrooms">
-                    <option value="" disabled selected></option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-            </div>
-        </form>
+    <div class="wow animate__animated animate__fadeInUp animate__faster" id="animationDiv">
+        <div class="container blue-grey lighten-5 z-depth-3" id="searchContainer" style="margin-top: 10px; margin-bottom: 20px; padding-bottom: 1px;">
+            <form class="row center scrollspy" id="search">
+                <div class="input-field col m4 s12 l6">
+                    <i class="material-icons prefix">location_city</i>
+                    <input id="icon_prefix2" type="text" class="materialize-textarea userCity">
+                    <label for="icon_prefix2">City</label>
+                </div>
+                <div class="col m4 s12 l6">
+                    <label>State:</label>
+                    <select class="browser-default stateCode">
+                        <option value="" disabled selected></option>
+                    </select>
+                </div>
+            </form>
+            <form class="row center">
+                <div class="col m4 s12 l6">
+                    <label>Min. Price:</label>
+                    <select class="browser-default minPrice">
+                        <option value="" disabled selected></option>
+                        <option value="50000">50,000</option>
+                        <option value="100000">100,000</option>
+                        <option value="150000">150,000</option>
+                        <option value="200000">200,000</option>
+                        <option value="250000">250,000</option>
+                        <option value="300000">300,000</option>
+                    </select>
+                </div>
+                <div class="col m4 s12 l6">
+                    <label>Max. Price:</label>
+                    <select class="browser-default maxPrice">
+                        <option value="" disabled selected></option>
+                        <option value="50000">50,000</option>
+                        <option value="100000">100,000</option>
+                        <option value="150000">150,000</option>
+                        <option value="200000">200,000</option>
+                        <option value="250000">250,000</option>
+                        <option value="300000">300,000</option>
+                    </select>
+                </div>
+            </form>
+            <form class="row center">
+                <div class="col m4 s12 l3 filter">
+                    <label>Min. Baths:</label>
+                    <select class="browser-default minBaths">
+                        <option value="" disabled selected></option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div class=" col m4 s12 l3 filter">
+                    <label>Max. Baths:</label>
+                    <select class="browser-default maxBaths">
+                        <option value="" disabled selected></option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div class="col m4 s12 l3 filter">
+                    <label>Min. Bedrooms:</label>
+                    <select class="browser-default minBedrooms">
+                        <option value="" disabled selected></option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div class="col m12 s12 l3 filter">
+                    <label>Max Bedrooms:</label>
+                    <select class="browser-default maxBedrooms">
+                        <option value="" disabled selected></option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div class="row center">
+            <a class="waves-effect waves-light btn-small" id="advancedFilter"><i class="material-icons prefix">filter_list</i>Advanced Filter</a>
+        </div>
+        <div class="row center">
+            <a class="waves-effect waves-light btn-large" id="submitButton">Search</a>
+        </div>
     </div>
-    <div class="row center">
-        <a class="waves-effect waves-light btn-small" id="advancedFilter">Advanced Filter</a>
-    </div>
-    <div class="row center">
-        <a class="waves-effect waves-light btn-large" id="submitButton">Search</a>
-    </div>
-    
     <div class="row center">
         <div class="preloader-wrapper big active">
             <div class="spinner-layer spinner-blue-only">
@@ -327,10 +331,18 @@
                 <div class="col s12 l4 offset-l2">
                     <h5>Connect</h5>
                     <ul>
-                        <li><i class="fa fa-envelope-square"></i>&NonBreakingSpace;<a target="_blank" href="mailto:jaswhitehead@gmail.com" class="grey-text text-lighten-3">Send email</a></li>
-                        <li><i class="fab fa-facebook"></i>&NonBreakingSpace;<a target="_blank" href="https://www.facebook.com/WhiteheadProperties" class="grey-text text-lighten-3">Facebook</a></li>
-                        <li><i class="fab fa-instagram"></i>&NonBreakingSpace;<a target="_blank" href="https://www.instagram.com/wsjrealestate/" class="grey-text text-lighten-3">Instagram</a></li>
-                        <li><i class="fab fa-linkedin"></i>&NonBreakingSpace;<a target="_blank" href="https://www.linkedin.com/in/noeleivadeveloper/" class="grey-text text-lighten-3">LinkedIn</a></li>
+                        <li><i class="fa fa-envelope-square"></i>&NonBreakingSpace;<a target="_blank"
+                                href="mailto:jaswhitehead@gmail.com" class="grey-text text-lighten-3">Send email</a>
+                        </li>
+                        <li><i class="fab fa-facebook"></i>&NonBreakingSpace;<a target="_blank"
+                                href="https://www.facebook.com/WhiteheadProperties"
+                                class="grey-text text-lighten-3">Facebook</a></li>
+                        <li><i class="fab fa-instagram"></i>&NonBreakingSpace;<a target="_blank"
+                                href="https://www.instagram.com/wsjrealestate/"
+                                class="grey-text text-lighten-3">Instagram</a></li>
+                        <li><i class="fab fa-linkedin"></i>&NonBreakingSpace;<a target="_blank"
+                                href="https://www.linkedin.com/in/noeleivadeveloper/"
+                                class="grey-text text-lighten-3">LinkedIn</a></li>
                     </ul>
                 </div>
             </div>
@@ -388,4 +400,5 @@
         })
     </script>
 </body>
+
 </html>
