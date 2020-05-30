@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- firebase -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script> 
+
+    
+    <!-- firebase -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script> 
+   
+
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+        integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Materialize css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+
+    <title>Favorite</title>
+</head>
+<body>
+
+    <header>
+        <nav class="nav-wrapper transparent white-text">
+            <div class="container">
+                <a href="#" class="brand-logo">Home Finder</a>
+                <!-- Mobile Device Menu -->
+                <a href="#" class="sidenav-trigger" data-target="mobile-menu">
+                    <i class="material-icons menu_icon">menu</i>
+                </a>
+                <!-- Navigation Bar -->
+                <ul class="right hide-on-med-and-down" id="#nav_menu">
+                    <li><a class="nav_button" href="index.html">Search Homes</a></li>
+                    <li><a class="nav_button" href="favorite.html">Favorites</a></li>
+                    <li><a class="nav_button" href="#contact">Contact</a></li>
+                    <!-- Fab Icons -->
+                    <li>
+                        <a href="#" class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- The menu that will appear when the page is viewed in mobile device -->
+                <ul class="sidenav grey lighten-4" id="mobile-menu">
+                    <li><a href="index.html">Search Homes</a></li>
+                    <li><a href="favorite.html">Favorites</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+
+    
+    <section class="container">
+        <div id="homeCards" style="min-height:200px" class="row">
+
+        </div>
+    </section>
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- Custom JS -->
+    <script type="text/javascript" src="assets/js/app.js"></script>
+    <script type="text/javascript" src="assets/js/firebase.js"></script>
+    
+    <script>
+
+        function loadFavoriteObj(index, obj){
+
+            var homeWebSite = obj.homeWebSite;
+            var addressLine = obj.addressLine;
+            var beds = obj.beds;
+            var baths = obj.baths;
+            var city = obj.city;
+            var state = obj.state;
+            var price = obj.price;
+            var lotSize = obj.lotSize;
+            var lotUnit = obj.lotUnit;
+            var houseSize = obj.houseSize;
+            var houseUnit = obj.houseUnit;
+            var houseImage = obj.houseImage;
+
+            displayCard(index, homeWebSite, addressLine, beds, baths, city, state, price, lotSize, lotUnit, houseSize, houseUnit, houseImage)
+        }   
+
+
+  
+        $(document).ready(function(){
+
+
+            // Initialize the Side Nav
+            $(".sidenav").sidenav();
+            $(".parallax").parallax();
+            $('.slider').slider();
+            $(".scrollspy").scrollSpy();
+            $(".datepicker").datepicker({
+                disableWeekends: true
+            });
+
+            // Added Scroll event listener for the Nav bar
+            $(window).scroll(function () {
+
+                if ($(window).scrollTop() > 20) {
+                    $("nav").addClass("white");
+                    $(".brand-logo").addClass("black-text");
+                    $(".nav_button").addClass("black-text");
+                    $("nav").removeClass("transparent white-text");
+                    $(".menu_icon").addClass("black-text");
+                }
+                else {
+                    $("nav").addClass("transparent white-text");
+                    $(".brand-logo").removeClass("black-text");
+                    $(".nav_button").removeClass("black-text");
+                    $(".menu_icon").removeClass("black-text");
+                }
+            });
+
+            var index = 1;
+
+            var query = db2.ref().orderByKey();
+            query.once("value")
+                .then(function(snapshot){
+                    snapshot.forEach(function(childSnapshot){
+
+                        var favoriteHome = childSnapshot.val();
+
+                        console.log(favoriteHome);
+
+                        loadFavoriteObj(index,favoriteHome);
+
+                        index++;
+                    })
+                });
+                
+        });
+    
+    
+    </script>
+</body>
+</html>

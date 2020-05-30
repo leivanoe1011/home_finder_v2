@@ -19,16 +19,16 @@ var firebaseConfig_SaveSearchResults = {
     measurementId: "G-LNPJ4N4NXZ"
 };
 
-var app2 = firebase.initializeApp(firebaseConfig_SaveSearchResults, 'app2');
+var app2 = firebase.initializeApp(firebaseConfig_SaveSearchResults,'app2');
 
 var db2 = firebase.database(app2);
 
 
-function displayCard(index, homeWebSite, addressLine, beds, baths, city, state, price, lotSize, lotUnit, houseSize, houseUnit, houseImage) {
+function displayCard(index, homeWebSite, addressLine, beds, baths, city, state, price, lotSize, lotUnit, houseSize, houseUnit, houseImage, googleDirections){
 
     var searchResults = $("#homeCards");
-    var column = $("<div class='col s12 l4 wow animate__animated animate__fadeInUp'>");
-
+    var column = $("<div class='col s12 l4'>");
+    
     // adding data target for favorite button functionality
     $(column).attr("data-target", index);
 
@@ -36,31 +36,32 @@ function displayCard(index, homeWebSite, addressLine, beds, baths, city, state, 
     var cardImgDiv = $("<div class='card-image'>");
     var cardBackground = $("<img height='300px'>");
     var spanCard = $("<span class='card-title'>");
-    var cardContent = $("<div class='card-content' style='margin-top: -10px;'>");
+    var cardContent = $("<div class='card-content'>");
     var cardAction = $("<div class='card-action'>");
-
-    var link = $("<a href='" + homeWebSite + "' target='_blank'>");
-    var homeLotSize = $("<p>");
+    
+    var link = $("<a href='" + homeWebSite+ "' target='_blank'>");
+    var lotSize = $("<p>");
     var bedBaths = $("<p>");
     var buildingSize = $("<p>");
     var location = $("<p>");
-    var homePrice = $("<p>");
-    
+    var price = $("<p>");
+
     spanCard.html(addressLine);
 
-    bedBaths.html("Beds: "
-        + beds
-        + " Baths: "
-        + baths);
+    bedBaths.html("Beds: " 
+    + beds
+    + " Baths: " 
+    + baths);
 
-    location.html("City: "
-        + city
-        + " State: "
-        + state);
+    location.html("City: " 
+    + city
+    + " State: " 
+    + state);
 
-    homePrice.html("Listing price: $"
-        + price
-        + " ");
+    price.html("Listing price: $" 
+    + price
+    + " ");
+
 
     // Favorite Icon
     var favoriteButton = $("<a>");
@@ -68,47 +69,62 @@ function displayCard(index, homeWebSite, addressLine, beds, baths, city, state, 
 
     var favIcon = $("<i>");
     $(favIcon).addClass("material-icons favorite_button");
-    $(favIcon).attr("data-value", index);
+    $(favIcon).attr("data-value",index);
     $(favIcon).text("favorite_border");
 
     $(favoriteButton).append(favIcon);
 
     // Check out Property Link
-    var propertyLink = $("<a href='"
+    var propertyLink = $("<a href='" 
         + homeWebSite
-        + "' target='_blank'>"
-        + "check out the property"
+        + "' target='_blank'>" 
+        + "check out the property" 
+        + "</a>");
+    var directionLink =$("<a href='" 
+        + googleDirections
+        + "' target='_blank'>" 
+        + "get ddirections" 
         + "</a>");
 
     $(cardAction).append(propertyLink);
+    $(cardAction).append(directionLink);
     $(cardAction).append(favoriteButton);
 
-    lotSize = (typeof lotSize !== "undefined" ? lotSize : "NA");
-    lotUnit = (typeof lotUnit !== "undefined" ? lotUnit : "NA");
 
-    homeLotSize.html("Lot size: "
-        + lotSize
-        + " "
-        + lotUnit);
+    var sizeLot = "NA";
 
-    houseSize = (typeof houseSize !== "undefined" ? houseSize : "NA")
-    houseUnit = (typeof houseUnit !== "undefined" ? houseUnit : "NA")
+    var unitLot = "";
+
+    sizeLot = (typeof lotSize!== "undefined" ? lotSize : "NA")
+    unitLot = (typeof lotUnit !== "undefined" ? lotUnit : "NA")
+
+    lotSize.html("Lot size: " 
+    + sizeLot 
+    + " " 
+    + unitLot);
+
+    var sizeHouse = "NA";
+
+    var unitHouse = "";
+
+    sizeHouse = (typeof houseSize !== "undefined" ? houseSize : "NA")
+    unitHouse = (typeof houseUnit !== "undefined" ? houseUnit : "NA")
 
     var imageUnavailable = cardBackground.attr("src", '\assets/images/unavailable-image.jpg');
 
     var houseThumbnail = cardBackground.attr("src", houseImage);
 
-
+    
     imageUnavailable = (typeof houseImage !== "undefined" ? houseThumbnail : imageUnavailable);
+   
 
+    buildingSize.html("Building size: " 
+    + sizeHouse 
+    + " " 
+    + unitHouse);
 
-    buildingSize.html("Building size: "
-        + houseSize
-        + " "
-        + houseUnit);
-
-    cardContent.append(cardAction, bedBaths, buildingSize, homeLotSize, location, homePrice);
-
+    cardContent.append(cardAction, bedBaths, buildingSize, lotSize, location, price);
+    
     link.append(cardBackground);
 
     cardImgDiv.append(link, spanCard);
@@ -149,7 +165,7 @@ function createCard(index, property) {
 
     // This will be used to create the Favorite Cards
     var propertyObj = {
-        homeWebSite: house.rdc_web_url,
+        homeWebSite: house.rdc_web_url ,
         addressLine: house.address.line,
         beds: house.beds,
         baths: house.baths,
@@ -160,14 +176,15 @@ function createCard(index, property) {
         lotUnit: unitLot,
         houseSize: sizeHouse,
         houseUnit: unitHouse,
-        houseImage: house.thumbnail
+        houseImage: house.thumbnail,
+        googleDirections: "http://maps.google.com/maps?q=Washington"
     }
 
     realtorResults.push(propertyObj);
 
     displayCard(index, propertyObj.homeWebSite, propertyObj.addressLine, propertyObj.beds
-        , propertyObj.baths, propertyObj.city, propertyObj.state, propertyObj.price
-        , propertyObj.lotSize, propertyObj.lotUnit, propertyObj.houseSize, propertyObj.houseUnit, propertyObj.houseImage);
+        ,propertyObj.baths, propertyObj.city, propertyObj.state, propertyObj.price
+        ,propertyObj.lotSize, propertyObj.lotUnit, propertyObj.houseSize, propertyObj.houseUnit, propertyObj.houseImage);
 };
 
 
@@ -175,7 +192,7 @@ function createCard(index, property) {
 var searchList = [];
 
 
-function createButtons(saveSearch) {
+function createButtons (saveSearch){
     var newResult = $("<button>");
     newResult.addClass("waves-effect waves-light btn-small search_button");
     var city = saveSearch.city;
@@ -187,7 +204,7 @@ function createButtons(saveSearch) {
     $("#previous_search").show()
 }
 
-function saveSearch(city, state) {
+function saveSearch(city, state){
 
     var searchObj = {
         city: city,
@@ -205,16 +222,16 @@ function saveSearch(city, state) {
 
 
 
-function getFavoriteCard(object, cardIndex) {
+function getFavoriteCard(object, cardIndex){
     var currentCardContainer = object;
-    let currentCard;
+    let currentCard; 
     var valueId = cardIndex;
 
-    $(currentCardContainer).children("div").each(function () {
-
+    $(currentCardContainer).children("div").each(function(){
+    
         var targetId = $(this).data("target");
-
-        if (valueId === targetId) {
+                
+        if(valueId === targetId){
             currentCard = $(this);
             return false;
         }
@@ -225,10 +242,10 @@ function getFavoriteCard(object, cardIndex) {
 }
 
 
-function storeFavoriteCards(card) {
-
+function storeFavoriteCards(card){
+    
     var house = card;
-
+    
     db2.ref().push({
         // searchResults: JSON.stringify(htmlObject)
         homeWebSite: house.homeWebSite,
@@ -246,7 +263,7 @@ function storeFavoriteCards(card) {
     });
 }
 
-db2.ref().on("value", function (snapshot) {
+db2.ref().on("value", function(snapshot){
 
     var data = snapshot.val();
 
@@ -259,7 +276,7 @@ db2.ref().on("value", function (snapshot) {
 })
 
 
-$(document).on("click", ".favorite_button", function () {
+$(document).on("click",".favorite_button", function(){
 
     var cardTargetId = $(this).data("value");
 
@@ -276,8 +293,6 @@ $(document).on("click", ".favorite_button", function () {
 
 
 $(document).ready(function () {
-    $('select').formSelect();
-
     var states = [];
 
     function loadStates(data) {
@@ -297,7 +312,7 @@ $(document).ready(function () {
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "states2.p.rapidapi.com",
-            "x-rapidapi-key": "5d4693a959msh4109217ff07938cp199915jsnb90f99a85b6d",
+            "x-rapidapi-key": "0c292c0993mshd75f0effe5adad9p120e45jsn157b0022e4d8",
             "country": "USA"
         }
     };
@@ -318,6 +333,8 @@ $(document).ready(function () {
         };
     });
 
+    $('select').formSelect();
+
     $('.sidenav').sidenav();
 
     $(".preloader-wrapper").hide();
@@ -332,9 +349,7 @@ $(document).ready(function () {
         var stateCode = $(".stateCode").val().toString();
         var minPrice = $(".minPrice").val();
         var maxPrice = $(".maxPrice").val();
-        var minBaths = $(".minBaths").val();
-        var maxBaths = $(".maxBaths").val();
-
+        
         // Save search Results
         saveSearch(city, stateCode);
 
@@ -352,11 +367,9 @@ $(document).ready(function () {
                 + "&city=" + city
                 + "&limit=" + listCount
                 + "&offset=0"
-                + "&state_code=" + stateCode
+                + "&state_code=" + stateCode + ""
                 + "&price_min=" + minPrice
-                + "&price_max=" + maxPrice
-                + "&baths_min=" + minBaths
-                + "&baths_max=" + maxBaths,
+                + "&price_max=" + maxPrice,
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "realtor.p.rapidapi.com",
@@ -367,7 +380,7 @@ $(document).ready(function () {
         $.ajax(apiSettings).then(function (response) {
             console.log(response);
             console.log(apiSettings);
-
+            
             // Used to extract the Favorites
             var results = response.properties
 
@@ -375,7 +388,7 @@ $(document).ready(function () {
 
                 createCard(i, results[i]);
             };
-
+            
         });
     })
 });
