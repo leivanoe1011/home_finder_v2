@@ -41,8 +41,10 @@ function displayCard(index, propertyObj) {
     var houseImage = propertyObj.houseImage;
     var googleDirections = propertyObj.googleDirections;
 
-    console.log("Google URL: " + googleDirections);
-    console.log("Home website URL: " + homeWebSite);
+
+    // console.log("Google URL: " + googleDirections);
+    // console.log("Home website URL: "+ homeWebSite);
+
     var searchResults = $("#homeCards");
     var column = $("<div class='col s12 m6 l6 wow animate__animated animate__fadeInUp'>");
 
@@ -181,9 +183,9 @@ function createCard(index, house) {
         houseImage: house.thumbnail,
         googleDirections: `http://maps.google.com/maps?q=${house.address.city}+${house.address.state}+${house.address.line}`
     }
+    // console.log (propertyObj);
 
 
-    console.log(propertyObj);
     realtorResults.push(propertyObj);
 
     displayCard(index, propertyObj);
@@ -246,10 +248,11 @@ function getFavoriteCard(object, cardIndex) {
 
 function storeFavoriteCards(card) {
 
+    console.log("adding card to firebase");
+
     var house = card;
 
     db2.ref().push({
-        // searchResults: JSON.stringify(htmlObject)
         homeWebSite: house.homeWebSite,
         addressLine: house.addressLine,
         beds: house.beds,
@@ -265,31 +268,78 @@ function storeFavoriteCards(card) {
     });
 }
 
-db2.ref().on("value", function (snapshot) {
+var favorites = [];
 
-    var data = snapshot.val();
+// Need on child added trigger to detect favorites when page loads, and then add the "key" that exists in firebase so we can delete it later
+db2.ref().on("child_added", function(snapshot) {
+    // use jquery or whatever to signifiy favorites on page
+    var favorite = snapshot.val();
+    favorite.key = snapshot.key; // will include the key from firebase? no need to add that.
 
-    console.log("Response from Firebase");
-    console.log(data);
+    console.log(favorite);
 
-    // var parsedData = JSON.parse(data);
-
-    // console.log(parsedData);
+    favorites.push(favorite); 
 })
 
 
+function removeStoredFavoriteCard(card){
+    
+    console.log("Removing Card from Firebase");
+
+    var addressLine = card.addressLine;
+    var city = card.city;
+    var state = card.state;
+    var key = "";
+
+
+    for(var i = 0; i < favorites.length; i++){
+        if (favorites[i].addressLine === addressLine && favorites[i].city === city && favorites[i].state === state){
+            key = favorites[i].key;
+            console.log(key);
+            favorites.splice(i,1);
+            break;
+        }
+    }
+
+    
+    console.log("current address line: " + addressLine);
+
+    db2.ref().child(key).remove();        
+
+
+}
+
+
+// Save House when selected to Favorite the home
 $(document).on("click", ".favorite_button", function () {
+
+    var currentFavoriteIcon = $(this).text();
 
     var cardTargetId = $(this).data("value");
 
     var favoriteCard = realtorResults[cardTargetId];
 
-    // var favoriteCard = getFavoriteCard(cardContainer,cardTargetId);
+    if(currentFavoriteIcon === "favorite_border"){
 
-    console.log("Displaying Card");
-    console.log(favoriteCard);
+        console.log("About to add entry in Firebase");
 
-    storeFavoriteCards(favoriteCard);
+        $(this).text("favorite");
+
+        // Adds new card to firebase database
+        storeFavoriteCards(favoriteCard);
+    }
+    else {
+
+        console.log("About to DELETE entry in Firebase");
+        
+        $(this).text("favorite_border");
+
+        // Removes favorite card from firebase database
+        // figure out which favorite in teh favorites array matches this one, then pass the object including the key.
+        removeStoredFavoriteCard(favoriteCard);
+    }
+
+    
 });
 
 $("#advancedFilter").on("click", function(){
