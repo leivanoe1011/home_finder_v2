@@ -276,8 +276,8 @@ db2.ref().on("value", function (snapshot) {
 
     var data = snapshot.val();
 
-    console.log("Response from Firebase");
-    console.log(data);
+    // console.log("Response from Firebase");
+    // console.log(data);
 
     // var parsedData = JSON.parse(data);
 
@@ -285,7 +285,16 @@ db2.ref().on("value", function (snapshot) {
 })
 
 function removeStoredFavoriteCard(card){
+    
+    var addressLine = card.addressLine;
+    var city = card.city;
+    var state = card.state;
 
+    var ref =  db2.ref();
+    ref.orderByChild("addressLine").equalTo(addressLine).on("child_added", function(snapshot){
+        console.log(snapshot.key);
+        ref.child(snapshot.key).remove();
+    })
 }
 
 
