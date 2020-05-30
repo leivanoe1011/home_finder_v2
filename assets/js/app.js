@@ -125,10 +125,8 @@ function displayCard(index, homeWebSite, addressLine, beds, baths, city, state, 
 
 
 // Function will be used to parse the Realtor API results and Favorite functionality
-function createCard(index, property) {
-
-    var house = property;
-
+function createCard(index, house) {
+    
     if (house.hasOwnProperty("lot_size")) {
         lotSize = (typeof house.lot_size.size !== "undefined" ? house.lot_size.size.toLocaleString() : "NA")
         lotUnit = (typeof house.lot_size.units !== "undefined" ? house.lot_size.units : "NA")
