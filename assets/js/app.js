@@ -54,7 +54,8 @@ function displayCard(index, propertyObj) {
     var cardBackground = $("<img height='300px' class='responsive-image'>");
     var spanCard = $("<span class='card-title'>");
     var cardContent = $("<div class='card-content' style='margin-top: -25px;'>");
-    var cardAction = $("<div class='card-action'>");
+    var cardActionRow = $("<div class='row'>")
+    var cardAction = $("<div class='card-action' style='display: block;'>");
 
     var link = $("<a href='" + homeWebSite + "' target='_blank'>");
     var homeLotSize = $("<p>");
@@ -81,7 +82,7 @@ function displayCard(index, propertyObj) {
 
     // Favorite Icon
     var favoriteButton = $("<a>");
-    $(favoriteButton).addClass("btn-floating waves-effect waves-light red right");
+    $(favoriteButton).addClass("btn-floating waves-effect waves-light red right pulse");
 
     var favIcon = $("<i>");
     $(favIcon).addClass("material-icons favorite_button");
@@ -101,7 +102,7 @@ function displayCard(index, propertyObj) {
     var directionLink = $("<a href='"
         + googleDirections
         + "' target='_blank' style='color: #26a69a;'>"
-        + "Get Directions"
+        + "Get Directions" 
         + "</a>");
 
     $(cardAction).append(propertyLink);
@@ -132,13 +133,15 @@ function displayCard(index, propertyObj) {
         + " "
         + houseUnit);
 
-    cardContent.append(cardAction, bedBaths, buildingSize, homeLotSize, location, homePrice);
-
+    cardContent.append(bedBaths, buildingSize, homeLotSize, location, homePrice);
+   
     link.append(cardBackground);
 
     cardImgDiv.append(link, spanCard);
 
-    card.append(cardImgDiv, cardContent);
+    cardActionRow.append(cardAction)
+
+    card.append(cardImgDiv, cardContent, cardActionRow);
 
     column.append(card);
 
