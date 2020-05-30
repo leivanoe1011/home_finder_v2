@@ -1,10 +1,9 @@
 
-
 header{
     background-image: url("../images/luxury_home_2.jpg");
     background-size: cover;
     background-position: center;
-    min-height: 60vw;
+    min-height: 60vw;    
 }
 
 nav {
@@ -59,5 +58,14 @@ nav {
     }
 }
 
+/*Google Fonts Rule References For Quick Retrieval
 
+font-family: 'Alex Brush', cursive;
+font-family: 'Bilbo Swash Caps', cursive;
+font-family: 'Dancing Script', cursive;
+font-family: 'Engagement', cursive;
+font-family: 'Italianno', cursive;
+font-family: 'Lobster', cursive;
+font-family: 'Noto Serif TC', serif;
+font-family: 'Tangerine', cursive; */
 
