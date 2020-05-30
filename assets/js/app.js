@@ -253,10 +253,11 @@ function getFavoriteCard(object, cardIndex) {
 
 function storeFavoriteCards(card) {
 
+    console.log("adding card to firebase");
+
     var house = card;
 
     db2.ref().push({
-        // searchResults: JSON.stringify(htmlObject)
         homeWebSite: house.homeWebSite,
         addressLine: house.addressLine,
         beds: house.beds,
@@ -272,29 +273,45 @@ function storeFavoriteCards(card) {
     });
 }
 
-db2.ref().on("value", function (snapshot) {
+var favorites = [];
 
-    var data = snapshot.val();
+// Need on child added trigger to detect favorites when page loads, and then add the "key" that exists in firebase so we can delete it later
+db2.ref().on("child_added", function(snapshot) {
+    // use jquery or whatever to signifiy favorites on page
+    var favorite = snapshot.val();
+    favorite.key = snapshot.key; // will include the key from firebase? no need to add that.
 
-    // console.log("Response from Firebase");
-    // console.log(data);
+    console.log(favorite);
 
-    // var parsedData = JSON.parse(data);
-
-    // console.log(parsedData);
+    favorites.push(favorite); 
 })
+
 
 function removeStoredFavoriteCard(card){
     
+    console.log("Removing Card from Firebase");
+
     var addressLine = card.addressLine;
     var city = card.city;
     var state = card.state;
+    var key = "";
 
-    var ref =  db2.ref();
-    ref.orderByChild("addressLine").equalTo(addressLine).on("child_added", function(snapshot){
-        console.log(snapshot.key);
-        ref.child(snapshot.key).remove();
-    })
+
+    for(var i = 0; i < favorites.length; i++){
+        if (favorites[i].addressLine === addressLine && favorites[i].city === city && favorites[i].state === state){
+            key = favorites[i].key;
+            console.log(key);
+            favorites.splice(i,1);
+            break;
+        }
+    }
+
+    
+    console.log("current address line: " + addressLine);
+
+    db2.ref().child(key).remove();        
+
+
 }
 
 
@@ -309,6 +326,8 @@ $(document).on("click", ".favorite_button", function () {
 
     if(currentFavoriteIcon === "favorite_border"){
 
+        console.log("About to add entry in Firebase");
+
         $(this).text("favorite");
 
         // Adds new card to firebase database
@@ -316,15 +335,14 @@ $(document).on("click", ".favorite_button", function () {
     }
     else {
 
+        console.log("About to DELETE entry in Firebase");
+        
         $(this).text("favorite_border");
 
         // Removes favorite card from firebase database
+        // figure out which favorite in teh favorites array matches this one, then pass the object including the key.
         removeStoredFavoriteCard(favoriteCard);
     }
-
-
-    console.log("Displaying Card");
-    console.log(favoriteCard);
 
     
 });
