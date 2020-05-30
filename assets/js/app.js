@@ -92,12 +92,8 @@ function displayCard(index, homeWebSite, addressLine, beds, baths, city, state, 
         + " "
         + lotUnit);
 
-    var undefinedHouseSize = "";
-
-    var undefinedHouseUnit = "";
-
-    undefinedHouseSize = (typeof houseSize !== "undefined" ? houseSize : "NA")
-    undefinedHouseUnit = (typeof houseUnit !== "undefined" ? houseUnit : "NA")
+    houseSize = (typeof houseSize !== "undefined" ? houseSize : "NA")
+    houseUnit = (typeof houseUnit !== "undefined" ? houseUnit : "NA")
 
     var imageUnavailable = cardBackground.attr("src", '\assets/images/unavailable-image.jpg');
 
@@ -108,9 +104,9 @@ function displayCard(index, homeWebSite, addressLine, beds, baths, city, state, 
 
 
     buildingSize.html("Building size: "
-        + undefinedHouseSize
+        + houseSize
         + " "
-        + undefinedHouseUnit);
+        + houseUnit);
 
     cardContent.append(cardAction, bedBaths, buildingSize, homeLotSize, location, homePrice);
 
