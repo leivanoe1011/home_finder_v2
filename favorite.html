@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Favorite</title>
+</head>
+<body>
+    
+    <section class="container">
+        <div id="homeCards" style="min-height:200px" class="row">
+
+        </div>
+    </section>
+
+    <script>
+
+
+        // Configuration file to the Save Search Results
+        var firebaseConfig_SaveSearchResults = {
+            apiKey: "AIzaSyAATbtZxRXHkvnP7CMemxc_8ibgyQLpWN4",
+            authDomain: "grpprj1-home-finder.firebaseapp.com",
+            databaseURL: "https://grpprj1-home-finder.firebaseio.com",
+            projectId: "grpprj1-home-finder",
+            storageBucket: "grpprj1-home-finder.appspot.com",
+            messagingSenderId: "1063890729907",
+            appId: "1:1063890729907:web:78a3392d4da6bb9acb69c6",
+            measurementId: "G-LNPJ4N4NXZ"
+        };
+
+        var app2 = firebase.initializeApp(firebaseConfig_SaveSearchResults,'app2');
+
+        var db2 = firebase.database(app2);
+        
+        $(document).ready(function(){
+            
+        })
+    
+    
+    </script>
+</body>
+</html>
