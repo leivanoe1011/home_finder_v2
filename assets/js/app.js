@@ -53,7 +53,7 @@ function displayCard(index, propertyObj) {
     var cardImgDiv = $("<div class='card-image'>");
     var cardBackground = $("<img height='300px' class='responsive-image'>");
     var spanCard = $("<span class='card-title'>");
-    var cardContent = $("<div class='card-content' style='margin-top: -10px;'>");
+    var cardContent = $("<div class='card-content' style='margin-top: -25px;'>");
     var cardAction = $("<div class='card-action'>");
 
     var link = $("<a href='" + homeWebSite + "' target='_blank'>");
