@@ -27,7 +27,7 @@ var db2 = firebase.database(app2);
 function displayCard(index, homeWebSite, addressLine, beds, baths, city, state, price, lotSize, lotUnit, houseSize, houseUnit, houseImage) {
 
     var searchResults = $("#homeCards");
-    var column = $("<div class='col s12 l4'>");
+    var column = $("<div class='col s12 l4 wow animate__animated animate__fadeInUp'>");
 
     // adding data target for favorite button functionality
     $(column).attr("data-target", index);
@@ -45,7 +45,7 @@ function displayCard(index, homeWebSite, addressLine, beds, baths, city, state, 
     var buildingSize = $("<p>");
     var location = $("<p>");
     var homePrice = $("<p>");
-
+    
     spanCard.html(addressLine);
 
     bedBaths.html("Beds: "
@@ -61,7 +61,6 @@ function displayCard(index, homeWebSite, addressLine, beds, baths, city, state, 
     homePrice.html("Listing price: $"
         + price
         + " ");
-
 
     // Favorite Icon
     var favoriteButton = $("<a>");
@@ -298,7 +297,7 @@ $(document).ready(function () {
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "states2.p.rapidapi.com",
-            "x-rapidapi-key": "0c292c0993mshd75f0effe5adad9p120e45jsn157b0022e4d8",
+            "x-rapidapi-key": "5d4693a959msh4109217ff07938cp199915jsnb90f99a85b6d",
             "country": "USA"
         }
     };
@@ -353,7 +352,7 @@ $(document).ready(function () {
                 + "&city=" + city
                 + "&limit=" + listCount
                 + "&offset=0"
-                + "&state_code=" + stateCode + ""
+                + "&state_code=" + stateCode
                 + "&price_min=" + minPrice
                 + "&price_max=" + maxPrice
                 + "&baths_min=" + minBaths
