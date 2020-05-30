@@ -24,7 +24,7 @@ var app2 = firebase.initializeApp(firebaseConfig_SaveSearchResults, 'app2');
 var db2 = firebase.database(app2);
 
 
-function displayCard(index, homeWebSite, addressLine, beds, baths, city, state, price, lotSize, lotUnit, houseSize, houseUnit, houseImage) {
+function displayCard(index, homeWebSite, addressLine, beds, baths, city, state, price, lotSize, lotUnit, houseSize, houseUnit, houseImage, googleDirections) {
 
     var searchResults = $("#homeCards");
     var column = $("<div class='col s12 l4 wow animate__animated animate__fadeInUp'>");
@@ -80,7 +80,15 @@ function displayCard(index, homeWebSite, addressLine, beds, baths, city, state, 
         + "check out the property"
         + "</a>");
 
+    // Google Maps Directions Link
+    var directionLink =$("<a href='" 
+        + googleDirections
+        + "' target='_blank'>"
+        + "Get Directions" 
+        + "</a>");
+
     $(cardAction).append(propertyLink);
+    $(cardAction).append(directionLink);
     $(cardAction).append(favoriteButton);
 
     lotSize = (typeof lotSize !== "undefined" ? lotSize : "NA");
@@ -160,7 +168,8 @@ function createCard(index, property) {
         lotUnit: unitLot,
         houseSize: sizeHouse,
         houseUnit: unitHouse,
-        houseImage: house.thumbnail
+        houseImage: house.thumbnail,
+        googleDirections: `http://maps.google.com/maps?q=${house.address.city}+${house.address.state}+${house.address.line}`
     }
 
     realtorResults.push(propertyObj);
