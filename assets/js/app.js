@@ -207,13 +207,19 @@ function createCard(index, house) {
 var searchList = [];
 
 
-function createButtons(saveSearch) {
+function createButtons(saveSearch, index) {
     var newResult = $("<button>");
-    newResult.addClass("waves-effect waves-light btn-small search_button");
+    $(newResult).addClass("waves-effect waves-light btn-small search_button");
+
+    // The data index will be used to query the results 
+    $(newResult).attr("data-index", index);
+
     var city = saveSearch.city;
     var state = saveSearch.stateCode;
 
-    newResult.html('<i class="material-icons left">home</i>' + city + ", " + state);
+    // We can add the form details as a data attribute
+
+    $(newResult).html('<i class="material-icons left">home</i>' + city + ", " + state);
 
     $("#previous_search").append(newResult);
     $("#previous_search").show()
@@ -226,13 +232,17 @@ function saveSearch(city, state) {
         stateCode: state
     }
 
+    var currentIndex = searchList.length;
+
     searchList.push(searchObj);
 
     // db2.ref().set({
     //     searchResults: JSON.stringify(searchList)
     // });
 
-    createButtons(searchObj);
+    sessionStorage.setItem("searchObj", JSON.stringify(searchList));
+
+    createButtons(searchObj, currentIndex);
 }
 
 
@@ -379,7 +389,6 @@ $(document).on("click", ".favorite_button", function () {
 
             favoriteCards.splice(cardTargetId, 1);
         }
-
 
     }
 
