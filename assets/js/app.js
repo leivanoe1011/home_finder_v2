@@ -168,6 +168,12 @@ function displayCard(index, propertyObj, favoritePage) {
 // Function will be used to parse the Realtor API results and Favorite functionality
 function createCard(index, house) {
 
+    
+    var lotSize = "";
+    var lotUnit = "";
+    var houseSize = "";
+    var houseUnit = "";
+
     if (house.hasOwnProperty("lot_size")) {
         lotSize = (typeof house.lot_size.size !== "undefined" ? house.lot_size.size.toLocaleString() : "NA")
         lotUnit = (typeof house.lot_size.units !== "undefined" ? house.lot_size.units : "NA")
@@ -235,10 +241,6 @@ function saveSearch(city, state) {
     var currentIndex = searchList.length;
 
     searchList.push(searchObj);
-
-    // db2.ref().set({
-    //     searchResults: JSON.stringify(searchList)
-    // });
 
     sessionStorage.setItem("searchObj", JSON.stringify(searchList));
 
@@ -395,9 +397,73 @@ $(document).on("click", ".favorite_button", function () {
     
 });
 
+
+// Used to make the API call to the Realtor API
+function makeRealtorApiCall (city, listCount, stateCode, minPrice, maxPrice, minBaths, maxBaths){
+
+    // The card container must be empty before loading the new cards
+    $("#homeCards").empty();
+
+    var apiSettings = {
+        "url": "https://realtor.p.rapidapi.com/properties/v2/list-for-sale?sort=relevance"
+            + "&city=" + city
+            + "&limit=" + listCount
+            + "&offset=0"
+            + "&state_code=" + stateCode
+            + "&price_min=" + minPrice
+            + "&price_max=" + maxPrice
+            + "&baths_min=" + minBaths
+            + "&baths_max=" + maxBaths,
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "realtor.p.rapidapi.com",
+            "x-rapidapi-key": "0c292c0993mshd75f0effe5adad9p120e45jsn157b0022e4d8"
+        }
+    };
+
+    $.ajax(apiSettings).then(function (response) {
+        console.log(response);
+        console.log(apiSettings);
+
+        // Used to extract the Favorites
+        var results = response.properties
+
+        for (var i = 0; i < results.length; i++) {
+
+            createCard(i, results[i]);
+        };
+
+    });
+}
+
 $("#advancedFilter").on("click", function(){
     $(".filter").toggle()
 });
+
+
+$(document).on("click", ".search_button", function(){
+    console.log("in search_button");
+
+    var searchIndex = $(this).data("index");
+
+    var searchArray = sessionStorage.getItem("searchObj");
+
+    var parsedSearchArray = JSON.parse(searchArray);
+
+    console.log(parsedSearchArray);
+
+    var searchSelected = parsedSearchArray[searchIndex];
+
+    console.log(searchSelected);
+
+    var city = searchSelected.city;
+    var state = searchSelected.stateCode;
+
+    console.log(city + " " + state);
+      
+    makeRealtorApiCall (city, 24, state, 200000, 300000, null, null);
+
+})
 
 
 
@@ -471,39 +537,11 @@ $(document).ready(function () {
         $(".preloader-wrapper").show();
         $("#submitButton").hide();
 
-        $("#homeCards").empty();
 
         console.log(stateCode);
 
-        var apiSettings = {
-            "url": "https://realtor.p.rapidapi.com/properties/v2/list-for-sale?sort=relevance"
-                + "&city=" + city
-                + "&limit=" + listCount
-                + "&offset=0"
-                + "&state_code=" + stateCode
-                + "&price_min=" + minPrice
-                + "&price_max=" + maxPrice
-                + "&baths_min=" + minBaths
-                + "&baths_max=" + maxBaths,
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": "realtor.p.rapidapi.com",
-                "x-rapidapi-key": "6348c7c3damsh9f06f3bf656de25p1004dajsn161cb5ca1bac"
-            }
-        };
-
-        $.ajax(apiSettings).then(function (response) {
-            console.log(response);
-            console.log(apiSettings);
-
-            // Used to extract the Favorites
-            var results = response.properties
-
-            for (var i = 0; i < results.length; i++) {
-
-                createCard(i, results[i]);
-            };
-
-        });
+        // submit API request to the Realtor API
+        makeRealtorApiCall (city, listCount, stateCode, minPrice, maxPrice, minBaths, maxBaths)
+        
     })
 });
