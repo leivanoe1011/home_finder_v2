@@ -321,6 +321,15 @@ function removeStoredFavoriteCard(card){
 }
 
 
+function removeCard(cardId){
+
+
+    var currentCardTarget = $("#homeCards").find('[data-target="' + cardId + '"]');
+
+    $(currentCardTarget).remove();
+
+}
+
 // Save House when selected to Favorite the home
 $(document).on("click", ".favorite_button", function () {
 
@@ -345,9 +354,6 @@ $(document).on("click", ".favorite_button", function () {
     }
     
 
-   
-    console.log(favoriteCard);
-
     if(currentFavoriteIcon === "favorite_border"){
 
         console.log("About to add entry in Firebase");
@@ -364,8 +370,17 @@ $(document).on("click", ".favorite_button", function () {
         $(this).text("favorite_border");
 
         // Removes favorite card from firebase database
-        // figure out which favorite in teh favorites array matches this one, then pass the object including the key.
         removeStoredFavoriteCard(favoriteCard);
+
+        // Currently in Favorite HTML
+        if(isFavoritePg === 1){
+            
+            removeCard(cardTargetId);
+
+            favoriteCards.splice(cardTargetId, 1);
+        }
+
+
     }
 
     
