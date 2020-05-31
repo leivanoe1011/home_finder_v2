@@ -97,6 +97,9 @@
     
     <script>
 
+        // cards in favorite HTML
+        var favoriteCards = [];
+
         function loadFavoriteObj(index, obj){
 
             var homeWebSite = obj.homeWebSite;
@@ -112,14 +115,13 @@
             var houseUnit = obj.houseUnit;
             var houseImage = obj.houseImage;
 
-            displayCard(index, homeWebSite, addressLine, beds, baths, city, state, price, lotSize, lotUnit, houseSize, houseUnit, houseImage)
+            // displayCard(index, homeWebSite, addressLine, beds, baths, city, state, price, lotSize, lotUnit, houseSize, houseUnit, houseImage)
         }   
-
 
   
         $(document).ready(function(){
 
-
+            
             // Initialize the Side Nav
             $(".sidenav").sidenav();
             $(".parallax").parallax();
@@ -147,7 +149,7 @@
                 }
             });
 
-            var index = 1;
+            var index = 0;
 
             var query = db2.ref().orderByKey();
             query.once("value")
@@ -158,14 +160,16 @@
 
                         console.log(favoriteHome);
 
-                        loadFavoriteObj(index,favoriteHome);
+                        favoriteCards.push(favoriteHome);
+
+                        // loadFavoriteObj(index,favoriteHome);
+
+                        displayCard(index, favoriteHome, 1);
 
                         index++;
                     })
-                });
-                
+                });     
         });
-    
     
     </script>
 </body>

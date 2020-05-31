@@ -24,9 +24,10 @@ var app2 = firebase.initializeApp(firebaseConfig_SaveSearchResults, 'app2');
 var db2 = firebase.database(app2);
 
 
-function displayCard(index, propertyObj) {
+function displayCard(index, propertyObj, favoritePage) {
 
 
+    var inFavoritePg = favoritePage;
     var homeWebSite = propertyObj.homeWebSite;
     var addressLine = propertyObj.addressLine;
     var beds = propertyObj.beds;
@@ -89,7 +90,16 @@ function displayCard(index, propertyObj) {
     var favIcon = $("<i>");
     $(favIcon).addClass("material-icons favorite_button");
     $(favIcon).attr("data-value", index);
-    $(favIcon).text("favorite_border");
+    $(favIcon).attr("data-favPg", inFavoritePg);
+
+    // Defines the page where this code is rendered
+    if(inFavoritePg === 0){
+        $(favIcon).text("favorite_border");
+    }
+    else{
+        $(favIcon).text("favorite");
+    }
+    
 
     $(favoriteButton).append(favIcon);
 
@@ -189,7 +199,7 @@ function createCard(index, house) {
 
     realtorResults.push(propertyObj);
 
-    displayCard(index, propertyObj);
+    displayCard(index, propertyObj, 0);
 }
 
 
@@ -318,7 +328,25 @@ $(document).on("click", ".favorite_button", function () {
 
     var cardTargetId = $(this).data("value");
 
-    var favoriteCard = realtorResults[cardTargetId];
+    var isFavoritePg = $(this).data("favpg");
+
+    let favoriteCard;
+
+    console.log("In click");
+    console.log("In favorite pg variable " + isFavoritePg);
+
+    if(isFavoritePg === 0){
+        console.log("In IF");
+        favoriteCard = realtorResults[cardTargetId];
+    }
+    else {
+        console.log("In else")
+        favoriteCard = favoriteCards[cardTargetId];
+    }
+    
+
+   
+    console.log(favoriteCard);
 
     if(currentFavoriteIcon === "favorite_border"){
 
