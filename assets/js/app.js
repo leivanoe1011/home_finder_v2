@@ -448,6 +448,20 @@ $(document).on("click", ".search_button", function () {
 })
 
 
+function previousSearchAvailable(){
+    
+    var previousSearchItems = sessionStorage.getItem("searchObj");
+
+    if (previousSearchItems !== null){
+
+        var parsedSearchItems = JSON.parse(previousSearchItems);
+
+        for(var i = 0; i < parsedSearchItems.length; i++){
+            saveSearch(parsedSearchItems[i].city, parsedSearchItems[i].stateCode);
+        }
+    }
+}
+
 
 $(document).ready(function () {
     $('select').formSelect();
@@ -523,5 +537,10 @@ $(document).ready(function () {
         // submit API request to the Realtor API
         makeRealtorApiCall(city, listCount, stateCode, minPrice, maxPrice, minBaths, maxBaths)
 
-    })
+
+    });
+    
+
+    previousSearchAvailable();
+
 });
