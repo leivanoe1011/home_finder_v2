@@ -44,9 +44,9 @@
                 </a>
                 <!-- Navigation Bar -->
                 <ul class="right hide-on-med-and-down" id="#nav_menu">
-                    <li><a class="nav_button" href="index.html.#search">Search Homes</a></li>
+                    <li><a class="nav_button" href="index.html">Search Homes</a></li>
                     <li><a class="nav_button" href="favorite.html">Favorites</a></li>
-                    <li><a class="nav_button" href="index.html.#contact">Contact</a></li>
+                    <!-- <li><a class="nav_button" href="#contact">Contact</a></li> -->
                     <!-- Fab Icons -->
                     <li>
                         <a href="#" class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="Facebook">
@@ -66,9 +66,9 @@
                 </ul>
                 <!-- The menu that will appear when the page is viewed in mobile device -->
                 <ul class="sidenav grey lighten-4" id="mobile-menu">
-                    <li><a class="nav_button" href="index.html.#search">Search Homes</a></li>
+                    <li><a class="nav_button" href="index.html">Search Homes</a></li>
                     <li><a class="nav_button" href="favorite.html">Favorites</a></li>
-                    <li><a class="nav_button" href="index.html.#contact">Contact</a></li>
+                    <!-- <li><a class="nav_button" href="#contact">Contact</a></li> -->
                 </ul>
             </div>
         </nav>
@@ -97,6 +97,9 @@
     
     <script>
 
+        // cards in favorite HTML
+        var favoriteCards = [];
+
         function loadFavoriteObj(index, obj){
 
             var homeWebSite = obj.homeWebSite;
@@ -112,14 +115,13 @@
             var houseUnit = obj.houseUnit;
             var houseImage = obj.houseImage;
 
-            displayCard(index, homeWebSite, addressLine, beds, baths, city, state, price, lotSize, lotUnit, houseSize, houseUnit, houseImage)
+            // displayCard(index, homeWebSite, addressLine, beds, baths, city, state, price, lotSize, lotUnit, houseSize, houseUnit, houseImage)
         }   
-
 
   
         $(document).ready(function(){
 
-
+            
             // Initialize the Side Nav
             $(".sidenav").sidenav();
             $(".parallax").parallax();
@@ -147,7 +149,7 @@
                 }
             });
 
-            var index = 1;
+            var index = 0;
 
             var query = db2.ref().orderByKey();
             query.once("value")
@@ -156,16 +158,17 @@
 
                         var favoriteHome = childSnapshot.val();
 
-                        console.log(favoriteHome);
 
-                        loadFavoriteObj(index,favoriteHome);
+                        favoriteCards.push(favoriteHome);
+
+                        // loadFavoriteObj(index,favoriteHome);
+
+                        displayCard(index, favoriteHome, 1);
 
                         index++;
                     })
-                });
-                
+                });     
         });
-    
     
     </script>
 </body>

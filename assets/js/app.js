@@ -20,9 +20,11 @@ var app2 = firebase.initializeApp(firebaseConfig_SaveSearchResults, 'app2');
 
 var db2 = firebase.database(app2);
 
-function displayCard(index, propertyObj) {
+
+function displayCard(index, propertyObj, favoritePage) {
 
 
+    var inFavoritePg = favoritePage;
     var homeWebSite = propertyObj.homeWebSite;
     var addressLine = propertyObj.addressLine;
     var beds = propertyObj.beds;
@@ -84,7 +86,16 @@ function displayCard(index, propertyObj) {
     var favIcon = $("<i>");
     $(favIcon).addClass("material-icons favorite_button");
     $(favIcon).attr("data-value", index);
-    $(favIcon).text("favorite_border");
+    $(favIcon).attr("data-favPg", inFavoritePg);
+
+    // Defines the page where this code is rendered
+    if(inFavoritePg === 0){
+        $(favIcon).text("favorite_border");
+    }
+    else{
+        $(favIcon).text("favorite");
+    }
+    
 
     $(favoriteButton).append(favIcon);
 
@@ -153,6 +164,12 @@ function displayCard(index, propertyObj) {
 // Function will be used to parse the Realtor API results and Favorite functionality
 function createCard(index, house) {
 
+    
+    var lotSize = "";
+    var lotUnit = "";
+    var houseSize = "";
+    var houseUnit = "";
+
     if (house.hasOwnProperty("lot_size")) {
         lotSize = (typeof house.lot_size.size !== "undefined" ? house.lot_size.size.toLocaleString() : "NA")
         lotUnit = (typeof house.lot_size.units !== "undefined" ? house.lot_size.units : "NA")
@@ -183,21 +200,27 @@ function createCard(index, house) {
 
     realtorResults.push(propertyObj);
 
-    displayCard(index, propertyObj);
-};
+    displayCard(index, propertyObj, 0);
+}
 
 
 // Used to load all our search entries
 var searchList = [];
 
 
-function createButtons(saveSearch) {
+function createButtons(saveSearch, index) {
     var newResult = $("<button>");
-    newResult.addClass("waves-effect waves-light btn-small search_button");
+    $(newResult).addClass("waves-effect waves-light btn-small search_button");
+
+    // The data index will be used to query the results 
+    $(newResult).attr("data-index", index);
+
     var city = saveSearch.city;
     var state = saveSearch.stateCode;
 
-    newResult.html('<i class="material-icons left">home</i>' + city + ", " + state);
+    // We can add the form details as a data attribute
+
+    $(newResult).html('<i class="material-icons left">home</i>' + city + ", " + state);
 
     $("#previous_search").append(newResult);
     $("#previous_search").show();
@@ -210,14 +233,16 @@ function saveSearch(city, state) {
         stateCode: state
     };
 
+    var currentIndex = searchList.length;
+
     searchList.push(searchObj);
 
-    // db2.ref().set({
-    //     searchResults: JSON.stringify(searchList)
-    // });
+    sessionStorage.setItem("searchObj", JSON.stringify(searchList));
 
-    createButtons(searchObj);
-};
+    createButtons(searchObj, currentIndex);
+}
+
+
 
 function getFavoriteCard(object, cardIndex) {
     var currentCardContainer = object;
@@ -297,13 +322,37 @@ function removeStoredFavoriteCard(card){
 };
 
 
+function removeCard(cardId){
+
+
+    var currentCardTarget = $("#homeCards").find('[data-target="' + cardId + '"]');
+
+    $(currentCardTarget).remove();
+
+}
+
 // Save House when selected to Favorite the home
 $(document).on("click", ".favorite_button", function () {
     var currentFavoriteIcon = $(this).text();
 
     var cardTargetId = $(this).data("value");
 
-    var favoriteCard = realtorResults[cardTargetId];
+    var isFavoritePg = $(this).data("favpg");
+
+    let favoriteCard;
+
+    console.log("In click");
+    console.log("In favorite pg variable " + isFavoritePg);
+
+    if(isFavoritePg === 0){
+        console.log("In IF");
+        favoriteCard = realtorResults[cardTargetId];
+    }
+    else {
+        console.log("In else")
+        favoriteCard = favoriteCards[cardTargetId];
+    }
+    
 
     if(currentFavoriteIcon === "favorite_border"){
 
@@ -321,14 +370,88 @@ $(document).on("click", ".favorite_button", function () {
         $(this).text("favorite_border");
 
         // Removes favorite card from firebase database
-        // figure out which favorite in teh favorites array matches this one, then pass the object including the key.
         removeStoredFavoriteCard(favoriteCard);
-    };
+
+        // Currently in Favorite HTML
+        if(isFavoritePg === 1){
+            
+            removeCard(cardTargetId);
+
+            favoriteCards.splice(cardTargetId, 1);
+        }
+
+    }
+
+    
 });
+
+
+// Used to make the API call to the Realtor API
+function makeRealtorApiCall (city, listCount, stateCode, minPrice, maxPrice, minBaths, maxBaths){
+
+    // The card container must be empty before loading the new cards
+    $("#homeCards").empty();
+
+    var apiSettings = {
+        "url": "https://realtor.p.rapidapi.com/properties/v2/list-for-sale?sort=relevance"
+            + "&city=" + city
+            + "&limit=" + listCount
+            + "&offset=0"
+            + "&state_code=" + stateCode
+            + "&price_min=" + minPrice
+            + "&price_max=" + maxPrice
+            + "&baths_min=" + minBaths
+            + "&baths_max=" + maxBaths,
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "realtor.p.rapidapi.com",
+            "x-rapidapi-key": "0c292c0993mshd75f0effe5adad9p120e45jsn157b0022e4d8"
+        }
+    };
+
+    $.ajax(apiSettings).then(function (response) {
+        console.log(response);
+        console.log(apiSettings);
+
+        // Used to extract the Favorites
+        var results = response.properties
+
+        for (var i = 0; i < results.length; i++) {
+
+            createCard(i, results[i]);
+        };
+
+    });
+}
 
 $("#advancedFilter").on("click", function(){
     $(".filter").toggle()
 });
+
+
+$(document).on("click", ".search_button", function(){
+    console.log("in search_button");
+
+    var searchIndex = $(this).data("index");
+
+    var searchArray = sessionStorage.getItem("searchObj");
+
+    var parsedSearchArray = JSON.parse(searchArray);
+
+    console.log(parsedSearchArray);
+
+    var searchSelected = parsedSearchArray[searchIndex];
+
+    console.log(searchSelected);
+
+    var city = searchSelected.city;
+    var state = searchSelected.stateCode;
+
+    console.log(city + " " + state);
+      
+    makeRealtorApiCall (city, 24, state, 200000, 300000, null, null);
+
+})
 
 
 
@@ -400,39 +523,11 @@ $(document).ready(function () {
         $(".preloader-wrapper").show();
         $("#submitButton").hide();
 
-        $("#homeCards").empty();
 
         console.log(stateCode);
 
-        var apiSettings = {
-            "url": "https://realtor.p.rapidapi.com/properties/v2/list-for-sale?sort=relevance"
-                + "&city=" + city
-                + "&limit=" + listCount
-                + "&offset=0"
-                + "&state_code=" + stateCode
-                + "&price_min=" + minPrice
-                + "&price_max=" + maxPrice
-                + "&baths_min=" + minBaths
-                + "&baths_max=" + maxBaths,
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": "realtor.p.rapidapi.com",
-                "x-rapidapi-key": "6348c7c3damsh9f06f3bf656de25p1004dajsn161cb5ca1bac"
-            }
-        };
-
-        $.ajax(apiSettings).then(function (response) {
-            console.log(response);
-            console.log(apiSettings);
-
-            // Used to extract the Favorites
-            var results = response.properties
-
-            for (var i = 0; i < results.length; i++) {
-
-                createCard(i, results[i]);
-            };
-
-        });
-    });
+        // submit API request to the Realtor API
+        makeRealtorApiCall (city, listCount, stateCode, minPrice, maxPrice, minBaths, maxBaths)
+        
+    })
 });
