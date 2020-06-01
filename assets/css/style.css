@@ -52,6 +52,32 @@ nav {
     margin: 5px !important;
 }
 
+.card-content{
+    margin-top: -25px;
+}
+
+.card .card-action {
+    padding: 0px 24px 3px;
+}
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating){
+    color: #26a69a;
+}
+
+.card.small .card-action, .card.medium .card-action, .card.large .card-action{
+    display: grid;
+}
+
+#homeCards{
+    min-height: 200px;
+}
+
+#searchContainer{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 1px;
+}
+
 @media screen and (max-width: 670px){
     header{
         min-height: 500px;

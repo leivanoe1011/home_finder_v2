@@ -53,7 +53,7 @@ function displayCard(index, propertyObj, favoritePage) {
     var cardBackground = $("<img height='300px' class='responsive-image'>");
     var spanCard = $("<span class='card-title'>");
     var cardContent = $("<div class='card-content'>");
-    var cardAction = $("<div class='card-action' style='padding-top: 0px'>");
+    var cardAction = $("<div class='card-action'>");
 
     var link = $("<a href='" + homeWebSite + "' target='_blank'>");
     var homeLotSize = $("<p>");
@@ -95,22 +95,20 @@ function displayCard(index, propertyObj, favoritePage) {
         $(favIcon).text("favorite");
     }
 
-
     $(favoriteButton).append(favIcon);
 
     // Check out Property Link
     var propertyLink = $("<a href='"
         + homeWebSite
-        + "' target='_blank' style='color: #26a69a;'>"
+        + "' target='_blank'>"
         + "Check out the property"
         + "</a>");
     // Google Maps Directions Link
     var directionLink = $("<a href='"
         + googleDirections
-        + "' target='_blank' style='color: #26a69a;'>"
+        + "' target='_blank'>"
         + "Get Directions"
         + "</a>");
-
 
     $(cardAction).append(propertyLink);
     $(cardAction).append(directionLink);
