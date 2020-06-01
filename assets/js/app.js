@@ -1,8 +1,5 @@
-
-
 // Used to load the results from Realtor API
 let realtorResults = [];
-
 
 // Sample Favorite Card Array
 var favoriteCards = [];
@@ -23,7 +20,6 @@ var app2 = firebase.initializeApp(firebaseConfig_SaveSearchResults, 'app2');
 
 var db2 = firebase.database(app2);
 
-
 function displayCard(index, propertyObj) {
 
 
@@ -41,7 +37,6 @@ function displayCard(index, propertyObj) {
     var houseImage = propertyObj.houseImage;
     var googleDirections = propertyObj.googleDirections;
 
-
     // console.log("Google URL: " + googleDirections);
     // console.log("Home website URL: "+ homeWebSite);
 
@@ -56,8 +51,8 @@ function displayCard(index, propertyObj) {
     var cardBackground = $("<img height='300px' class='responsive-image'>");
     var spanCard = $("<span class='card-title'>");
     var cardContent = $("<div class='card-content' style='margin-top: -25px;'>");
-    var cardActionRow = $("<div class='row'>")
-    var cardAction = $("<div class='card-action' style='padding-top: g0px'>");
+    var cardActionRow = $("<div class='row'>");
+    var cardAction = $("<div class='card-action' style='padding-top: 0px'>");
 
     var link = $("<a href='" + homeWebSite + "' target='_blank'>");
     var homeLotSize = $("<p>");
@@ -84,7 +79,7 @@ function displayCard(index, propertyObj) {
 
     // Favorite Icon
     var favoriteButton = $("<a>");
-    $(favoriteButton).addClass("btn-floating waves-effect waves-light red right pulse");
+    $(favoriteButton).addClass("btn-floating waves-effect waves-light red right");
 
     var favIcon = $("<i>");
     $(favIcon).addClass("material-icons favorite_button");
@@ -142,7 +137,7 @@ function displayCard(index, propertyObj) {
 
     cardImgDiv.append(link, spanCard);
 
-    cardActionRow.append(cardAction)
+    cardActionRow.append(cardAction);
 
     card.append(cardImgDiv, cardContent, cardActionRow);
 
@@ -152,7 +147,7 @@ function displayCard(index, propertyObj) {
 
     $(".preloader-wrapper").hide();
     $("#submitButton").show();
-}
+};
 
 
 // Function will be used to parse the Realtor API results and Favorite functionality
@@ -183,14 +178,13 @@ function createCard(index, house) {
         houseUnit: houseUnit,
         houseImage: house.thumbnail,
         googleDirections: `http://maps.google.com/maps?q=${house.address.city}+${house.address.state}+${house.address.line}`
-    }
+    };
     // console.log (propertyObj);
-
 
     realtorResults.push(propertyObj);
 
     displayCard(index, propertyObj);
-}
+};
 
 
 // Used to load all our search entries
@@ -206,7 +200,7 @@ function createButtons(saveSearch) {
     newResult.html('<i class="material-icons left">home</i>' + city + ", " + state);
 
     $("#previous_search").append(newResult);
-    $("#previous_search").show()
+    $("#previous_search").show();
 }
 
 function saveSearch(city, state) {
@@ -214,7 +208,7 @@ function saveSearch(city, state) {
     var searchObj = {
         city: city,
         stateCode: state
-    }
+    };
 
     searchList.push(searchObj);
 
@@ -223,9 +217,7 @@ function saveSearch(city, state) {
     // });
 
     createButtons(searchObj);
-}
-
-
+};
 
 function getFavoriteCard(object, cardIndex) {
     var currentCardContainer = object;
@@ -233,18 +225,17 @@ function getFavoriteCard(object, cardIndex) {
     var valueId = cardIndex;
 
     $(currentCardContainer).children("div").each(function () {
-
         var targetId = $(this).data("target");
 
         if (valueId === targetId) {
             currentCard = $(this);
             return false;
-        }
+        };
     });
 
     return currentCard;
 
-}
+};
 
 
 function storeFavoriteCards(card) {
@@ -267,7 +258,7 @@ function storeFavoriteCards(card) {
         houseUnit: house.houseUnit,
         houseImage: house.houseImage
     });
-}
+};
 
 var favorites = [];
 
@@ -280,11 +271,10 @@ db2.ref().on("child_added", function(snapshot) {
     console.log(favorite);
 
     favorites.push(favorite); 
-})
+});
 
 
 function removeStoredFavoriteCard(card){
-    
     console.log("Removing Card from Firebase");
 
     var addressLine = card.addressLine;
@@ -292,28 +282,23 @@ function removeStoredFavoriteCard(card){
     var state = card.state;
     var key = "";
 
-
     for(var i = 0; i < favorites.length; i++){
         if (favorites[i].addressLine === addressLine && favorites[i].city === city && favorites[i].state === state){
             key = favorites[i].key;
             console.log(key);
-            favorites.splice(i,1);
+            favorites.splice(i, 1);
             break;
-        }
-    }
+        };
+    };
 
-    
     console.log("current address line: " + addressLine);
 
-    db2.ref().child(key).remove();        
-
-
-}
+    db2.ref().child(key).remove();
+};
 
 
 // Save House when selected to Favorite the home
 $(document).on("click", ".favorite_button", function () {
-
     var currentFavoriteIcon = $(this).text();
 
     var cardTargetId = $(this).data("value");
@@ -338,9 +323,7 @@ $(document).on("click", ".favorite_button", function () {
         // Removes favorite card from firebase database
         // figure out which favorite in teh favorites array matches this one, then pass the object including the key.
         removeStoredFavoriteCard(favoriteCard);
-    }
-
-    
+    };
 });
 
 $("#advancedFilter").on("click", function(){
@@ -397,9 +380,7 @@ $(document).ready(function () {
     $('.sidenav').sidenav();
 
     $(".preloader-wrapper").hide();
-
-
-
+    
     $("#submitButton").on("click", function (event) {
         event.preventDefault();
 
@@ -414,7 +395,7 @@ $(document).ready(function () {
         // Save search Results
         saveSearch(city, stateCode);
 
-        console.log(city)
+        console.log(city);
 
         $(".preloader-wrapper").show();
         $("#submitButton").hide();
@@ -453,5 +434,5 @@ $(document).ready(function () {
             };
 
         });
-    })
+    });
 });
