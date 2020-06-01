@@ -64,9 +64,6 @@ nav {
     color: #26a69a;
 }
 
-.card.small .card-action, .card.medium .card-action, .card.large .card-action{
-    display: grid;
-}
 
 #homeCards{
     min-height: 200px;
@@ -76,6 +73,12 @@ nav {
     margin-top: 10px;
     margin-bottom: 20px;
     padding-bottom: 1px;
+}
+
+@media screen and (max-width: 1700px){
+    .card.small .card-action, .card.medium .card-action, .card.large .card-action{
+    display: grid;
+    }
 }
 
 @media screen and (max-width: 670px){
