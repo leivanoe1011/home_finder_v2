@@ -22,8 +22,7 @@ var db2 = firebase.database(app2);
 
 
 function displayCard(index, propertyObj, favoritePage) {
-
-
+    
     var inFavoritePg = favoritePage;
     var homeWebSite = propertyObj.homeWebSite;
     var addressLine = propertyObj.addressLine;

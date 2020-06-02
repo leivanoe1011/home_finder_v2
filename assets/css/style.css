@@ -77,7 +77,10 @@ nav {
 
 @media screen and (max-width: 1700px){
     .card.small .card-action, .card.medium .card-action, .card.large .card-action{
-    display: grid;
+        display: grid;
+    }
+    .card.large{
+        height: 530px;
     }
 }
 
