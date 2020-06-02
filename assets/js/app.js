@@ -226,7 +226,7 @@ function saveSearch(city, stateCode, listCount, minPrice, maxPrice, minBaths, ma
 
     var searchObj = {
         city: city,
-        stateCode: state,
+        stateCode: stateCode,
         listCount: listCount, 
         minPrice: minPrice, 
         maxPrice: maxPrice,
@@ -421,6 +421,27 @@ function makeRealtorApiCall(city, listCount, stateCode, minPrice, maxPrice, minB
     });
 }
 
+
+function updateForm(searchSelected){
+    var city = searchSelected.city;
+    var state = searchSelected.stateCode;
+    var listCount = searchSelected.listCount;
+    var minPrice = searchSelected.minPrice;
+    var maxPrice = searchSelected.maxPrice;
+    var minBaths = searchSelected.minBaths;
+    var maxBaths = searchSelected.maxBaths;
+
+    console.log(searchSelected);
+
+    $(".userCity").val(city.toUpperCase());
+    $(".stateCode").val(state);
+    $(".minPrice").val(minPrice);
+    $(".maxPrice").val(maxPrice);
+    $(".minBaths").val(minBaths);
+    $(".maxBaths").val(maxBaths);
+
+}
+
 $("#advancedFilter").on("click", function () {
     $(".filter").toggle()
 });
@@ -445,7 +466,10 @@ $(document).on("click", ".search_button", function () {
     var minBaths = searchSelected.minBaths;
     var maxBaths = searchSelected.maxBaths;
 
+    //update form entries
+    updateForm(searchSelected);
 
+    // Reach out to the API for the properties
     makeRealtorApiCall(city, listCount, state, minPrice, maxPrice, minBaths, maxBaths);
 
 })
@@ -460,7 +484,8 @@ function previousSearchAvailable(){
         var parsedSearchItems = JSON.parse(previousSearchItems);
 
         for(var i = 0; i < parsedSearchItems.length; i++){
-            saveSearch(parsedSearchItems[i].city, parsedSearchItems[i].stateCode);
+            saveSearch(parsedSearchItems[i].city, parsedSearchItems[i].stateCode, parsedSearchItems[i].listCount, 
+                parsedSearchItems[i].minPrice, parsedSearchItems[i].maxPrice, parsedSearchItems[i].minBaths, parsedSearchItems[i].maxBaths);
         }
     }
 }
