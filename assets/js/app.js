@@ -476,18 +476,27 @@ $(document).on("click", ".search_button", function () {
 })
 
 
+// Loads up the Search Options when the page is refreshed
 function previousSearchAvailable(){
     
     var previousSearchItems = sessionStorage.getItem("searchObj");
 
     if (previousSearchItems !== null){
 
+        
         var parsedSearchItems = JSON.parse(previousSearchItems);
+        var searchLength = parsedSearchItems.length - 1;
+        var loopLength = ((parsedSearchItems.length <= 3 ) ? parsedSearchItems.length : 3);
 
-        for(var i = 0; i < parsedSearchItems.length; i++){
-            saveSearch(parsedSearchItems[i].city, parsedSearchItems[i].stateCode, parsedSearchItems[i].listCount, 
-                parsedSearchItems[i].minPrice, parsedSearchItems[i].maxPrice, parsedSearchItems[i].minBaths, parsedSearchItems[i].maxBaths);
+        while (loopLength > 0){
+
+            saveSearch(parsedSearchItems[searchLength].city, parsedSearchItems[searchLength].stateCode, parsedSearchItems[searchLength].listCount, 
+                parsedSearchItems[searchLength].minPrice, parsedSearchItems[searchLength].maxPrice, parsedSearchItems[searchLength].minBaths, parsedSearchItems[searchLength].maxBaths);
+
+            loopLength--;
+            searchLength--;
         }
+
     }
 }
 
