@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +8,8 @@
 
     <!-- firebase -->
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script> 
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script>
 
-    
-    <!-- firebase -->
-    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script> 
-   
 
     <!-- font awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
@@ -38,12 +34,13 @@
 
     <title>Favorite</title>
 </head>
+
 <body>
 
     <header>
         <nav class="nav-wrapper transparent white-text">
             <div class="container">
-                <a href="#" class="brand-logo">Home Finder</a>
+                <a href="index.html" class="brand-logo">Home Finder</a>
                 <!-- Mobile Device Menu -->
                 <a href="#" class="sidenav-trigger" data-target="mobile-menu">
                     <i class="material-icons menu_icon">menu</i>
@@ -52,7 +49,8 @@
                 <ul class="right hide-on-med-and-down" id="#nav_menu">
                     <li><a class="nav_button" href="#search" style="font-size: x-large;">Search Homes</a></li>
                     <li><a class="nav_button" href="favorite.html" style="font-size: x-large;">Favorites</a></li>
-                    <!-- <li><a class="nav_button" href="#contact">Contact</a></li> -->
+                    <li><a class="nav_button" href="#contact" style="font-size: x-large;">Contact</a></li>
+                   
                     <!-- Fab Icons -->
                     <li>
                         <a href="#" class="tooltipped btn-floating btn-small indigo darken-4" data-tooltip="Facebook">
@@ -70,17 +68,17 @@
                         </a>
                     </li>
                 </ul>
-                <!-- The menu that will appear when the page is viewed in mobile device -->
-                <ul class="sidenav grey lighten-4" id="mobile-menu">
-                    <li><a class="nav_button" href="index.html">Search Homes</a></li>
-                    <li><a class="nav_button" href="favorite.html">Favorites</a></li>
-                    <!-- <li><a class="nav_button" href="#contact">Contact</a></li> -->
-                </ul>
+
             </div>
         </nav>
+
+        <!-- The menu that will appear when the page is viewed in mobile device -->
+        <ul class="sidenav grey lighten-4" id="mobile-menu">
+            <li><a class="nav_button" href="index.html">Search Homes</a></li>
+            <li><a class="nav_button" href="favorite.html">Favorites</a></li>
+            <!-- <li><a class="nav_button" href="#contact">Contact</a></li> -->
+        </ul>
     </header>
-
-
     
     <section class="container">
         <div id="homeCards" style="min-height:200px" class="row">
@@ -88,8 +86,43 @@
         </div>
     </section>
 
-    <!-- JQuery -->
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <footer class="page-footer grey darken-1">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 l6">
+                    <h5>Some Stuff</h5>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae, enim veritatis corporis
+                        architecto repellat velit sapiente sequi voluptates harum, distinctio nesciunt atque quae
+                        exercitationem inventore quam eum maiores voluptatem. Ullam.</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Harum quisquam fugit perspiciatis
+                        veritatis, cum recusandae, aspernatur ipsum similique blanditiis sit voluptatem. Accusantium,
+                        molestias? Atque, sequi. Sit blanditiis molestias dolorum asperiores.</p>
+                </div>
+                <div class="col s12 l4 offset-l2">
+                    <h5>Connect</h5>
+                    <ul>
+                        <li><i class="fa fa-envelope-square"></i>&NonBreakingSpace;<a target="_blank"
+                                href="mailto:jaswhitehead@gmail.com" class="grey-text text-lighten-3">Send email</a>
+                        </li>
+                        <li><i class="fab fa-facebook"></i>&NonBreakingSpace;<a target="_blank"
+                                href="https://www.facebook.com/WhiteheadProperties"
+                                class="grey-text text-lighten-3">Facebook</a></li>
+                        <li><i class="fab fa-instagram"></i>&NonBreakingSpace;<a target="_blank"
+                                href="https://www.instagram.com/wsjrealestate/"
+                                class="grey-text text-lighten-3">Instagram</a></li>
+                        <li><i class="fab fa-linkedin"></i>&NonBreakingSpace;<a target="_blank"
+                                href="https://www.linkedin.com/in/noeleivadeveloper/"
+                                class="grey-text text-lighten-3">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright grey darken-4">
+            <div class="container center-align">&copy;
+                <script>document.write(new Date().getFullYear())</script> Home Finder </div>
+        </div>
+    </footer>
+
 
     <!-- JQuery -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -100,13 +133,13 @@
     <!-- Custom JS -->
     <script type="text/javascript" src="assets/js/app.js"></script>
     <script type="text/javascript" src="assets/js/firebase.js"></script>
-    
+
     <script>
 
         // cards in favorite HTML
         var favoriteCards = [];
 
-        function loadFavoriteObj(index, obj){
+        function loadFavoriteObj(index, obj) {
 
             var homeWebSite = obj.homeWebSite;
             var addressLine = obj.addressLine;
@@ -122,12 +155,12 @@
             var houseImage = obj.houseImage;
 
             // displayCard(index, homeWebSite, addressLine, beds, baths, city, state, price, lotSize, lotUnit, houseSize, houseUnit, houseImage)
-        }   
+        }
 
-  
-        $(document).ready(function(){
 
-            
+        $(document).ready(function () {
+
+
             // Initialize the Side Nav
             $(".sidenav").sidenav();
             $(".parallax").parallax();
@@ -159,8 +192,8 @@
 
             var query = db2.ref().orderByKey();
             query.once("value")
-                .then(function(snapshot){
-                    snapshot.forEach(function(childSnapshot){
+                .then(function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
 
                         var favoriteHome = childSnapshot.val();
 
@@ -173,9 +206,10 @@
 
                         index++;
                     })
-                });     
+                });
         });
-    
+
     </script>
 </body>
+
 </html>
