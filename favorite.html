@@ -76,7 +76,7 @@
         <ul class="sidenav grey lighten-4" id="mobile-menu">
             <li><a class="nav_button" href="index.html#search">Search Homes</a></li>
             <li><a class="nav_button" href="favorite.html">Favorites</a></li>
-            <!-- <li><a class="nav_button" href="#contact">Contact</a></li> -->
+            <li><a class="nav_button" href="index.html#contact" >Contact</a></li>
         </ul>
     </header>
     
@@ -133,83 +133,8 @@
     <!-- Custom JS -->
     <script type="text/javascript" src="assets/js/app.js"></script>
     <script type="text/javascript" src="assets/js/firebase.js"></script>
-
-    <script>
-
-        // cards in favorite HTML
-        var favoriteCards = [];
-
-        function loadFavoriteObj(index, obj) {
-
-            var homeWebSite = obj.homeWebSite;
-            var addressLine = obj.addressLine;
-            var beds = obj.beds;
-            var baths = obj.baths;
-            var city = obj.city;
-            var state = obj.state;
-            var price = obj.price;
-            var lotSize = obj.lotSize;
-            var lotUnit = obj.lotUnit;
-            var houseSize = obj.houseSize;
-            var houseUnit = obj.houseUnit;
-            var houseImage = obj.houseImage;
-
-            // displayCard(index, homeWebSite, addressLine, beds, baths, city, state, price, lotSize, lotUnit, houseSize, houseUnit, houseImage)
-        }
-
-
-        $(document).ready(function () {
-
-
-            // Initialize the Side Nav
-            $(".sidenav").sidenav();
-            $(".parallax").parallax();
-            $('.slider').slider();
-            $(".scrollspy").scrollSpy();
-            $(".datepicker").datepicker({
-                disableWeekends: true
-            });
-
-            // Added Scroll event listener for the Nav bar
-            $(window).scroll(function () {
-
-                if ($(window).scrollTop() > 20) {
-                    $("nav").addClass("white");
-                    $(".brand-logo").addClass("black-text");
-                    $(".nav_button").addClass("black-text");
-                    $("nav").removeClass("transparent white-text");
-                    $(".menu_icon").addClass("black-text");
-                }
-                else {
-                    $("nav").addClass("transparent white-text");
-                    $(".brand-logo").removeClass("black-text");
-                    $(".nav_button").removeClass("black-text");
-                    $(".menu_icon").removeClass("black-text");
-                }
-            });
-
-            var index = 0;
-
-            var query = db2.ref().orderByKey();
-            query.once("value")
-                .then(function (snapshot) {
-                    snapshot.forEach(function (childSnapshot) {
-
-                        var favoriteHome = childSnapshot.val();
-
-
-                        favoriteCards.push(favoriteHome);
-
-                        // loadFavoriteObj(index,favoriteHome);
-
-                        displayCard(index, favoriteHome, 1);
-
-                        index++;
-                    })
-                });
-        });
-
-    </script>
+    <script type="text/javascript" src="assets/js/favorite.js"></script>
+   
 </body>
 
 </html>

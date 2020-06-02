@@ -201,6 +201,13 @@ function createCard(index, house) {
 var searchList = [];
 
 
+// Load Buttons
+// Used to control how many cards will be displayed
+function loadButton(){
+
+}
+
+
 // Creates a button to access the search
 function createButtons(saveSearch, index) {
     var newResult = $("<button>");
@@ -292,8 +299,6 @@ db2.ref().on("child_added", function (snapshot) {
     var favorite = snapshot.val();
     favorite.key = snapshot.key; // will include the key from firebase? no need to add that.
 
-    console.log(favorite);
-
     favorites.push(favorite);
 });
 
@@ -322,7 +327,6 @@ function removeStoredFavoriteCard(card) {
 
 
 function removeCard(cardId) {
-
 
     var currentCardTarget = $("#homeCards").find('[data-target="' + cardId + '"]');
 
@@ -424,6 +428,7 @@ function makeRealtorApiCall(city, listCount, stateCode, minPrice, maxPrice, minB
 
 
 function updateForm(searchSelected){
+
     var city = searchSelected.city;
     var state = searchSelected.stateCode;
     var listCount = searchSelected.listCount;
@@ -490,8 +495,14 @@ function previousSearchAvailable(){
 
         while (loopLength > 0){
 
-            saveSearch(parsedSearchItems[searchLength].city, parsedSearchItems[searchLength].stateCode, parsedSearchItems[searchLength].listCount, 
-                parsedSearchItems[searchLength].minPrice, parsedSearchItems[searchLength].maxPrice, parsedSearchItems[searchLength].minBaths, parsedSearchItems[searchLength].maxBaths);
+            // The properties are parsed because this function is used by the Search Form as well
+            saveSearch(parsedSearchItems[searchLength].city
+                , parsedSearchItems[searchLength].stateCode
+                , parsedSearchItems[searchLength].listCount
+                , parsedSearchItems[searchLength].minPrice
+                , parsedSearchItems[searchLength].maxPrice
+                , parsedSearchItems[searchLength].minBaths
+                , parsedSearchItems[searchLength].maxBaths);
 
             loopLength--;
             searchLength--;
@@ -581,5 +592,7 @@ $(document).ready(function () {
         // submit API request to the Realtor API
         makeRealtorApiCall(city, listCount, stateCode, minPrice, maxPrice, minBaths, maxBaths)
     });
+
+    // Load Search Parameters 
     previousSearchAvailable();
 });
