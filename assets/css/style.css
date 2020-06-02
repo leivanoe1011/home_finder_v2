@@ -4,6 +4,8 @@ header{
     background-size: cover;
     background-position: center;
     min-height: 60vw;
+    font-family: 'Tangerine', cursive;
+    
 }
 
 nav {
@@ -31,16 +33,26 @@ nav {
     margin-bottom: 100px !important;
 }
 
-#contact_form{
+#contact_form {
     margin-top: 50px !important;
     border: 2px solid #ececec;
+    font-family: 'Alex Brush', cursive;
+    
     /* margin: 10px; */
 }
 
-#about{
+#about {
     margin-top: 50px !important;
+    font-family: 'Dancing Script', cursive;
 }
 
+p {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+h2 {
+    font-family: 'Alex Brush', cursive;
+}
 
 #previous_search {
     margin: 20px !important;
@@ -53,7 +65,7 @@ nav {
 }
 
 .card-content{
-    margin-top: -25px;
+    margin-top: -25px;S
 }
 
 .card .card-action {
@@ -95,6 +107,6 @@ font-family: 'Dancing Script', cursive;
 font-family: 'Engagement', cursive;
 font-family: 'Italianno', cursive;
 font-family: 'Lobster', cursive;
-font-family: 'Noto Serif TC', serif;
+font-family: 'Lobster Two', cursive;
 font-family: 'Tangerine', cursive; */
 
