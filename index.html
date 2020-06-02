@@ -21,8 +21,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<<<<<<< HEAD
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/images/favicon2.png" type="image/x-icon">
+=======
+    
+>>>>>>> 9145917584034eacb3f51c5aa06e91ba113f9bff
     <title>Home Finder</title>
 </head>
 
@@ -136,18 +140,19 @@
         <div class="parallax">
             <img src="assets/images/luxury_home_6.jpg" class="responsive-img">
         </div>
+        
     </div>
 
 
     <!-- Load the Search Results -->
-    <div class="container">
-        <div class="row " id="previous_search">
-
+    
+    <div class="wow animate__animated animate__fadeInUp animate__faster" id="animationDiv">
+        <div class="container">
+        <div class="row blue-grey lighten-5 z-depth-2" id="previous_search">
         </div>
     </div>
 
-    <div class="wow animate__animated animate__fadeInUp animate__faster" id="animationDiv">
-        <div class="container blue-grey lighten-5 z-depth-3" id="searchContainer">
+        <div class="container blue-grey lighten-5 z-depth-2" id="searchContainer">
             <form class="row center scrollspy" id="search">
                 <div class="input-field col m6 s12 l6">
                     <i class="material-icons prefix">location_city</i>
@@ -166,24 +171,36 @@
                     <label>Min. Price:</label>
                     <select class="browser-default minPrice">
                         <option value="" disabled selected></option>
+                        <option value="">Nothing</option>
                         <option value="50000">50,000</option>
                         <option value="100000">100,000</option>
                         <option value="150000">150,000</option>
                         <option value="200000">200,000</option>
                         <option value="250000">250,000</option>
                         <option value="300000">300,000</option>
+                        <option value="350000">350,000</option>
+                        <option value="400000">400,000</option>
+                        <option value="450000">450,000</option>
+                        <option value="500000">500,000</option>
+                        <option value="999999999999999999">Maximum</option>
                     </select>
                 </div>
                 <div class="col m6 s12 l6">
                     <label>Max. Price:</label>
                     <select class="browser-default maxPrice">
                         <option value="" disabled selected></option>
+                        <option value="">Nothing</option>
                         <option value="50000">50,000</option>
                         <option value="100000">100,000</option>
                         <option value="150000">150,000</option>
                         <option value="200000">200,000</option>
                         <option value="250000">250,000</option>
                         <option value="300000">300,000</option>
+                        <option value="350000">350,000</option>
+                        <option value="400000">400,000</option>
+                        <option value="450000">450,000</option>
+                        <option value="500000">500,000</option>
+                        <option value="999999999999999999">Maximum</option>
                     </select>
                 </div>
             </form>
@@ -192,44 +209,52 @@
                     <label>Min. Baths:</label>
                     <select class="browser-default minBaths">
                         <option value="" disabled selected></option>
+                        <option value="">Nothing</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
+                        <option value="999999999999999999">Maximum</option>
                     </select>
                 </div>
                 <div class=" col m3 s12 l3 filter">
                     <label>Max. Baths:</label>
                     <select class="browser-default maxBaths">
                         <option value="" disabled selected></option>
+                        <option value="">Nothing</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
+                        <option value="999999999999999999">Maximum</option>
                     </select>
                 </div>
                 <div class="col m3 s12 l3 filter">
                     <label>Min. Bedrooms:</label>
                     <select class="browser-default minBedrooms">
                         <option value="" disabled selected></option>
+                        <option value="">Nothing</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
+                        <option value="999999999999999999">Maximum</option>
                     </select>
                 </div>
                 <div class="col m3 s12 l3 filter">
                     <label>Max Bedrooms:</label>
                     <select class="browser-default maxBedrooms">
                         <option value="" disabled selected></option>
+                        <option value="">Nothing</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
+                        <option value="999999999999999999">Maximum</option>
                     </select>
                 </div>
             </form>
@@ -318,7 +343,7 @@
                     </div>
 
                     <div id="send_message" class="input-field center">
-                        <button onclick="M.toast({html: 'Form submitted successfully!'})" class="btn">Submit</button>
+                        <button class="btn">Submit</button>
                     </div>
                 </form>
             </div>

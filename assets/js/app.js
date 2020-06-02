@@ -23,7 +23,6 @@ var db2 = firebase.database(app2);
 
 function displayCard(index, propertyObj, favoritePage) {
 
-
     var inFavoritePg = favoritePage;
     var homeWebSite = propertyObj.homeWebSite;
     var addressLine = propertyObj.addressLine;
@@ -202,6 +201,7 @@ function createCard(index, house) {
 var searchList = [];
 
 
+// Creates a button to access the search
 function createButtons(saveSearch, index) {
     var newResult = $("<button>");
     $(newResult).addClass("waves-effect waves-light btn-small search_button");
@@ -220,11 +220,17 @@ function createButtons(saveSearch, index) {
     $("#previous_search").show();
 }
 
-function saveSearch(city, state) {
+// Gathers all the information from a search
+function saveSearch(city, stateCode, listCount, minPrice, maxPrice, minBaths, maxBaths) {
 
     var searchObj = {
         city: city,
-        stateCode: state
+        stateCode: stateCode,
+        listCount: listCount, 
+        minPrice: minPrice, 
+        maxPrice: maxPrice,
+        minBaths: minBaths,
+        maxBaths: maxBaths
     };
 
     var currentIndex = searchList.length;
@@ -235,7 +241,6 @@ function saveSearch(city, state) {
 
     createButtons(searchObj, currentIndex);
 }
-
 
 
 function getFavoriteCard(object, cardIndex) {
@@ -335,8 +340,6 @@ $(document).on("click", ".favorite_button", function () {
 
     let favoriteCard;
 
-    console.log("In click");
-    console.log("In favorite pg variable " + isFavoritePg);
 
     if (isFavoritePg === 0) {
         console.log("In IF");
@@ -376,7 +379,6 @@ $(document).on("click", ".favorite_button", function () {
 
     }
 
-
 });
 
 
@@ -403,6 +405,8 @@ function makeRealtorApiCall(city, listCount, stateCode, minPrice, maxPrice, minB
         }
     };
 
+   
+
     $.ajax(apiSettings).then(function (response) {
         console.log(response);
         console.log(apiSettings);
@@ -418,13 +422,33 @@ function makeRealtorApiCall(city, listCount, stateCode, minPrice, maxPrice, minB
     });
 }
 
+
+function updateForm(searchSelected){
+    var city = searchSelected.city;
+    var state = searchSelected.stateCode;
+    var listCount = searchSelected.listCount;
+    var minPrice = searchSelected.minPrice;
+    var maxPrice = searchSelected.maxPrice;
+    var minBaths = searchSelected.minBaths;
+    var maxBaths = searchSelected.maxBaths;
+
+    console.log(searchSelected);
+
+    $(".userCity").val(city.toUpperCase());
+    $(".stateCode").val(state);
+    $(".minPrice").val(minPrice);
+    $(".maxPrice").val(maxPrice);
+    $(".minBaths").val(minBaths);
+    $(".maxBaths").val(maxBaths);
+
+}
+
 $("#advancedFilter").on("click", function () {
     $(".filter").toggle()
 });
 
 
 $(document).on("click", ".search_button", function () {
-    console.log("in search_button");
 
     var searchIndex = $(this).data("index");
 
@@ -432,24 +456,45 @@ $(document).on("click", ".search_button", function () {
 
     var parsedSearchArray = JSON.parse(searchArray);
 
-    console.log(parsedSearchArray);
-
     var searchSelected = parsedSearchArray[searchIndex];
 
-    console.log(searchSelected);
 
     var city = searchSelected.city;
     var state = searchSelected.stateCode;
+    var listCount = searchSelected.listCount;
+    var minPrice = searchSelected.minPrice;
+    var maxPrice = searchSelected.maxPrice;
+    var minBaths = searchSelected.minBaths;
+    var maxBaths = searchSelected.maxBaths;
 
-    console.log(city + " " + state);
+    //update form entries
+    updateForm(searchSelected);
 
-    makeRealtorApiCall(city, 24, state, 200000, 300000, null, null);
+    // Reach out to the API for the properties
+    makeRealtorApiCall(city, listCount, state, minPrice, maxPrice, minBaths, maxBaths);
 
 })
 
 
+function previousSearchAvailable(){
+    
+    var previousSearchItems = sessionStorage.getItem("searchObj");
+
+    if (previousSearchItems !== null){
+
+        var parsedSearchItems = JSON.parse(previousSearchItems);
+
+        for(var i = 0; i < parsedSearchItems.length; i++){
+            saveSearch(parsedSearchItems[i].city, parsedSearchItems[i].stateCode, parsedSearchItems[i].listCount, 
+                parsedSearchItems[i].minPrice, parsedSearchItems[i].maxPrice, parsedSearchItems[i].minBaths, parsedSearchItems[i].maxBaths);
+        }
+    }
+}
+
 
 $(document).ready(function () {
+    $("#previous_search").hide()
+
     $('select').formSelect();
 
     $(".filter").hide();
@@ -503,14 +548,18 @@ $(document).ready(function () {
 
         var city = $(".userCity").val();
         var listCount = 24;
-        var stateCode = $(".stateCode").val().toString();
+        var stateCode = $(".stateCode").val();
         var minPrice = $(".minPrice").val();
         var maxPrice = $(".maxPrice").val();
         var minBaths = $(".minBaths").val();
         var maxBaths = $(".maxBaths").val();
-
+        
+        if(stateCode == null || city == ""){
+            M.toast({html: 'City and state are required!'})
+            return false;
+        }
         // Save search Results
-        saveSearch(city, stateCode);
+        saveSearch(city, stateCode, listCount, minPrice, maxPrice, minBaths, maxBaths);
 
         console.log(city);
 
@@ -522,6 +571,6 @@ $(document).ready(function () {
 
         // submit API request to the Realtor API
         makeRealtorApiCall(city, listCount, stateCode, minPrice, maxPrice, minBaths, maxBaths)
-
-    })
+    });
+    previousSearchAvailable();
 });
