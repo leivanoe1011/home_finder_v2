@@ -88,6 +88,7 @@ footer{
 
 #searchContainer{
     z-index: 1;
+    margin-top: 50px !important;
 }
 
 .parallax-container{
