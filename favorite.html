@@ -76,7 +76,7 @@
         <ul class="sidenav grey lighten-4" id="mobile-menu">
             <li><a class="nav_button" href="index.html#search">Search Homes</a></li>
             <li><a class="nav_button" href="favorite.html">Favorites</a></li>
-            <!-- <li><a class="nav_button" href="#contact">Contact</a></li> -->
+            <li><a class="nav_button" href="index.html#contact" >Contact</a></li>
         </ul>
     </header>
     
@@ -197,6 +197,7 @@
 
                         var favoriteHome = childSnapshot.val();
 
+                        var key = childSnapshot.key
 
                         favoriteCards.push(favoriteHome);
 
