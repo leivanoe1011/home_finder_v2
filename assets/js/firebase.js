@@ -45,7 +45,6 @@ $("#send_message").on("click", function submitForm() {
         M.toast({html: 'Form submitted successfully!'})
     }
 
-    
     db1.ref('messages').push().set({
         firstName: firstName,
         lastName: lastName,
