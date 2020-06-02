@@ -1,7 +1,3 @@
-$("#previous_search").hide()
-
-
-
 // Your web app's Firebase configuration
 var firebaseConfig = {
     apiKey: "AIzaSyBlj8CgWXeF6dSo5fkma7K-iBOEUOtTpAg",
