@@ -64,9 +64,27 @@ nav {
     color: #26a69a;
 }
 
+#contact{
+    position: relative;
+    z-index: 0;
+}
+
+footer{
+    position: relative;
+    z-index: 1;
+}
+
+#searchContainer{
+    z-index: 1;
+}
+
+.parallax-container{
+    z-index: 0;
+}
+
 
 #homeCards{
-    min-height: 200px;
+    min-height: 0px;
 }
 
 #searchContainer{
