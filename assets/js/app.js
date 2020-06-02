@@ -526,7 +526,7 @@ $(document).ready(function () {
         var minBaths = $(".minBaths").val();
         var maxBaths = $(".maxBaths").val();
         
-        if(stateCode == null || city == null){
+        if(stateCode == null || city == ""){
             M.toast({html: 'City and state are required!'})
             return false;
         }
@@ -543,11 +543,6 @@ $(document).ready(function () {
 
         // submit API request to the Realtor API
         makeRealtorApiCall(city, listCount, stateCode, minPrice, maxPrice, minBaths, maxBaths)
-
-
     });
-    
-
     previousSearchAvailable();
-
 });

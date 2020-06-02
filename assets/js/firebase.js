@@ -38,6 +38,14 @@ $("#send_message").on("click", function submitForm() {
     var date = $("#date").val();
     var time = $("#time").val();
 
+    if(firstName == "" || lastName == "" || email == "" || message == "" || date == "" || time == ""){
+        M.toast({html: 'All fields are required!'})
+        return false
+    } else {
+        M.toast({html: 'Form submitted successfully!'})
+    }
+
+    
     db1.ref('messages').push().set({
         firstName: firstName,
         lastName: lastName,
