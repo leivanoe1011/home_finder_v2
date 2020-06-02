@@ -23,7 +23,6 @@ var db2 = firebase.database(app2);
 
 function displayCard(index, propertyObj, favoritePage) {
 
-
     var inFavoritePg = favoritePage;
     var homeWebSite = propertyObj.homeWebSite;
     var addressLine = propertyObj.addressLine;
@@ -403,6 +402,8 @@ function makeRealtorApiCall(city, listCount, stateCode, minPrice, maxPrice, minB
         }
     };
 
+   
+
     $.ajax(apiSettings).then(function (response) {
         console.log(response);
         console.log(apiSettings);
@@ -464,6 +465,8 @@ function previousSearchAvailable(){
 
 
 $(document).ready(function () {
+    $("#previous_search").hide()
+
     $('select').formSelect();
 
     $(".filter").hide();
@@ -517,12 +520,16 @@ $(document).ready(function () {
 
         var city = $(".userCity").val();
         var listCount = 24;
-        var stateCode = $(".stateCode").val().toString();
+        var stateCode = $(".stateCode").val();
         var minPrice = $(".minPrice").val();
         var maxPrice = $(".maxPrice").val();
         var minBaths = $(".minBaths").val();
         var maxBaths = $(".maxBaths").val();
-
+        
+        if(stateCode == null || city == ""){
+            M.toast({html: 'City and state are required!'})
+            return false;
+        }
         // Save search Results
         saveSearch(city, stateCode);
 
@@ -536,11 +543,6 @@ $(document).ready(function () {
 
         // submit API request to the Realtor API
         makeRealtorApiCall(city, listCount, stateCode, minPrice, maxPrice, minBaths, maxBaths)
-
-
     });
-    
-
     previousSearchAvailable();
-
 });

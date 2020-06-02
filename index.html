@@ -138,7 +138,6 @@
     <!-- Load the Search Results -->
     <div class="container">
         <div class="row " id="previous_search">
-
         </div>
     </div>
 
@@ -162,24 +161,36 @@
                     <label>Min. Price:</label>
                     <select class="browser-default minPrice">
                         <option value="" disabled selected></option>
+                        <option value="">Nothing</option>
                         <option value="50000">50,000</option>
                         <option value="100000">100,000</option>
                         <option value="150000">150,000</option>
                         <option value="200000">200,000</option>
                         <option value="250000">250,000</option>
                         <option value="300000">300,000</option>
+                        <option value="350000">350,000</option>
+                        <option value="400000">400,000</option>
+                        <option value="450000">450,000</option>
+                        <option value="500000">500,000</option>
+                        <option value="999999999999999999">Maximum</option>
                     </select>
                 </div>
                 <div class="col m6 s12 l6">
                     <label>Max. Price:</label>
                     <select class="browser-default maxPrice">
                         <option value="" disabled selected></option>
+                        <option value="">Nothing</option>
                         <option value="50000">50,000</option>
                         <option value="100000">100,000</option>
                         <option value="150000">150,000</option>
                         <option value="200000">200,000</option>
                         <option value="250000">250,000</option>
                         <option value="300000">300,000</option>
+                        <option value="350000">350,000</option>
+                        <option value="400000">400,000</option>
+                        <option value="450000">450,000</option>
+                        <option value="500000">500,000</option>
+                        <option value="999999999999999999">Maximum</option>
                     </select>
                 </div>
             </form>
@@ -188,6 +199,7 @@
                     <label>Min. Baths:</label>
                     <select class="browser-default minBaths">
                         <option value="" disabled selected></option>
+                        <option value="">Nothing</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -199,6 +211,7 @@
                     <label>Max. Baths:</label>
                     <select class="browser-default maxBaths">
                         <option value="" disabled selected></option>
+                        <option value="">Nothing</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -210,6 +223,7 @@
                     <label>Min. Bedrooms:</label>
                     <select class="browser-default minBedrooms">
                         <option value="" disabled selected></option>
+                        <option value="">Nothing</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -221,6 +235,7 @@
                     <label>Max Bedrooms:</label>
                     <select class="browser-default maxBedrooms">
                         <option value="" disabled selected></option>
+                        <option value="">Nothing</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -314,7 +329,7 @@
                     </div>
 
                     <div id="send_message" class="input-field center">
-                        <button onclick="M.toast({html: 'Form submitted successfully!'})" class="btn">Submit</button>
+                        <button class="btn">Submit</button>
                     </div>
                 </form>
             </div>
