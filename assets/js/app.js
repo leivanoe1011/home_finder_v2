@@ -547,7 +547,7 @@ $(document).ready(function () {
         event.preventDefault();
 
         var city = $(".userCity").val();
-        var listCount = 24;
+        var listCount = 15;
         var stateCode = $(".stateCode").val();
         var minPrice = $(".minPrice").val();
         var maxPrice = $(".maxPrice").val();
