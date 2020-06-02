@@ -202,6 +202,7 @@ function createCard(index, house) {
 var searchList = [];
 
 
+// Creates a button to access the search
 function createButtons(saveSearch, index) {
     var newResult = $("<button>");
     $(newResult).addClass("waves-effect waves-light btn-small search_button");
@@ -220,11 +221,17 @@ function createButtons(saveSearch, index) {
     $("#previous_search").show();
 }
 
-function saveSearch(city, state) {
+// Gathers all the information from a search
+function saveSearch(city, stateCode, listCount, minPrice, maxPrice, minBaths, maxBaths) {
 
     var searchObj = {
         city: city,
-        stateCode: state
+        stateCode: state,
+        listCount: listCount, 
+        minPrice: minPrice, 
+        maxPrice: maxPrice,
+        minBaths: minBaths,
+        maxBaths: maxBaths
     };
 
     var currentIndex = searchList.length;
@@ -235,7 +242,6 @@ function saveSearch(city, state) {
 
     createButtons(searchObj, currentIndex);
 }
-
 
 
 function getFavoriteCard(object, cardIndex) {
@@ -335,8 +341,6 @@ $(document).on("click", ".favorite_button", function () {
 
     let favoriteCard;
 
-    console.log("In click");
-    console.log("In favorite pg variable " + isFavoritePg);
 
     if (isFavoritePg === 0) {
         console.log("In IF");
@@ -375,7 +379,6 @@ $(document).on("click", ".favorite_button", function () {
         }
 
     }
-
 
 });
 
@@ -424,7 +427,6 @@ $("#advancedFilter").on("click", function () {
 
 
 $(document).on("click", ".search_button", function () {
-    console.log("in search_button");
 
     var searchIndex = $(this).data("index");
 
@@ -432,18 +434,19 @@ $(document).on("click", ".search_button", function () {
 
     var parsedSearchArray = JSON.parse(searchArray);
 
-    console.log(parsedSearchArray);
-
     var searchSelected = parsedSearchArray[searchIndex];
 
-    console.log(searchSelected);
 
     var city = searchSelected.city;
     var state = searchSelected.stateCode;
+    var listCount = searchSelected.listCount;
+    var minPrice = searchSelected.minPrice;
+    var maxPrice = searchSelected.maxPrice;
+    var minBaths = searchSelected.minBaths;
+    var maxBaths = searchSelected.maxBaths;
 
-    console.log(city + " " + state);
 
-    makeRealtorApiCall(city, 24, state, 200000, 300000, null, null);
+    makeRealtorApiCall(city, listCount, state, minPrice, maxPrice, minBaths, maxBaths);
 
 })
 
@@ -524,7 +527,7 @@ $(document).ready(function () {
         var maxBaths = $(".maxBaths").val();
 
         // Save search Results
-        saveSearch(city, stateCode);
+        saveSearch(city, stateCode, listCount, minPrice, maxPrice, minBaths, maxBaths);
 
         console.log(city);
 
