@@ -201,12 +201,6 @@ function createCard(index, house) {
 var searchList = [];
 
 
-// Load Buttons
-// Used to control how many cards will be displayed
-function loadButton(){
-
-}
-
 
 // Creates a button to access the search
 function createButtons(saveSearch, index) {
