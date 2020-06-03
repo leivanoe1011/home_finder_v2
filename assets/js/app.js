@@ -240,13 +240,29 @@ function saveSearch(city, stateCode, listCount, minPrice, maxPrice, minBaths, ma
         maxBaths: maxBaths
     };
 
+    
+    searchList.push(searchObj);
+
     var currentIndex = searchList.length;
 
-    searchList.push(searchObj);
+    var loopLength = (( currentIndex <= 3 ) ? currentIndex : 3);
+
 
     sessionStorage.setItem("searchObj", JSON.stringify(searchList));
 
-    createButtons(searchObj, currentIndex);
+    $("#previous_search").empty();
+  
+
+    while( loopLength > 0){
+
+        currentIndex--;
+
+        createButtons(searchList[currentIndex], currentIndex);
+
+        loopLength--;
+        
+    }
+
 }
 
 
@@ -320,7 +336,6 @@ function removeStoredFavoriteCard(card) {
         };
     };
 
-    console.log("current address line: " + addressLine);
 
     db2.ref().child(key).remove();
 };
@@ -412,8 +427,6 @@ function makeRealtorApiCall(city, listCount, stateCode, minPrice, maxPrice, minB
    
 
     $.ajax(apiSettings).then(function (response) {
-        console.log(response);
-        console.log(apiSettings);
 
         // Used to extract the Favorites
         var results = response.properties
@@ -437,7 +450,6 @@ function updateForm(searchSelected){
     var minBaths = searchSelected.minBaths;
     var maxBaths = searchSelected.maxBaths;
 
-    console.log(searchSelected);
 
     $(".userCity").val(city.toUpperCase());
     $(".stateCode").val(state);
@@ -453,6 +465,7 @@ $("#advancedFilter").on("click", function () {
 });
 
 
+// Make an API call to the REALTOR API after selecting the Search Button
 $(document).on("click", ".search_button", function () {
 
     var searchIndex = $(this).data("index");
@@ -487,22 +500,17 @@ function previousSearchAvailable(){
     var previousSearchItems = sessionStorage.getItem("searchObj");
 
     if (previousSearchItems !== null){
-
-        
+       
         var parsedSearchItems = JSON.parse(previousSearchItems);
         var searchLength = parsedSearchItems.length - 1;
         var loopLength = ((parsedSearchItems.length <= 3 ) ? parsedSearchItems.length : 3);
 
+        console.log("In previous search Avaialable")
+
         while (loopLength > 0){
 
             // The properties are parsed because this function is used by the Search Form as well
-            saveSearch(parsedSearchItems[searchLength].city
-                , parsedSearchItems[searchLength].stateCode
-                , parsedSearchItems[searchLength].listCount
-                , parsedSearchItems[searchLength].minPrice
-                , parsedSearchItems[searchLength].maxPrice
-                , parsedSearchItems[searchLength].minBaths
-                , parsedSearchItems[searchLength].maxBaths);
+            createButtons(parsedSearchItems[searchLength], searchLength);
 
             loopLength--;
             searchLength--;
@@ -593,6 +601,37 @@ $(document).ready(function () {
         makeRealtorApiCall(city, listCount, stateCode, minPrice, maxPrice, minBaths, maxBaths)
     });
 
-    // Load Search Parameters 
+    // Load all Search entries from Session Storage
     previousSearchAvailable();
+
 });
+
+
+
+// function previousSearchAvailable(){
+    
+//     var previousSearchItems = sessionStorage.getItem("searchObj");
+
+//     if (previousSearchItems !== null){
+       
+//         var parsedSearchItems = JSON.parse(previousSearchItems);
+//         var searchLength = parsedSearchItems.length - 1;
+//         var loopLength = ((parsedSearchItems.length <= 3 ) ? parsedSearchItems.length : 3);
+
+//         while (loopLength > 0){
+
+//             // The properties are parsed because this function is used by the Search Form as well
+//             saveSearch(parsedSearchItems[searchLength].city
+//                 , parsedSearchItems[searchLength].stateCode
+//                 , parsedSearchItems[searchLength].listCount
+//                 , parsedSearchItems[searchLength].minPrice
+//                 , parsedSearchItems[searchLength].maxPrice
+//                 , parsedSearchItems[searchLength].minBaths
+//                 , parsedSearchItems[searchLength].maxBaths);
+
+//             loopLength--;
+//             searchLength--;
+//         }
+
+//     }
+// }
