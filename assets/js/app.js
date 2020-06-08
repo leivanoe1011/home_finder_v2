@@ -290,11 +290,11 @@ function storeFavoriteCards(card) {
         city: house.city,
         state: house.state,
         price: house.price,
-        lotSize: house.lotSize,
-        lotUnit: house.lotUnit,
-        houseSize: house.houseSize,
+        lotSize: ((house.lotSize === undefined) ? "NA" : house.lotSize),
+        lotUnit: ((house.lotUnit === undefined) ? "NA" : house.lotUnit),
+        houseSize: ((house.houseSize === undefined) ? "NA" : house.houseSize),
         houseUnit: house.houseUnit,
-        houseImage: house.houseImage
+        houseImage: ((house.houseImage === undefined) ? "NA" : house.houseImage)
     });
 };
 
