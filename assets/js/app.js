@@ -21,7 +21,7 @@ var app2 = firebase.initializeApp(firebaseConfig_SaveSearchResults, 'app2');
 var db2 = firebase.database(app2);
 
 
-function displayCard(index, propertyObj, favoritePage) {
+function displayCard(index, propertyObj, favoritePage, lotSize, lotUnit, houseUnit, houseSize) {
 
     var inFavoritePg = favoritePage;
     var homeWebSite = propertyObj.homeWebSite;
@@ -114,7 +114,7 @@ function displayCard(index, propertyObj, favoritePage) {
     $(cardAction).append(favoriteButton);
 
     lotSize = (typeof lotSize !== "undefined" ? lotSize : "NA");
-    lotUnit = (typeof lotUnit !== "undefined" ? lotUnit : "NA");
+    lotUnit = (typeof lotUnit !== "undefined" ? lotUnit : "");
 
     homeLotSize.html("Lot size: "
         + lotSize
@@ -122,7 +122,7 @@ function displayCard(index, propertyObj, favoritePage) {
         + lotUnit);
 
     houseSize = (typeof houseSize !== "undefined" ? houseSize : "NA");
-    houseUnit = (typeof houseUnit !== "undefined" ? houseUnit : "NA");
+    houseUnit = (typeof houseUnit !== "undefined" ? houseUnit : "");
 
     var imageUnavailable = cardBackground.attr("src", '\assets/images/unavailable-image.jpg');
 
@@ -155,13 +155,8 @@ function displayCard(index, propertyObj, favoritePage) {
 
 
 // Function will be used to parse the Realtor API results and Favorite functionality
-function createCard(index, house) {
+function createCard(index, house, lotSize, lotUnit, houseUnit, houseSize){
 
-
-    var lotSize = "";
-    var lotUnit = "";
-    var houseSize = "";
-    var houseUnit = "";
 
     if (house.hasOwnProperty("lot_size")) {
         lotSize = (typeof house.lot_size.size !== "undefined" ? house.lot_size.size.toLocaleString() : "NA")
@@ -222,7 +217,7 @@ function createButtons(saveSearch, index) {
 }
 
 // Gathers all the information from a search
-function saveSearch(city, stateCode, listCount, minPrice, maxPrice, minBaths, maxBaths) {
+function saveSearch(city, stateCode, listCount, minPrice, maxPrice, minBaths, maxBaths, minBeds, maxBeds) {
 
     var searchObj = {
         city: city,
@@ -231,7 +226,9 @@ function saveSearch(city, stateCode, listCount, minPrice, maxPrice, minBaths, ma
         minPrice: minPrice, 
         maxPrice: maxPrice,
         minBaths: minBaths,
-        maxBaths: maxBaths
+        maxBaths: maxBaths,
+        minBeds: minBeds,
+        maxBeds: maxBeds,
     };
 
     
@@ -444,6 +441,8 @@ function updateForm(searchSelected){
     var maxPrice = searchSelected.maxPrice;
     var minBaths = searchSelected.minBaths;
     var maxBaths = searchSelected.maxBaths;
+    var minBeds = searchSelected.minBeds;
+    var maxBeds = searchSelected.maxBeds;
 
 
     $(".userCity").val(city.toUpperCase());
@@ -452,6 +451,8 @@ function updateForm(searchSelected){
     $(".maxPrice").val(maxPrice);
     $(".minBaths").val(minBaths);
     $(".maxBaths").val(maxBaths);
+    $(".minBeds").val(minBeds);
+    $(".maxBeds").val(maxBeds);
 
 }
 
@@ -479,6 +480,8 @@ $(document).on("click", ".search_button", function () {
     var maxPrice = searchSelected.maxPrice;
     var minBaths = searchSelected.minBaths;
     var maxBaths = searchSelected.maxBaths;
+    var minBeds = searchSelected.minBeds;
+    var maxBeds = searchSelected.maxBeds;
 
     //update form entries
     updateForm(searchSelected);
@@ -576,13 +579,15 @@ $(document).ready(function () {
         var maxPrice = $(".maxPrice").val();
         var minBaths = $(".minBaths").val();
         var maxBaths = $(".maxBaths").val();
+        var minBeds = $(".minBeds").val();
+        var maxBeds = $(".maxBeds").val();
         
         if(stateCode == null || city == ""){
             M.toast({html: 'City and state are required!'})
             return false;
         }
         // Save search Results
-        saveSearch(city, stateCode, listCount, minPrice, maxPrice, minBaths, maxBaths);
+        saveSearch(city, stateCode, listCount, minPrice, maxPrice, minBaths, maxBaths, minBeds, maxBeds);
 
         console.log(city);
 
@@ -593,7 +598,7 @@ $(document).ready(function () {
         console.log(stateCode);
 
         // submit API request to the Realtor API
-        makeRealtorApiCall(city, listCount, stateCode, minPrice, maxPrice, minBaths, maxBaths)
+        makeRealtorApiCall(city, listCount, stateCode, minPrice, maxPrice, minBaths, maxBaths, minBeds, maxBeds)
     });
 
     // Load all Search entries from Session Storage
