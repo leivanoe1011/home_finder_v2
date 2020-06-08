@@ -293,11 +293,11 @@ function storeFavoriteCards(card) {
         city: house.city,
         state: house.state,
         price: house.price,
-        lotSize: house.lotSize,
-        lotUnit: house.lotUnit,
-        houseSize: house.houseSize,
-        houseUnit: house.houseUnit,
-        houseImage: house.houseImage
+        lotSize: ((house.lotSize === undefined) ? "NA" : house.lotSize),
+        lotUnit: ((house.lotUnit === undefined) ? "NA" : house.lotUnit),
+        houseSize: ((house.houseSize === undefined) ? "NA" : house.houseSize),
+        houseUnit: ((house.houseUnit === undefined) ? "NA" : house.houseUnit),
+        houseImage: ((house.houseImage === undefined) ? "NA" : house.houseImage)
     });
 };
 
@@ -345,6 +345,7 @@ function removeCard(cardId) {
 
 // Save House when selected to Favorite the home
 $(document).on("click", ".favorite_button", function () {
+    
     var currentFavoriteIcon = $(this).text();
 
     var cardTargetId = $(this).data("value");
