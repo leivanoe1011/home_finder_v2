@@ -387,7 +387,7 @@ $(document).on("click", ".favorite_button", function () {
 
 
 // Used to make the API call to the Realtor API
-function makeRealtorApiCall(city, listCount, stateCode, minPrice, maxPrice, minBaths, maxBaths) {
+function makeRealtorApiCall(city, listCount, stateCode, minPrice, maxPrice, minBaths, maxBaths, minBeds, maxBeds) {
 
     // The card container must be empty before loading the new cards
     $("#homeCards").empty();
@@ -401,7 +401,9 @@ function makeRealtorApiCall(city, listCount, stateCode, minPrice, maxPrice, minB
             + "&price_min=" + minPrice
             + "&price_max=" + maxPrice
             + "&baths_min=" + minBaths
-            + "&baths_max=" + maxBaths,
+            + "&baths_max=" + maxBaths
+            + "&beds_min=" + minBeds
+            + "&beds_max=" + maxBeds,
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "realtor.p.rapidapi.com",
@@ -419,7 +421,6 @@ function makeRealtorApiCall(city, listCount, stateCode, minPrice, maxPrice, minB
         var results = response.properties
 
         for (var i = 0; i < results.length; i++) {
-
             createCard(i, results[i]);
         };
 
