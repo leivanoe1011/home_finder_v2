@@ -345,6 +345,7 @@ function removeCard(cardId) {
 
 // Save House when selected to Favorite the home
 $(document).on("click", ".favorite_button", function () {
+    
     var currentFavoriteIcon = $(this).text();
 
     var cardTargetId = $(this).data("value");
