@@ -160,12 +160,12 @@ function createCard(index, house, lotSize, lotUnit, houseUnit, houseSize){
 
     if (house.hasOwnProperty("lot_size")) {
         lotSize = (typeof house.lot_size.size !== "undefined" ? house.lot_size.size.toLocaleString() : "NA")
-        lotUnit = (typeof house.lot_size.units !== "undefined" ? house.lot_size.units : "NA")
+        lotUnit = (typeof house.lot_size.units !== "undefined" ? house.lot_size.units : "")
     }
 
     if (house.hasOwnProperty("building_size")) {
         houseSize = (typeof house.building_size.size !== "undefined" ? house.building_size.size.toLocaleString() : "NA")
-        houseUnit = (typeof house.building_size.units !== "undefined" ? house.building_size.units : "NA")
+        houseUnit = (typeof house.building_size.units !== "undefined" ? house.building_size.units : "")
     };
 
     // This will be used to create the Favorite Cards
