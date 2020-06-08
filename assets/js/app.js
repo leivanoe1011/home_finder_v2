@@ -21,7 +21,7 @@ var app2 = firebase.initializeApp(firebaseConfig_SaveSearchResults, 'app2');
 var db2 = firebase.database(app2);
 
 
-function displayCard(index, propertyObj, favoritePage) {
+function displayCard(index, propertyObj, favoritePage, lotSize, lotUnit, houseUnit, houseSize) {
 
     var inFavoritePg = favoritePage;
     var homeWebSite = propertyObj.homeWebSite;
@@ -114,7 +114,7 @@ function displayCard(index, propertyObj, favoritePage) {
     $(cardAction).append(favoriteButton);
 
     lotSize = (typeof lotSize !== "undefined" ? lotSize : "NA");
-    lotUnit = (typeof lotUnit !== "undefined" ? lotUnit : "NA");
+    lotUnit = (typeof lotUnit !== "undefined" ? lotUnit : "");
 
     homeLotSize.html("Lot size: "
         + lotSize
@@ -122,7 +122,7 @@ function displayCard(index, propertyObj, favoritePage) {
         + lotUnit);
 
     houseSize = (typeof houseSize !== "undefined" ? houseSize : "NA");
-    houseUnit = (typeof houseUnit !== "undefined" ? houseUnit : "NA");
+    houseUnit = (typeof houseUnit !== "undefined" ? houseUnit : "");
 
     var imageUnavailable = cardBackground.attr("src", '\assets/images/unavailable-image.jpg');
 
@@ -155,22 +155,17 @@ function displayCard(index, propertyObj, favoritePage) {
 
 
 // Function will be used to parse the Realtor API results and Favorite functionality
-function createCard(index, house) {
+function createCard(index, house, lotSize, lotUnit, houseUnit, houseSize){
 
-
-    var lotSize = "";
-    var lotUnit = "";
-    var houseSize = "";
-    var houseUnit = "";
 
     if (house.hasOwnProperty("lot_size")) {
         lotSize = (typeof house.lot_size.size !== "undefined" ? house.lot_size.size.toLocaleString() : "NA")
-        lotUnit = (typeof house.lot_size.units !== "undefined" ? house.lot_size.units : "NA")
+        lotUnit = (typeof house.lot_size.units !== "undefined" ? house.lot_size.units : "")
     }
 
     if (house.hasOwnProperty("building_size")) {
         houseSize = (typeof house.building_size.size !== "undefined" ? house.building_size.size.toLocaleString() : "NA")
-        houseUnit = (typeof house.building_size.units !== "undefined" ? house.building_size.units : "NA")
+        houseUnit = (typeof house.building_size.units !== "undefined" ? house.building_size.units : "")
     };
 
     // This will be used to create the Favorite Cards
@@ -222,7 +217,7 @@ function createButtons(saveSearch, index) {
 }
 
 // Gathers all the information from a search
-function saveSearch(city, stateCode, listCount, minPrice, maxPrice, minBaths, maxBaths) {
+function saveSearch(city, stateCode, listCount, minPrice, maxPrice, minBaths, maxBaths, minBeds, maxBeds) {
 
     var searchObj = {
         city: city,
@@ -231,7 +226,9 @@ function saveSearch(city, stateCode, listCount, minPrice, maxPrice, minBaths, ma
         minPrice: minPrice, 
         maxPrice: maxPrice,
         minBaths: minBaths,
-        maxBaths: maxBaths
+        maxBaths: maxBaths,
+        minBeds: minBeds,
+        maxBeds: maxBeds,
     };
 
     
@@ -397,7 +394,7 @@ $(document).on("click", ".favorite_button", function () {
 
 
 // Used to make the API call to the Realtor API
-function makeRealtorApiCall(city, listCount, stateCode, minPrice, maxPrice, minBaths, maxBaths) {
+function makeRealtorApiCall(city, listCount, stateCode, minPrice, maxPrice, minBaths, maxBaths, minBeds, maxBeds) {
 
     // The card container must be empty before loading the new cards
     $("#homeCards").empty();
@@ -411,7 +408,9 @@ function makeRealtorApiCall(city, listCount, stateCode, minPrice, maxPrice, minB
             + "&price_min=" + minPrice
             + "&price_max=" + maxPrice
             + "&baths_min=" + minBaths
-            + "&baths_max=" + maxBaths,
+            + "&baths_max=" + maxBaths
+            + "&beds_min=" + minBeds
+            + "&beds_max=" + maxBeds,
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "realtor.p.rapidapi.com",
@@ -427,7 +426,6 @@ function makeRealtorApiCall(city, listCount, stateCode, minPrice, maxPrice, minB
         var results = response.properties
 
         for (var i = 0; i < results.length; i++) {
-
             createCard(i, results[i]);
         };
 
@@ -444,6 +442,8 @@ function updateForm(searchSelected){
     var maxPrice = searchSelected.maxPrice;
     var minBaths = searchSelected.minBaths;
     var maxBaths = searchSelected.maxBaths;
+    var minBeds = searchSelected.minBeds;
+    var maxBeds = searchSelected.maxBeds;
 
 
     $(".userCity").val(city.toUpperCase());
@@ -452,6 +452,8 @@ function updateForm(searchSelected){
     $(".maxPrice").val(maxPrice);
     $(".minBaths").val(minBaths);
     $(".maxBaths").val(maxBaths);
+    $(".minBeds").val(minBeds);
+    $(".maxBeds").val(maxBeds);
 
 }
 
@@ -479,6 +481,8 @@ $(document).on("click", ".search_button", function () {
     var maxPrice = searchSelected.maxPrice;
     var minBaths = searchSelected.minBaths;
     var maxBaths = searchSelected.maxBaths;
+    var minBeds = searchSelected.minBeds;
+    var maxBeds = searchSelected.maxBeds;
 
     //update form entries
     updateForm(searchSelected);
@@ -570,19 +574,21 @@ $(document).ready(function () {
         event.preventDefault();
 
         var city = $(".userCity").val();
-        var listCount = 24;
+        var listCount = 15;
         var stateCode = $(".stateCode").val();
         var minPrice = $(".minPrice").val();
         var maxPrice = $(".maxPrice").val();
         var minBaths = $(".minBaths").val();
         var maxBaths = $(".maxBaths").val();
+        var minBeds = $(".minBeds").val();
+        var maxBeds = $(".maxBeds").val();
         
         if(stateCode == null || city == ""){
             M.toast({html: 'City and state are required!'})
             return false;
         }
         // Save search Results
-        saveSearch(city, stateCode, listCount, minPrice, maxPrice, minBaths, maxBaths);
+        saveSearch(city, stateCode, listCount, minPrice, maxPrice, minBaths, maxBaths, minBeds, maxBeds);
 
         console.log(city);
 
@@ -593,7 +599,7 @@ $(document).ready(function () {
         console.log(stateCode);
 
         // submit API request to the Realtor API
-        makeRealtorApiCall(city, listCount, stateCode, minPrice, maxPrice, minBaths, maxBaths)
+        makeRealtorApiCall(city, listCount, stateCode, minPrice, maxPrice, minBaths, maxBaths, minBeds, maxBeds)
     });
 
     // Load all Search entries from Session Storage

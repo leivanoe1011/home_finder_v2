@@ -2,7 +2,7 @@
 // get local address
 // Then translate either Geolocation or IP address to users local address and timezone
 // Next display prospect properties around the area
-
+//THIS IS AN EXAMPLE FILE THAT ISNT IN USE.
 
 var listing_state_code = "TN"
 var listing_city = "Murfreesboro";
