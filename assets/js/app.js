@@ -483,7 +483,7 @@ $(document).on("click", ".search_button", function () {
     updateForm(searchSelected);
 
     // Reach out to the API for the properties
-    makeRealtorApiCall(city, listCount, state, minPrice, maxPrice, minBaths, maxBaths);
+    // makeRealtorApiCall(city, listCount, state, minPrice, maxPrice, minBaths, maxBaths);
 
 })
 
