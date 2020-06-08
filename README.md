@@ -13,7 +13,7 @@ API’s:
 1.	RapidAPI (Real Estate information delivery)
 2.	GoogleMaps API (For directions to the property / Piggybacks off RapidAPI by using results from that API to drive the URL creation for this one)
 Data Storage: 
-1.	Frirebase (To store favorites and contact information for call scheduling)
+1.	Firebase (To store favorites and contact information for call scheduling)
 2.	Session Storage (Used for the real estate search queries)
 
 Functionality:
@@ -33,7 +33,7 @@ Functionality:
 12.	Parralax gives a scrolling reveal of background image. 
 13.	Use of z-index to layer sections appropriately.
 14.	All fields are required to submit a contact form. 
-15.	E-mail validation is in place to make sure format is correct (I don’t think its working though ☹)
+15.	E-mail validation is in place to make sure format is correct
 16.	Date and Time scheduling is done through an enhanced CSS format.
 17.	Footer includes a “Send E-mail” link that will automatically pull up users e-mail client and populate it with home finder return address.
 18.	Entire web site is mobile responsive and produces side navigation as needed for mobile phones and tablets.
