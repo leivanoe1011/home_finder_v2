@@ -21,7 +21,7 @@ var app2 = firebase.initializeApp(firebaseConfig_SaveSearchResults, 'app2');
 var db2 = firebase.database(app2);
 
 
-function displayCard(index, propertyObj, favoritePage, lotSize, lotUnit, houseUnit, houseSize) {
+function displayCard(index, propertyObj, favoritePage) {
 
     var inFavoritePg = favoritePage;
     var homeWebSite = propertyObj.homeWebSite;
@@ -155,8 +155,11 @@ function displayCard(index, propertyObj, favoritePage, lotSize, lotUnit, houseUn
 
 
 // Function will be used to parse the Realtor API results and Favorite functionality
-function createCard(index, house, lotSize, lotUnit, houseUnit, houseSize){
-
+function createCard(index, house){
+    var lotSize = "NA"
+    var lotUnit = ""
+    var houseSize = "NA"
+    var houseUnit = ""
 
     if (house.hasOwnProperty("lot_size")) {
         lotSize = (typeof house.lot_size.size !== "undefined" ? house.lot_size.size.toLocaleString() : "NA")
