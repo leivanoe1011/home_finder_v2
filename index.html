@@ -95,7 +95,7 @@
                     <li>
                         <div class="card">
                             <div class="card-image waves-effect waves-block waves-light">
-                                <img class="activator" src="assets/images/luxury_home_5.jpg">
+                                <img class="activator responsive-img" src="assets/images/luxury_home_5.jpg">
                             </div>
                             <div class="card-content">
                                 <span class="card-title activator grey-text text-darken-4">Luxury Home<i
@@ -119,7 +119,7 @@
                     <li>
                         <div class="card ">
                             <div class="card-image waves-effect waves-block waves-light">
-                                <img class="activator" src="assets/images/luxury_home_6.jpg">
+                                <img class="activator responsive-img" src="assets/images/luxury_home_7.jpg">
                             </div>
                             <div class="card-content">
                                 <span class="card-title activator grey-text text-darken-4">Luxury Home<i
@@ -159,7 +159,7 @@
 
 
     <!-- Load the Search Results -->
-    <div class="wow animate__animated animate__fadeInUp animate__faster" id="animationDiv">
+    <div class="wow animate__animated animate__fadeInUp animate__slower" id="animationDiv">
         <div class="container">
             <div class="row blue-grey lighten-5 z-depth-2 center" id="previous_search">
             </div>
@@ -248,7 +248,7 @@
                 </div>
                 <div class="col m3 s12 l3 filter">
                     <label>Min. Bedrooms:</label>
-                    <select class="browser-default minBedrooms">
+                    <select class="browser-default minBedrooms bedDisabled">
                         <option value="" disabled selected></option>
                         <option value="">Nothing</option>
                         <option value="1">1</option>
@@ -261,7 +261,7 @@
                 </div>
                 <div class="col m3 s12 l3 filter">
                     <label>Max Bedrooms:</label>
-                    <select class="browser-default maxBedrooms">
+                    <select class="browser-default maxBedrooms bedDisabled">
                         <option value="" disabled selected></option>
                         <option value="">Nothing</option>
                         <option value="1">1</option>
@@ -431,6 +431,8 @@
             $(".datepicker").datepicker({
                 disableWeekends: true
             });
+
+            $(".bedDisabled").prop("disabled", true);
 
             // Added Scroll event listener for the Nav bar
             $(window).scroll(function () {
