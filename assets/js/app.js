@@ -4,7 +4,7 @@ let realtorResults = [];
 // Sample Favorite Card Array
 var favoriteCards = [];
 
-// Configuration file to the Save Search Results
+// Configuration file to the Favorites Database
 var firebaseConfig_SaveSearchResults = {
     apiKey: "AIzaSyAATbtZxRXHkvnP7CMemxc_8ibgyQLpWN4",
     authDomain: "grpprj1-home-finder.firebaseapp.com",
@@ -241,12 +241,13 @@ function saveSearch(city, stateCode, listCount, minPrice, maxPrice, minBaths, ma
 
     var loopLength = (( currentIndex <= 3 ) ? currentIndex : 3);
 
-
+    // Load the search entries into the Session Storage
     sessionStorage.setItem("searchObj", JSON.stringify(searchList));
 
     $("#previous_search").empty();
   
 
+    // Only the latest 3 search entries are loaded to the Index html previous search container
     while( loopLength > 0){
 
         currentIndex--;
@@ -259,7 +260,7 @@ function saveSearch(city, stateCode, listCount, minPrice, maxPrice, minBaths, ma
 
 }
 
-
+// Function NOT used
 function getFavoriteCard(object, cardIndex) {
     var currentCardContainer = object;
     let currentCard;
@@ -301,9 +302,11 @@ function storeFavoriteCards(card) {
     });
 };
 
+// Used to store the favorite cards in the Index HTML
+// Here we capture the Firebase Key when a new entry is Pushed
 var favorites = [];
 
-// Need on child added trigger to detect favorites when page loads, and then add the "key" that exists in firebase so we can delete it later
+// Child added trigger to detect favorites when page loads and then add the "key" that exists in firebase so we can delete it later
 db2.ref().on("child_added", function (snapshot) {
     // use jquery or whatever to signifiy favorites on page
     var favorite = snapshot.val();
@@ -313,6 +316,7 @@ db2.ref().on("child_added", function (snapshot) {
 });
 
 
+// Remove the favorite card from the Firebase Index
 function removeStoredFavoriteCard(card) {
     console.log("Removing Card from Firebase");
 
@@ -335,6 +339,7 @@ function removeStoredFavoriteCard(card) {
 };
 
 
+// Remove card when is displayed in the Favorite Index
 function removeCard(cardId) {
 
     var currentCardTarget = $("#homeCards").find('[data-target="' + cardId + '"]');
@@ -364,7 +369,7 @@ $(document).on("click", ".favorite_button", function () {
         favoriteCard = favoriteCards[cardTargetId];
     }
 
-
+    // If the Card is not favorite, then we add the Favorite Icon with the Heard filled in
     if (currentFavoriteIcon === "favorite_border") {
 
         console.log("About to add entry in Firebase");
@@ -378,6 +383,7 @@ $(document).on("click", ".favorite_button", function () {
 
         console.log("About to DELETE entry in Firebase");
 
+        // Remove the favorite icon
         $(this).text("favorite_border");
 
         // Removes favorite card from firebase database
