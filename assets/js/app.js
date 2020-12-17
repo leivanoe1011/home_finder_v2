@@ -423,7 +423,7 @@ function makeRealtorApiCall(city, listCount, stateCode, minPrice, maxPrice, minB
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "realtor.p.rapidapi.com",
-            "x-rapidapi-key": "0c292c0993mshd75f0effe5adad9p120e45jsn157b0022e4d8"
+            "x-rapidapi-key": "6348c7c3damsh9f06f3bf656de25p1004dajsn161cb5ca1bac"
         }
     };
 
